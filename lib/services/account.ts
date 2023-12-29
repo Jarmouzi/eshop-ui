@@ -15,3 +15,22 @@
 //       return null;
 //     }
 //   }
+
+export async function login(userName: string, password: string ) {
+    const data = { userName: userName, password: password }; 
+    const response = await fetch("http://localhost:5290/api/Auth/Login", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+  
+    if (response.ok) {
+      const responseData = await response.json();
+      return responseData;
+    } else {
+      // Handle the error response
+      return null;
+    }
+  }

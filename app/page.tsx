@@ -1,6 +1,7 @@
-import { Carousel } from '@/components/carousel';
+import { AnimatedCarousel } from '@/components/animated-carousel';
 import { ThreeItemGrid } from '@/components/grid/three-items';
 import Footer from '@/components/layout/footer';
+import { SlideShowComponent } from '@/components/layout/slideshow';
 import { Suspense } from 'react';
 
 export const runtime = 'edge';
@@ -15,10 +16,9 @@ export const metadata = {
 export default async function HomePage() {
   return (
     <>
-    <h1>به کاسب یار خوش آمدید</h1>
-      {/* <ThreeItemGrid />
-      <Suspense>
-        <Carousel />
+      <SlideShowComponent />
+      {/* <Suspense>
+        <AnimatedCarousel />
         <Suspense>
           <Footer />
         </Suspense>
