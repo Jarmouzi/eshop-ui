@@ -17,12 +17,12 @@ export default async function HomePage() {
   return (
     <>
       <SlideShowComponent />
-      {/* <Suspense>
-        <AnimatedCarousel />
+      <Suspense>
+        <AnimatedCarousel collectionName='fav' title='پیشنهادات ویژه' />
         <Suspense>
           <Footer />
-        </Suspense>
-      </Suspense> */}
+        </Suspense> 
+      </Suspense>
     </>
   );
 }

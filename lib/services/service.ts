@@ -2,7 +2,7 @@ const domain = process.env.API_Domain;
 
 export async function GetData<T>({
     path = '',
-    cache = 'force-cache',
+    cache = 'force-cache', //'no-store',
     tags
   }: {
     path?: string,

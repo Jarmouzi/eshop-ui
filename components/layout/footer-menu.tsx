@@ -7,16 +7,16 @@ import { useEffect, useState } from 'react';
 
 const FooterMenuItem = ({ item }: { item: Menu }) => {
   const pathname = usePathname();
-  const [active, setActive] = useState(pathname === item.path);
+  const [active, setActive] = useState(pathname === item.PageAddress);
 
   useEffect(() => {
-    setActive(pathname === item.path);
-  }, [pathname, item.path]);
+    setActive(pathname === item.PageAddress);
+  }, [pathname, item.PageAddress]);
 
   return (
     <li>
       <Link
-        href={item.path}
+        href={item.PageAddress}
         className={clsx(
           'block p-2 text-lg underline-offset-4 hover:text-black hover:underline dark:hover:text-neutral-300 md:inline-block md:text-sm',
           {
@@ -24,7 +24,7 @@ const FooterMenuItem = ({ item }: { item: Menu }) => {
           }
         )}
       >
-        {item.title}
+        {item.Title}
       </Link>
     </li>
   );
@@ -37,7 +37,7 @@ export default function FooterMenu({ menu }: { menu: Menu[] }) {
     <nav>
       <ul>
         {menu.map((item: Menu) => {
-          return <FooterMenuItem key={item.title} item={item} />;
+          return <FooterMenuItem key={item.Title} item={item} />;
         })}
       </ul>
     </nav>

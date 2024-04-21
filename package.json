@@ -20,7 +20,7 @@
     "@heroicons/react": "^2.0.18",
     "clsx": "^2.0.0",
     "geist": "^1.0.0",
-    "next": "14.0.4",
+    "next": "^14.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-responsive-carousel": "^3.2.23"

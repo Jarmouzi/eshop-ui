@@ -78,15 +78,16 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                     {menu.map((item: Menu) => (
                       <li
                         className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
-                        key={item.id}
+                        key={item.Id}
                       >
                         <Link href="/" onClick={closeMobileMenu}>
-                          {item.title}
+                          {item.Title}
                         </Link>
                       </li>
                     ))}
                   </ul>
-                ) : null}
+                ) : null
+                }
               </div>
             </Dialog.Panel>
           </Transition.Child>

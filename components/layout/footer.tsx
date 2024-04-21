@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import FooterMenu from '@/components/layout/footer-menu';
 import LogoSquare from '@/components/logo-square';
-import getMenu from '@/lib/services/categoryService';
+import {getMenu} from '@/lib/services/categoryService';
 import { Suspense } from 'react';
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
@@ -41,7 +41,7 @@ export default async function Footer() {
           <a
             className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white"
             aria-label="Deploy on Vercel"
-            href="https://vercel.com/templates/next.js/nextjs-commerce"
+            href="https://vercel.com/templa#tes/next.js/nextjs-commerce"
           >
             <span className="px-3">▲</span>
             <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />

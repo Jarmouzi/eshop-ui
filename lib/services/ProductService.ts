@@ -1,3 +1,4 @@
+import { SimpleProduct, Product } from '../types/Product';
 import { GetData, PostData } from './service';
 
 export async function getProduct(id: string): Promise<Product>  {
@@ -8,7 +9,7 @@ export async function getProduct(id: string): Promise<Product>  {
 
   return res.body;
 } 
-export async function getAllCategories(): Promise<Product[]>  {
+export async function getAllProducts(): Promise<Product[]>  {
 
   const res = await GetData<Product[]>({
     path: 'Product/GetAll',
@@ -16,12 +17,32 @@ export async function getAllCategories(): Promise<Product[]>  {
 
   return res.body;
 } 
-export async function getCategories(jp: string): Promise<Product[]>  {
+export async function getProducts(jp: string): Promise<SimpleProduct[]>  {
 
-  const res = await PostData<Product[]>({
+  const res = await PostData<SimpleProduct[]>({
     path: 'Product/GetFiltered',
     variables: jp,
   });
 
   return res.body;
 } 
+
+
+export async function getCollectionProducts(cn: string): Promise<SimpleProduct[]>  {
+
+  const res = await GetData<SimpleProduct[]>({
+    path: 'Product/GetCollectionProducts?cn=' + cn
+  });
+
+  return res.body;
+} 
+
+export async function getProductRecommendations(cn: string): Promise<SimpleProduct[]>  {
+
+  const res = await GetData<SimpleProduct[]>({
+    path: 'Product/GetCollectionProducts?cn=' + cn
+  });
+
+  return res.body;
+} 
+

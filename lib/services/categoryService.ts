@@ -30,7 +30,7 @@ export async function getCategories(jp: string): Promise<Category[]>  {
 export async function getMenu(): Promise<Menu[]>  {
 
   const res = await GetData<Menu[]>({
-    path: 'Category/GetFiltered',
+    path: 'Category/GetMenu',
   });
 
   return res.body;

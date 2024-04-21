@@ -13,23 +13,18 @@ export async function SlideShowComponent() {
     const data = [
         {
           img:
-            "https://static.etma.ir/UserFiles/etmashop/Images/Slide/202312111533275526.png",
+            "/banner1.png",
             path: "#"
         },
         {
           img:
-            "https://static.etma.ir/UserFiles/etmashop/Images/Slide/202312111504595427.png",
-            path: "#"
-        },
-        {
-          img:
-            "https://static.etma.ir/UserFiles/etmashop/Images/Slide/202311221552184514.png",
+            "/202312111533275526.png",
             path: "#"
         }
       ];
   
     return (
-      <section dir='ltr' className="mx-auto grid max-w-screen-2xl gap-4 px-4 max-h-[287px] ">
+      <section dir='ltr' className="mx-auto inline-block max-w-screen-2xl gap-4 px-4 max-h-[287px] ">
       <Carousel autoPlay infiniteLoop showIndicators={false} showThumbs={false}>
       {data.map((item, index) => (
         <div

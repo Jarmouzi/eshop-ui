@@ -7,9 +7,10 @@ import Footer from '@/components/layout/footer';
 import { Gallery } from '@/components/product/gallery';
 import { ProductDescription } from '@/components/product/product-description';
 import { HIDDEN_PRODUCT_TAG } from '@/lib/constants';
-import { getProduct, getProductRecommendations } from '@/lib/shopify';
+//import { getProduct, getProductRecommendations } from '@/lib/shopify';
 import { Image } from '@/lib/shopify/types';
 import Link from 'next/link';
+import { getProduct, getProductRecommendations } from '@/lib/services/ProductService';
 
 export const runtime = 'edge';
 
@@ -67,9 +68,9 @@ export default async function ProductPage({ params }: { params: { handle: string
       availability: product.availableForSale
         ? 'https://schema.org/InStock'
         : 'https://schema.org/OutOfStock',
-      priceCurrency: product.priceRange.minVariantPrice.currencyCode,
-      highPrice: product.priceRange.maxVariantPrice.amount,
-      lowPrice: product.priceRange.minVariantPrice.amount
+      priceCurrency: 'IRI', //product.priceRange.minVariantPrice.currencyCode,
+      highPrice: product.price, //.priceRange.maxVariantPrice.amount,
+      lowPrice: product.price, //priceRange.minVariantPrice.amount
     }
   };
 
@@ -108,7 +109,7 @@ export default async function ProductPage({ params }: { params: { handle: string
 }
 
 async function RelatedProducts({ id }: { id: string }) {
-  const relatedProducts = await getProductRecommendations(id);
+  const relatedProducts = await getProductRecommendations('fav'); //id
 
   if (!relatedProducts.length) return null;
 
@@ -118,18 +119,18 @@ async function RelatedProducts({ id }: { id: string }) {
       <ul className="flex w-full gap-4 overflow-x-auto pt-1">
         {relatedProducts.map((product) => (
           <li
-            key={product.handle}
+            key={product.Id}
             className="aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
           >
-            <Link className="relative h-full w-full" href={`/product/${product.handle}`}>
+            <Link className="relative h-full w-full" href={`/product/${product.Id}`}>
               <GridTileImage
-                alt={product.title}
+                alt={product.Title}
                 label={{
-                  title: product.title,
-                  amount: product.priceRange.maxVariantPrice.amount,
-                  currencyCode: product.priceRange.maxVariantPrice.currencyCode
+                  title: product.Title,
+                  amount: product.Price, //.priceRange.maxVariantPrice.amount,
+                  currencyCode: 'IRI', //product.priceRange.maxVariantPrice.currencyCode
                 }}
-                src={product.featuredImage?.url}
+                src={product.FeaturedImage}
                 fill
                 sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
               />
