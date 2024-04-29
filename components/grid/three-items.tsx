@@ -1,6 +1,6 @@
 import { GridTileImage } from '@/components/grid/tile';
 import { getCollectionProducts } from '@/lib/shopify';
-import type { Product } from '@/lib/shopify/types';
+import type { Product } from '@/lib/types/Product';
 import Link from 'next/link';
 
 function ThreeItemGridItem({
@@ -18,18 +18,18 @@ function ThreeItemGridItem({
     >
       <Link className="relative block aspect-square h-full w-full" href={`/product/${item.handle}`}>
         <GridTileImage
-          src={item.featuredImage.url}
-          fill
+          src={item.FeaturedImage.Url}
+          //fill
           sizes={
             size === 'full' ? '(min-width: 768px) 66vw, 100vw' : '(min-width: 768px) 33vw, 100vw'
           }
           priority={priority}
-          alt={item.title}
+          alt={item.Title}
           label={{
             position: size === 'full' ? 'center' : 'bottom',
-            title: item.title as string,
-            amount: item.priceRange.maxVariantPrice.amount,
-            currencyCode: item.priceRange.maxVariantPrice.currencyCode
+            title: item.Title as string,
+            amount: item.Price, // item.priceRange.maxVariantPrice.amount,
+            currencyCode: 'IRI', //item.priceRange.maxVariantPrice.currencyCode
           }}
         />
       </Link>

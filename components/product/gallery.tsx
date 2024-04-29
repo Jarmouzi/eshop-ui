@@ -30,13 +30,13 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
     <>
       <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden">
         {images[imageIndex] && (
-          <Image
+          <img
             className="h-full w-full object-contain"
-            fill
+            // fill
             sizes="(min-width: 1024px) 66vw, 100vw"
             alt={images[imageIndex]?.altText as string}
             src={images[imageIndex]?.src as string}
-            priority={true}
+            //priority={true}
           />
         )}
 
@@ -49,7 +49,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
                 className={buttonClassName}
                 scroll={false}
               >
-                <ArrowLeftIcon className="h-5" />
+                <ArrowRightIcon className="h-5" />
               </Link>
               <div className="mx-1 h-6 w-px bg-neutral-500"></div>
               <Link
@@ -58,7 +58,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
                 className={buttonClassName}
                 scroll={false}
               >
-                <ArrowRightIcon className="h-5" />
+                <ArrowLeftIcon className="h-5" />
               </Link>
             </div>
           </div>

@@ -7,17 +7,17 @@ export default function ProductGridItems({ products }: { products: SimpleProduct
   return (
     <>
       {products.map((product) => (
-        <Grid.Item key={product.id} className="animate-fadeIn">
-          <Link className="relative inline-block h-full w-full" href={`/product/${product.id}`}>
+        <Grid.Item key={product.Id} className="animate-fadeIn">
+          <Link className="relative inline-block h-full w-full" href={`/product/${product.Id}`}>
             <GridTileImage
-              alt={product.title}
+              alt={product.Title}
               label={{
-                title: product.title,
-                amount: product.price,
+                title: product.Title,
+                amount: product.Price,
                 currencyCode: "تومان"
               }}
-              src={product.featuredImage}
-              fill
+              src={product.FeaturedImage}
+              //fill
               sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
             />
           </Link>

@@ -53,7 +53,7 @@ export default async function Navbar() {
                                 <a href={item.PageAddress} className="font-bold text-sm text-neutral-800 text-bold border-teal-600 pr-1 border-r-2">{child.Title}</a>
                                 </li>
                                 {child.Children.map((gc: Menu) => { return (                                                                            
-                                  <li key={child.Id}>
+                                  <li key={gc.Id}>
                                     <a href={gc.PageAddress} className="block p-1 hover:bg-neutral-300 text-neutral-800 hover:text-neutral-950">{gc.Title}</a>
                                   </li>
                                 )})}      

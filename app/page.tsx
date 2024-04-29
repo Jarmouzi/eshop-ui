@@ -16,12 +16,11 @@ export const metadata = {
 export default async function HomePage() {
   return (
     <>
-      <SlideShowComponent />
+      <Suspense>
+        <SlideShowComponent />
+      </Suspense>
       <Suspense>
         <AnimatedCarousel collectionName='fav' title='پیشنهادات ویژه' />
-        <Suspense>
-          <Footer />
-        </Suspense> 
       </Suspense>
     </>
   );

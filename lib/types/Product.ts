@@ -7,50 +7,65 @@
   };
 
   export type Product = {
-    id: string;
-    availableForSale: boolean;
-    title: string;
-    description: string;
-    descriptionHtml: string;
-    options: ProductOption[];
-    price: number;
-    variants: ProductVariant[];
-    featuredImage: Image;
-    images: Image[];
-    seo: SEO;
-    tags: string[];
-    updatedAt: string;
+    Id: string;
+    AvailableForSale: boolean;
+    Title: string;
+    Description: string;
+    DescriptionHtml: string;
+    Options: ProductOption[];
+    Features: ProductFeature[];
+    Price: number;
+    Variants: ProductVariant[];
+    FeaturedImage: Image;
+    Images: Image[];
+    Seo: SEO;
+    Tags: string[];
+    UpdatedAt: string;
+  };
+
+  export type ProductFeature = {
+    Id: string;
+    Title: string;
+    Value: string;
   };
 
   export type ProductOption = {
-    id: string;
-    name: string;
-    values: string[];
+    Id: string;
+    Title: string;
+    Values: OptionValue[];
+  };
+
+  export type OptionValue = {
+    Id: string;
+    Title: string;
+    Image: Image;
+    Color: string;
   };
   
   export type ProductVariant = {
-    id: string;
-    title: string;
-    availableForSale: boolean;
-    selectedOptions: {
-      name: string;
-      value: string;
+    Id: string;
+    Title: string;
+    AvailableForSale: boolean;
+    SelectedOptions: {
+      OptionId: string; //Title: string;
+      OptionValueId: string; //Value: string;
     }[];
-    price: Money;
+    Price: number;
   };
   
   export type SEO = {
-    title: string;
-    description: string;
+    Title: string;
+    Description: string;
+    IsName: boolean;
   };
   export type Image = {
-    url: string;
-    altText: string;
-    width: number;
-    height: number;
+    Url: string;
+    AltText: string;
+    Width: number;
+    Height: number;
   };
   
-  export type Money = {
-    amount: string;
-    currencyCode: string;
-  };
+  // export type Money = {
+  //   amount: string;
+  //   currencyCode: string;
+  // };

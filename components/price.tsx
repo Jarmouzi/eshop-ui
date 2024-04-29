@@ -1,4 +1,4 @@
-import { Money } from '@/lib/shopify/types';
+//import { Money } from '@/lib/types/product';
 import clsx from 'clsx';
 
 const Price = ({

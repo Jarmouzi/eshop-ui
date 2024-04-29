@@ -1,13 +1,13 @@
 'use client'
 import { GridTileImage } from '@/components/grid/tile';
 import { getCollectionProducts } from '@/lib/shopify';
-import type { Product } from '@/lib/shopify/types';
+import type { Product } from '@/lib/types/Product';
 import Link from 'next/link';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 
-export async function SlideShowComponent() {
+export function SlideShowComponent() {
     //const homepageItems = await getHeadLines();
 
     const data = [

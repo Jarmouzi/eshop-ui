@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { ProductOption, ProductVariant } from '@/lib/shopify/types';
+import { ProductFeature, ProductOption, ProductVariant } from '@/lib/types/Product';
 import { createUrl } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
@@ -22,35 +22,35 @@ export function VariantSelector({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const hasNoOptionsOrJustOneOption =
-    !options.length || (options.length === 1 && options[0]?.values.length === 1);
+    !options.length || (options.length === 1 && options[0]?.Values.length === 1);
 
   if (hasNoOptionsOrJustOneOption) {
     return null;
   }
 
   const combinations: Combination[] = variants.map((variant) => ({
-    id: variant.id,
-    availableForSale: variant.availableForSale,
+    id: variant.Id,
+    availableForSale: variant.AvailableForSale,
     // Adds key / value pairs for each variant (ie. "color": "Black" and "size": 'M").
-    ...variant.selectedOptions.reduce(
-      (accumulator, option) => ({ ...accumulator, [option.name.toLowerCase()]: option.value }),
+    ...variant.SelectedOptions.reduce(
+      (accumulator, option) => ({ ...accumulator, [option.OptionId.toString()]: option.OptionValueId }),
       {}
     )
   }));
 
   return options.map((option) => (
-    <dl className="mb-8" key={option.id}>
-      <dt className="mb-4 text-sm uppercase tracking-wide">{option.name}</dt>
+    <dl className="mb-8" key={option.Id}>
+      <dt className="mb-4 text-sm uppercase tracking-wide">{option.Title}</dt>
       <dd className="flex flex-wrap gap-3">
-        {option.values.map((value) => {
-          const optionNameLowerCase = option.name.toLowerCase();
+        {option.Values.map((value) => {
+          const optionNameLowerCase = option.Title.toLowerCase();
 
           // Base option params on current params so we can preserve any other param state in the url.
           const optionSearchParams = new URLSearchParams(searchParams.toString());
 
           // Update the option params using the current option to reflect how the url *would* change,
           // if the option was clicked.
-          optionSearchParams.set(optionNameLowerCase, value);
+          optionSearchParams.set(optionNameLowerCase, value.Title);
           const optionUrl = createUrl(pathname, optionSearchParams);
 
           // In order to determine if an option is available for sale, we need to:
@@ -64,7 +64,7 @@ export function VariantSelector({
           // then all other sizes should be disabled.
           const filtered = Array.from(optionSearchParams.entries()).filter(([key, value]) =>
             options.find(
-              (option) => option.name.toLowerCase() === key && option.values.includes(value)
+              (option) => option.Title.toLowerCase() === key && option.Values.find(m => m.Title == value) != undefined //option.Values.includes(value.Title)
             )
           );
           const isAvailableForSale = combinations.find((combination) =>
@@ -74,17 +74,17 @@ export function VariantSelector({
           );
 
           // The option is active if it's in the url params.
-          const isActive = searchParams.get(optionNameLowerCase) === value;
+          const isActive = searchParams.get(optionNameLowerCase) === value.Title;
 
           return (
             <button
-              key={value}
+              key={value.Id}
               aria-disabled={!isAvailableForSale}
               disabled={!isAvailableForSale}
               onClick={() => {
                 router.replace(optionUrl, { scroll: false });
               }}
-              title={`${option.name} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
+              title={`${option.Title} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
               className={clsx(
                 'flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900',
                 {
@@ -96,7 +96,7 @@ export function VariantSelector({
                 }
               )}
             >
-              {value}
+              {value.Title}
             </button>
           );
         })}
