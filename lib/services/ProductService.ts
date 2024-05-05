@@ -18,11 +18,11 @@ export async function getAllProducts(): Promise<Product[]>  {
   return res.body;
 } 
 export async function getProducts(jp: string): Promise<SimpleProduct[]>  {
-
+  console.log('Product/GetFiltered?variables=' + jp);
   const res = await GetData<SimpleProduct[]>({
     path: 'Product/GetFiltered?variables=' + jp,
   });
-
+  console.log(res.body);
   return res.body;
 } 
 

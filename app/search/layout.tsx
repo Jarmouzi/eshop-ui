@@ -9,11 +9,11 @@ export default function SearchLayout({ children }: { children: React.ReactNode }
     <Suspense>
       <div className="mx-auto flex max-w-screen-2xl flex-col gap-8 px-4 pb-4 text-black dark:text-white md:flex-row">
         <div className="order-first w-full flex-none md:max-w-[125px]">
-          {/* <Collections /> */}
+          <Collections />
         </div>
         <div className="order-last min-h-screen w-full md:order-none">
-          <div className="order-none flex-none ">
-            <FilterList list={sorting} title="مرتب سازی بر اساس" />
+          <div className="order-none flex-none text-xs">
+            <FilterList list={sorting} title="مرتب سازی بر اساس" display="inline-flex" />
           </div>
           {children}
         </div>

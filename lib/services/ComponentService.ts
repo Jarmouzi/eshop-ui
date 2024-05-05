@@ -8,7 +8,7 @@ export async function getComponent(id: string): Promise<Component>  {
 
   return res.body;
 } 
-export async function getAllCategories(): Promise<Component[]>  {
+export async function getAllComponents(): Promise<Component[]>  {
 
   const res = await GetData<Component[]>({
     path: 'Component/GetAll',
@@ -16,7 +16,7 @@ export async function getAllCategories(): Promise<Component[]>  {
 
   return res.body;
 } 
-export async function getCategories(jp: string): Promise<Component[]>  {
+export async function getComponents(jp: string): Promise<Component[]>  {
 
   const res = await PostData<Component[]>({
     path: 'Component/GetFiltered',

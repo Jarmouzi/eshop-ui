@@ -1,12 +1,12 @@
 import Navbar from '@/components/layout/navbar';
-import { ensureStartsWith } from '@/lib/utils';
+//import { ensureStartsWith } from '@/lib/utils';
 import { ReactNode, Suspense } from 'react';
 import './globals.css';
 import Footer from '@/components/layout/footer';
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
-const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+const baseUrl = process.env.NEXT_PUBLIC_URL
+  ? `https://${process.env.NEXT_PUBLIC_URL}`
   : 'http://localhost:3000';
 
 export const metadata = {

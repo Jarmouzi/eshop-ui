@@ -20,7 +20,7 @@ export function GridTileImage({
   return (
     <div
       className={clsx(
-        'group flex h-full w-full top-1 overflow-hidden rounded-lg border bg-white hover:border-teal-600 dark:bg-black', // items-center justify-center
+        'group flex h-full w-full top-1 pb-20 overflow-hidden rounded-lg border bg-white hover:border-teal-600 dark:bg-black', // items-center justify-center
         {
           relative: label,
           'border-2 border-teal-600': active,

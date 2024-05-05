@@ -9,20 +9,10 @@ export async function AnimatedCarousel({
   collectionName?: string;
   title?: string;
 }) {
-  // Collections that start with `hidden-*` are hidden from the search page.
   const products = await getCollectionProducts(collectionName);
 
   if (!products?.length) return null;
 
-  const imageLoader = ( { src }: any ) => {
-    const imgString = `https://fakestoreapi.com/${ src }`
-    return imgString;
-}
-
-  // Purposefully duplicating products to make the carousel loop and not run out of products on wide screens.
-  //const carouselProducts = [...products, ...products, ...products];
-
-  
   return (
     <>
     <div className="px-4 collection">

@@ -8,7 +8,7 @@ export type Edge<T> = {
   node: T;
 };
 
-export type Cart = Omit<ShopifyCart, 'lines'> & {
+export type lCart = Omit<Cart, 'lines'> & {
   lines: CartItem[];
 };
 
@@ -29,7 +29,7 @@ export type CartItem = {
   };
 };
 
-export type Collection = ShopifyCollection & {
+export type Collectionp = Collection & {
   path: string;
 };
 
@@ -61,7 +61,7 @@ export type Page = {
   updatedAt: string;
 };
 
-export type Product = Omit<ShopifyProduct, 'variants' | 'images'> & {
+export type imgProduct = Omit<Product, 'variants' | 'images'> & {
   variants: ProductVariant[];
   images: Image[];
 };
@@ -88,7 +88,7 @@ export type SEO = {
   description: string;
 };
 
-export type ShopifyCart = {
+export type Cart = {
   id: string;
   checkoutUrl: string;
   cost: {
@@ -100,7 +100,7 @@ export type ShopifyCart = {
   totalQuantity: number;
 };
 
-export type ShopifyCollection = {
+export type Collection = {
   handle: string;
   title: string;
   description: string;
@@ -108,7 +108,7 @@ export type ShopifyCollection = {
   updatedAt: string;
 };
 
-export type ShopifyProduct = {
+export type Product = {
   id: string;
   handle: string;
   availableForSale: boolean;
@@ -128,23 +128,23 @@ export type ShopifyProduct = {
   updatedAt: string;
 };
 
-export type ShopifyCartOperation = {
+export type CartOperation = {
   data: {
-    cart: ShopifyCart;
+    cart: Cart;
   };
   variables: {
     cartId: string;
   };
 };
 
-export type ShopifyCreateCartOperation = {
-  data: { cartCreate: { cart: ShopifyCart } };
+export type CreateCartOperation = {
+  data: { cartCreate: { cart: Cart } };
 };
 
-export type ShopifyAddToCartOperation = {
+export type AddToCartOperation = {
   data: {
     cartLinesAdd: {
-      cart: ShopifyCart;
+      cart: Cart;
     };
   };
   variables: {
@@ -156,10 +156,10 @@ export type ShopifyAddToCartOperation = {
   };
 };
 
-export type ShopifyRemoveFromCartOperation = {
+export type RemoveFromCartOperation = {
   data: {
     cartLinesRemove: {
-      cart: ShopifyCart;
+      cart: Cart;
     };
   };
   variables: {
@@ -168,10 +168,10 @@ export type ShopifyRemoveFromCartOperation = {
   };
 };
 
-export type ShopifyUpdateCartOperation = {
+export type UpdateCartOperation = {
   data: {
     cartLinesUpdate: {
-      cart: ShopifyCart;
+      cart: Cart;
     };
   };
   variables: {
@@ -184,19 +184,19 @@ export type ShopifyUpdateCartOperation = {
   };
 };
 
-export type ShopifyCollectionOperation = {
+export type CollectionOperation = {
   data: {
-    collection: ShopifyCollection;
+    collection: Collection;
   };
   variables: {
     handle: string;
   };
 };
 
-export type ShopifyCollectionProductsOperation = {
+export type CollectionProductsOperation = {
   data: {
     collection: {
-      products: Connection<ShopifyProduct>;
+      products: Connection<Product>;
     };
   };
   variables: {
@@ -206,13 +206,13 @@ export type ShopifyCollectionProductsOperation = {
   };
 };
 
-export type ShopifyCollectionsOperation = {
+export type CollectionsOperation = {
   data: {
-    collections: Connection<ShopifyCollection>;
+    collections: Connection<Collection>;
   };
 };
 
-export type ShopifyMenuOperation = {
+export type MenuOperation = {
   data: {
     menu?: {
       items: {
@@ -226,36 +226,36 @@ export type ShopifyMenuOperation = {
   };
 };
 
-export type ShopifyPageOperation = {
+export type PageOperation = {
   data: { pageByHandle: Page };
   variables: { handle: string };
 };
 
-export type ShopifyPagesOperation = {
+export type PagesOperation = {
   data: {
     pages: Connection<Page>;
   };
 };
 
-export type ShopifyProductOperation = {
-  data: { product: ShopifyProduct };
+export type ProductOperation = {
+  data: { product: Product };
   variables: {
     handle: string;
   };
 };
 
-export type ShopifyProductRecommendationsOperation = {
+export type ProductRecommendationsOperation = {
   data: {
-    productRecommendations: ShopifyProduct[];
+    productRecommendations: Product[];
   };
   variables: {
     productId: string;
   };
 };
 
-export type ShopifyProductsOperation = {
+export type ProductsOperation = {
   data: {
-    products: Connection<ShopifyProduct>;
+    products: Connection<Product>;
   };
   variables: {
     query?: string;

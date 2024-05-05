@@ -48,12 +48,12 @@ function SortFilters({ item }: { item: SortFilterItem }) {
   const DynamicTag = active ? 'p' : Link;
 
   return (
-    <li className="mt-2 flex text-sm text-black dark:text-white" key={item.title}>
+    <li className="flex text-sm text-black dark:text-white" key={item.title}>
       <DynamicTag
         prefetch={!active ? false : undefined}
         href={href}
-        className={clsx('w-full hover:underline hover:underline-offset-4', {
-          'underline underline-offset-4': active
+        className={clsx('w-full p-2 hover:underline hover:underline-offset-4', {
+          'bg-teal-600 text-white font-semibold rounded-full': active
         })}
       >
         {item.title}

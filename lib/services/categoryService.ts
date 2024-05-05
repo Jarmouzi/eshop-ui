@@ -1,5 +1,6 @@
 import React from 'react'
 import { GetData, PostData } from './service';
+import { Category, Collection } from '../types/Category';
 
 export async function getCategory(id: string): Promise<Category>  {
 
@@ -53,4 +54,29 @@ export async function getDataWithToken() {
       // Handle the error response
       return null;
     }
+  }
+
+  export async function getCollections(): Promise<Collection[]> {
+    const res = await GetData<Collection[]>({
+      path: 'Category/GetFiltered',
+    });
+
+    const collections: Collection[] = [
+      {
+        Id: '1',
+        //Handle: '',
+        Title: 'همه',
+        //Description: 'همه محصولات',
+        // Seo: {
+        //   Title: 'All',
+        //   Description: 'All products',
+        //   IsName: false
+        // },
+        Path: '/search',
+        //updatedAt: new Date().toISOString()
+      },
+      ...res.body
+    ];
+  
+    return collections;
   }

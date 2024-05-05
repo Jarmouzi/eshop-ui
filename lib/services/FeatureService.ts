@@ -8,7 +8,7 @@ export async function getFeature(id: string): Promise<Feature>  {
 
   return res.body;
 } 
-export async function getAllCategories(): Promise<Feature[]>  {
+export async function getAllFeatures(): Promise<Feature[]>  {
 
   const res = await GetData<Feature[]>({
     path: 'Feature/GetAll',
@@ -16,7 +16,7 @@ export async function getAllCategories(): Promise<Feature[]>  {
 
   return res.body;
 } 
-export async function getCategories(jp: string): Promise<Feature[]>  {
+export async function getFeatures(jp: string): Promise<Feature[]>  {
 
   const res = await PostData<Feature[]>({
     path: 'Feature/GetFiltered',

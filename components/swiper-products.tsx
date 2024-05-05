@@ -1,0 +1,62 @@
+'use client';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+//import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import Link from 'next/link';
+import { GridTileImage } from './grid/tile';
+import { SimpleProduct } from '@/lib/types/Product';
+
+export default async function SwiperProducts({
+  products = [],
+  title
+}: {
+  products?: SimpleProduct[];
+  title?: string;
+}) {
+  return (
+    <>
+      <div className="px-4 mt-2 collection">
+        <h1>{title}</h1>
+      </div>
+      <Swiper
+        slidesPerView={6}
+        spaceBetween={15}
+        centeredSlides={false}
+        loop={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+          waitForTransition: false,
+          reverseDirection: true,
+          pauseOnMouseEnter: true
+        }}
+        // pagination={{
+        //   clickable: true,
+        // }}
+        navigation={true}
+        modules={[Autoplay, Navigation]} //, Pagination
+        //className="mySwiper"
+      >
+        {products.map((product, i) => (
+            <SwiperSlide className='mb-3'>
+              <Link href={`/product/${product.Id}`} className="relative h-full w-full">
+                <GridTileImage
+                  alt={product.Title}
+                  label={{
+                    title: product.Title,
+                    amount: product.Price, //product.priceRange.maxVariantPrice.amount,
+                    currencyCode: 'IRI' //product.priceRange.maxVariantPrice.currencyCode
+                  }}
+                  src={product.FeaturedImage}//?.url}
+                  //fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                />
+              </Link>
+            </SwiperSlide>
+          ))}
+      </Swiper>
+    </>
+  );
+};

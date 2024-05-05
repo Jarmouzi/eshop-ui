@@ -8,7 +8,7 @@ export async function getFilter(id: string): Promise<Filter>  {
 
   return res.body;
 } 
-export async function getAllCategories(): Promise<Filter[]>  {
+export async function getAllFilters(): Promise<Filter[]>  {
 
   const res = await GetData<Filter[]>({
     path: 'Filter/GetAll',
@@ -16,7 +16,7 @@ export async function getAllCategories(): Promise<Filter[]>  {
 
   return res.body;
 } 
-export async function getCategories(jp: string): Promise<Filter[]>  {
+export async function getFilters(jp: string): Promise<Filter[]>  {
 
   const res = await PostData<Filter[]>({
     path: 'Filter/GetFiltered',
