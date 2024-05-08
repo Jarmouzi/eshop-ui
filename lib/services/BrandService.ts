@@ -14,7 +14,7 @@ export async function getAllBrands(): Promise<Brand[]>  {
   const res = await GetData<Brand[]>({
     path: 'Brand/GetAll',
   });
-  console.log(res.body);
+  
   return res.body;
 } 
 export async function getBrands(jp: string): Promise<Brand[]>  {

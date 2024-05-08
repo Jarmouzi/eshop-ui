@@ -4,10 +4,10 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
-import type { ListItem } from '.';
-import { FilterItem } from './item';
+import { SortFilterItem } from '@/lib/constants';
+import { SortFilters } from './item';
 
-export default function FilterItemDropdown({ list }: { list: ListItem[] }) {
+export default function FilterItemDropdown({ list }: { list: SortFilterItem[] }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [active, setActive] = useState('');
@@ -26,10 +26,10 @@ export default function FilterItemDropdown({ list }: { list: ListItem[] }) {
   }, []);
 
   useEffect(() => {
-    list.forEach((listItem: ListItem) => {
+    list.forEach((listItem: SortFilterItem) => {
       if (
         ('path' in listItem && pathname === listItem.path) ||
-        ('slug' in listItem && searchParams.get('sort') === listItem.slug)
+        (searchParams.get('sort') === listItem.slug)
       ) {
         setActive(listItem.title);
       }
@@ -54,8 +54,8 @@ export default function FilterItemDropdown({ list }: { list: ListItem[] }) {
           }}
           className="absolute z-40 w-full rounded-b-md bg-white shadow-md p-1 dark:bg-black"
         >
-          {list.map((item: ListItem, i) => (
-            <FilterItem key={i} item={item} />
+          {list.map((item: SortFilterItem, i) => (
+            <SortFilters key={i} item={item} />
           ))}
         </div>
       )}

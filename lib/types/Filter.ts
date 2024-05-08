@@ -5,3 +5,9 @@ type Filter =  {
 	'Confirmed': boolean | null, 
 	'Title': string | null, 
 } 
+
+export type FilterItem = {
+    Id: string,
+    Path: string | '#',
+    Title: string;
+  };

@@ -1,11 +1,12 @@
 import React from 'react'
 import { GetData, PostData } from './service';
 import { Category, Collection } from '../types/Category';
+import { FilterItem } from '../types/Filter';
 
 export async function getCategory(id: string): Promise<Category>  {
 
   const res = await GetData<Category>({
-    path: 'Category/Get?' + id,
+    path: 'Category/Get?id=' + id,
   });
 
   return res.body;
@@ -56,27 +57,21 @@ export async function getDataWithToken() {
     }
   }
 
-  export async function getCollections(): Promise<Collection[]> {
-    const res = await GetData<Collection[]>({
+  export async function getCollections(): Promise<Menu[]> {
+    console.log('getCollection called');
+    const res = await GetData<Menu[]>({
       path: 'Category/GetFiltered',
     });
 
-    const collections: Collection[] = [
+    const collections: Menu[] = [
       {
         Id: '1',
-        //Handle: '',
         Title: 'همه',
-        //Description: 'همه محصولات',
-        // Seo: {
-        //   Title: 'All',
-        //   Description: 'All products',
-        //   IsName: false
-        // },
-        Path: '/search',
-        //updatedAt: new Date().toISOString()
+        PageAddress: '/search',
+        Children: []
       },
       ...res.body
     ];
-  
+    console.log('Category List: ' + collections);
     return collections;
   }

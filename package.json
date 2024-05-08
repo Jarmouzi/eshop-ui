@@ -18,7 +18,11 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@nextui-org/slider": "^2.2.9",
+    "@nextui-org/system": "^2.1.2",
+    "@nextui-org/theme": "^2.2.3",
     "clsx": "^2.0.0",
+    "framer-motion": "^11.1.7",
     "geist": "^1.0.0",
     "next": "^14.2.1",
     "react": "18.2.0",

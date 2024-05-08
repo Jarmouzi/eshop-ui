@@ -1,10 +1,12 @@
-import { getCollection, getCollectionProducts } from '@/lib/shopify';
+
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import Grid from '@/components/grid';
 import ProductGridItems from '@/components/layout/product-grid-items';
 import { defaultSort, sorting } from '@/lib/constants';
+import { getCollectionProducts, getProducts } from '@/lib/services/ProductService';
+import { getCollection } from '@/lib/shopify';
 
 export const runtime = 'edge';
 
@@ -33,7 +35,7 @@ export default async function CategoryPage({
 }) {
   const { sort } = searchParams as { [key: string]: string };
   const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
-  const products = await getCollectionProducts({ collection: params.collection, sortKey, reverse });
+  const products = await getProducts(JSON.stringify({ collection: params.collection, sk: sortKey, r: reverse}));
 
   return (
     <section>
