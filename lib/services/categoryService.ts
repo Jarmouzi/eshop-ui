@@ -72,6 +72,5 @@ export async function getDataWithToken() {
       },
       ...res.body
     ];
-    console.log('Category List: ' + collections);
     return collections;
   }

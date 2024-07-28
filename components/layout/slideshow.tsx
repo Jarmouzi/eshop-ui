@@ -1,6 +1,5 @@
 'use client'
 import { GridTileImage } from '@/components/grid/tile';
-import { getAllBanners } from '@/lib/services/BannerService';
 import { Banner } from '@/lib/types/Banner';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';

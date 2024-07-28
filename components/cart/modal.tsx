@@ -65,18 +65,18 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
             leaveTo="translate-x-full"
           >
             <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white/80 p-6 text-black backdrop-blur-xl dark:border-neutral-700 dark:bg-black/80 dark:text-white md:w-[390px]">
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold">My Cart</p>
+              <div className="flex items-center justify-between text-neutral-500">
+                <p className="text-lg font-semibold">سبد خرید</p>
 
                 <button aria-label="Close cart" onClick={closeCart}>
-                  <CloseCart />
+                  <CloseCart className='text-neutral-500' />
                 </button>
               </div>
 
               {!cart || cart.lines.length === 0 ? (
-                <div className="mt-20 flex w-full flex-col items-center justify-center overflow-hidden">
+                <div className="mt-20 flex text-neutral-500 w-full flex-col items-center justify-center overflow-hidden">
                   <ShoppingCartIcon className="h-16" />
-                  <p className="mt-6 text-center text-2xl font-bold">Your cart is empty.</p>
+                  <p className="mt-6 text-center text-2xl font-bold">سبد خرید شما خالیست.</p>
                 </div>
               ) : (
                 <div className="flex h-full flex-col justify-between overflow-hidden p-1">
@@ -101,7 +101,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                           className="flex w-full flex-col border-b border-neutral-300 dark:border-neutral-700"
                         >
                           <div className="relative flex w-full flex-row justify-between px-1 py-4">
-                            <div className="absolute z-40 -mt-2 ml-[55px]">
+                            <div className="absolute z-40 -mt-2 mr-[55px]">
                               <DeleteItemButton item={item} />
                             </div>
                             <Link
@@ -139,7 +139,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                                 amount={item.cost.totalAmount.amount}
                                 currencyCode={item.cost.totalAmount.currencyCode}
                               />
-                              <div className="ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200 dark:border-neutral-700">
+                              <div className="mr-auto flex h-9 flex-row items-center rounded-full border border-neutral-200 dark:border-neutral-700">
                                 <EditItemQuantityButton item={item} type="minus" />
                                 <p className="w-6 text-center">
                                   <span className="w-full text-sm">{item.quantity}</span>

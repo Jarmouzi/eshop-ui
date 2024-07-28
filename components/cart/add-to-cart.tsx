@@ -57,7 +57,7 @@ function SubmitButton({
         disabledClasses: pending
       })}
     >
-      <div className="absolute right-0 ml-4">
+      <div className="absolute right-0 mr-4">
         {pending ? <LoadingDots className="mb-3 bg-white" /> : <ShoppingBagIcon className='h-6' />}
       </div>
       افزودن به سبد خرید

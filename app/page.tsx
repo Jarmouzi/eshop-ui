@@ -1,6 +1,6 @@
 import { AnimatedCarousel } from '@/components/animated-carousel';
+import Banner from '@/components/banner';
 import { ThreeItemGrid } from '@/components/grid/three-items';
-import Footer from '@/components/layout/footer';
 import SlideShowComponent from '@/components/layout/slideshow';
 import SwiperProducts from '@/components/swiper-products';
 import { getAllBanners } from '@/lib/services/BannerService';
@@ -42,6 +42,14 @@ export default async function HomePage() {
       </Suspense> */}
       <Suspense>
         <SwiperProducts products={products} title='پیشنهادات ویژه' />
+      </Suspense>
+      <Suspense>
+        <div className='inline-flex pl-2 pr-6 py-3 justify-center'>
+          <Banner title='لوازم خانگی' src='https://localhost:7029/Statistics?path=202302071335259013.png' path='' />
+          <Banner title='گوشی و تبلت' src='https://localhost:7029/Statistics?path=202302071337043448.png' path='' />
+          <Banner title='لوازم جانبی' src='https://localhost:7029/Statistics?path=202302071338425222.png' path='' />
+          <Banner title='ساعت هوشمند' src='https://localhost:7029/Statistics?path=202302071358587162.png' path='' />
+        </div>
       </Suspense>
     </>
   );

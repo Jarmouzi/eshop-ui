@@ -1,10 +1,8 @@
-import clsx from 'clsx';
-import Image from 'next/image';
-
-export default function LogoIcon(props: React.ComponentProps<'svg'>) {
-  return (
-    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="60.000000pt" height="60.000000pt" viewBox="0 0 6000.000000 6000.000000"
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="6000.000000pt" height="6000.000000pt" viewBox="0 0 6000.000000 6000.000000"
  preserveAspectRatio="xMidYMid meet">
 
 <g transform="translate(0.000000,6000.000000) scale(0.100000,-0.100000)"
@@ -191,6 +189,3 @@ l-761 757 -3609 -3609 -3610 -3610 705 -706 c903 -904 1313 -1298 1876 -1805
 64 l-3 22 -589 0 -589 0 -3 -22z"/>
 </g>
 </svg>
-
-  );
-}

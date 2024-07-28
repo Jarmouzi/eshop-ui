@@ -2,12 +2,34 @@
 import {Slider} from "@nextui-org/slider";
 import React from "react";
 import Search from "../../navbar/search";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { createUrl } from "@/lib/utils";
+import Link from "next/link";
+import { CogIcon } from "@heroicons/react/24/solid";
+import { MagnifyingGlassCircleIcon } from "@heroicons/react/16/solid";
 
+function search({value} : {value: number[]})
+{
+}
 
-export function PriceRangeSlider({minPrice, maxPrice} : {minPrice: number, maxPrice: number}) {
+export function PriceFilter({minPrice, maxPrice} : {minPrice: number, maxPrice: number}) {
 
   const [value, setValue] = React.useState([minPrice, maxPrice]);
+
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const current = new URLSearchParams(Array.from(searchParams.entries())); 
+  if(value && value.length == 2)
+    {
+      current.set("lp", value[0].toString());
+      current.set("hp", value[1].toString());
+    }
+  const href = createUrl(pathname, current);
+  //router.push(href, undefined, {shallow: true});
+
+
 
 //   const pathname = usePathname();
 //   const searchParams = useSearchParams();
@@ -25,7 +47,7 @@ export function PriceRangeSlider({minPrice, maxPrice} : {minPrice: number, maxPr
 
   return (
     <>
-      <div className="block gap-2 w-full h-full max-w-md items-start justify-center pb-4">
+      <div className="block gap-2 w-full max-w-md items-start justify-center pb-4">
         <Slider 
             label="حدود قیمت"
             //formatOptions={{maximumFractionDigits: 15}}          
@@ -37,7 +59,6 @@ export function PriceRangeSlider({minPrice, maxPrice} : {minPrice: number, maxPr
             hideValue={true}
             value={value} 
             onChange={setValue}   
-            onMouseUp={Search}
             classNames={{
               base: "max-w-md font-semibold text-sm text-neutral-500 dark:text-neutral-400 p-2",
               filler: "bg-teal-600",
@@ -58,9 +79,17 @@ export function PriceRangeSlider({minPrice, maxPrice} : {minPrice: number, maxPr
               </div>
             )}
         />
-        <pre className="text-small text-neutral-500 dark:text-neutral-400 px-4">
-            از: {Array.isArray(value) && value.map((b) => ` ${new Intl.NumberFormat('fa-IR').format(b)} تومان\n`).join("تا: ")}
-        </pre>
+        <div className="flex h-full w-full">
+          <pre className="w-4/5 text-small text-neutral-500 dark:text-neutral-400 px-4">
+              از: {Array.isArray(value) && value.map((b) => ` ${new Intl.NumberFormat('fa-IR').format(b)} تومان\n`).join("تا: ")}
+          </pre>
+          
+          <div className="float-left mr-0 pt-1">
+            <Link className="text-teal-600" href={href}> 
+              <MagnifyingGlassCircleIcon width="32" height="32" /> 
+            </Link>
+          </div>
+        </div>
         {/* <div className="price-input grid mb-5"> 
         {Array.isArray(value) && value.map((v, i) => (
             <div className="flex mb-5"> 

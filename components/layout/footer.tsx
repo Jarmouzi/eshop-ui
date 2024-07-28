@@ -37,7 +37,7 @@ export default async function Footer() {
         >
           <FooterMenu menu={menu} />
         </Suspense>
-        <div className="md:ml-auto">
+        <div className="md:mr-auto">
           <a
             className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white"
             aria-label="طراحی و پیاده سازی توسط تیم کاسب یار"
@@ -56,7 +56,7 @@ export default async function Footer() {
             تمامی حقوق این سامانه متعلق به {copyrightName} می باشد.
           </p>
           <hr className="mx-4 hidden h-4 w-[1px] border-l border-neutral-400 md:inline-block" />
-          <p className="md:ml-auto">
+          <p className="md:mr-auto">
             <a href="https://kasebyar.com" className="text-black dark:text-white">
               طراحی، پیاده سازی و پشتیبانی توسط تیم ▲ کاسب یار 
             </a>

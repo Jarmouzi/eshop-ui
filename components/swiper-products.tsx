@@ -16,8 +16,8 @@ export default async function SwiperProducts({
   title?: string;
 }) {
   return (
-    <>
-      <div className="px-4 mt-2 collection">
+    <div className="px-6 my-2 collection">
+      <div className="collection">
         <h1>{title}</h1>
       </div>
       <Swiper
@@ -37,7 +37,7 @@ export default async function SwiperProducts({
         // }}
         navigation={true}
         modules={[Autoplay, Navigation]} //, Pagination
-        //className="mySwiper"
+        //className="text-teal-600"
       >
         {products.map((product, i) => (
             <SwiperSlide className='mb-3'>
@@ -57,6 +57,6 @@ export default async function SwiperProducts({
             </SwiperSlide>
           ))}
       </Swiper>
-    </>
+    </div>
   );
 };

@@ -6,23 +6,13 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { FilterItem } from '@/lib/types/Filter';
 import { PathFilterItem } from './item';
+import { createUrl } from '@/lib/utils';
 
 
-export default function FilterItemDropdown({ list, key }: { list: Menu[], key: string }) {
+export default function FilterItemDropdown({ list, sk }: { list: Menu[], sk: string, }) {
+  console.log('sk in dropdown: ' + sk);
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  // const current = new URLSearchParams(Array.from(searchParams.entries())); 
-  // const active = searchParams.get(key) === item.slug;
-  // current.set("sort", (item.slug && item.slug.length ? item.slug : ""));
-  // //const q = searchParams.get('q');
-  // const href = createUrl(
-  //   pathname,
-  //   current
-  //   // new URLSearchParams({
-  //   //   ...(q && { q }),
-  //   //   ...(item.slug && item.slug.length && { sort: item.slug })
-  //   // })
-  // );
   const [active, setActive] = useState('');
   const [openSelect, setOpenSelect] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -40,9 +30,7 @@ export default function FilterItemDropdown({ list, key }: { list: Menu[], key: s
 
   useEffect(() => {
     list.forEach((listItem: Menu) => {
-      if (
-        ('path' in listItem && pathname === listItem.path) 
-      ) {
+      if (searchParams.get(sk) === listItem.Id) {
         setActive(listItem.Title);
       }
     });
@@ -67,7 +55,7 @@ export default function FilterItemDropdown({ list, key }: { list: Menu[], key: s
           className="absolute z-40 w-full rounded-b-md bg-white shadow-md p-1 dark:bg-black"
         >
           {list.map((item: Menu, i) => (
-            <PathFilterItem key={i} item={item} />
+            <PathFilterItem key={i} item={item} sk={sk} />
           ))}
         </div>
       )}

@@ -32,9 +32,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         {/* <Suspense> */}
           <main>{children}</main>
         {/* </Suspense> */}
-        {/* <Suspense>
+        <Suspense>
           <Footer/>
-        </Suspense>  */}
+        </Suspense> 
       </body>
     </html>
   );

@@ -18,7 +18,10 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@nextui-org/checkbox": "^2.0.29",
+    "@nextui-org/react": "^2.3.6",
     "@nextui-org/slider": "^2.2.9",
+    "@nextui-org/switch": "^2.0.28",
     "@nextui-org/system": "^2.1.2",
     "@nextui-org/theme": "^2.2.3",
     "clsx": "^2.0.0",

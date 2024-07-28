@@ -3,11 +3,13 @@ import { Suspense } from 'react';
 
 import FilterList from './list-filter';
 import { getCollections } from '@/lib/services/CategoryService';
-import { PriceRangeSlider } from './price-filter';
+import { PriceFilter } from './price-filter';
+import SwitchFilter from './switch-filter';
+import CheckboxFilter from './checkbox-filter';
 
 async function CollectionList() {
   const collections = await getCollections();
-  return <FilterList list={collections} title="گروه محصولات" />;
+  return <FilterList list={collections} title="گروه محصولات" sk="c"/>;
 }
 
 const skeleton = 'mb-3 h-4 w-5/6 animate-pulse rounded';
@@ -39,7 +41,13 @@ export default function Collections() {
         <CollectionList/>
       </Suspense>
 
-        <PriceRangeSlider minPrice={10000} maxPrice={100000000} />
+        <PriceFilter minPrice={10000} maxPrice={100000000} />
+
+        {/* <SwitchFilter title='فقط کالاهای موجود' sk='e' /> */}
+
+        <CheckboxFilter title='فقط کالاهای تخفیف دار' sk='b'/>
+
+        <CheckboxFilter title='ارسال امروز' sk='d' imageUrl='https://dkstatics-public.digikala.com/digikala-static/262c38c0e4990522af759e0016a287508bbc84f6_1684761217.png'/>
 
     </div>
   );

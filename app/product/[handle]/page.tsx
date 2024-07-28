@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
 import { GridTileImage } from '@/components/grid/tile';
-import Footer from '@/components/layout/footer';
 import { Gallery } from '@/components/product/gallery';
 import { ProductDescription } from '@/components/product/product-description';
 import { HIDDEN_PRODUCT_TAG } from '@/lib/constants';
@@ -56,32 +55,32 @@ export default async function ProductPage({ params }: { params: { handle: string
 
   if (!product) return notFound();
 
-  const productJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: product.Title,
-    description: product.Description,
-    image: product.FeaturedImage.Url,
-    offers: {
-      '@type': 'AggregateOffer',
-      availability: product.AvailableForSale
-        ? 'https://schema.org/InStock'
-        : 'https://schema.org/OutOfStock',
-      //priceCurrency: 'IRI', product.priceRange.minVariantPrice.currencyCode,
-      // highPrice: product.priceRange.maxVariantPrice.amount,
-      // lowPrice: product.priceRange.minVariantPrice.amount
-      price: product.Price,
-    }
-  };
+  // const productJsonLd = {
+  //   //'@context': 'https://schema.org',
+  //   //'@type': 'Product',
+  //   name: product.Title,
+  //   description: product.Description,
+  //   image: product.FeaturedImage.Url,
+  //   offers: {
+  //     '@type': 'AggregateOffer',
+  //     availability: product.AvailableForSale
+  //       ? 'https://schema.org/InStock'
+  //       : 'https://schema.org/OutOfStock',
+  //     //priceCurrency: 'IRI', product.priceRange.minVariantPrice.currencyCode,
+  //     // highPrice: product.priceRange.maxVariantPrice.amount,
+  //     // lowPrice: product.priceRange.minVariantPrice.amount
+  //     price: product.Price,
+  //   }
+  // };
 
   return (
     <>
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(productJsonLd)
         }}
-      />
+      /> */}
       <div className="mx-auto max-w-screen-2xl px-4">
         <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12 lg:flex-row lg:gap-8">
           <div className="h-full w-full basis-full lg:basis-2/6 md:basis-1/2">

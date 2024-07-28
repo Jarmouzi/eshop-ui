@@ -17,10 +17,10 @@ export function ProductDescription({ product }: { product: Product }) {
       </div>
       <VariantSelector options={product.Options} variants={product.Variants} />
 
-      {product.DescriptionHtml ? (
+      {product.Description ? (
         <Prose
           className="mb-6 text-sm leading-tight dark:text-white/[60%]"
-          html={product.DescriptionHtml}
+          html={product.Description}
         />
       ) : null}
 
