@@ -10,6 +10,7 @@
     Id: string;
     AvailableForSale: boolean;
     Title: string;
+    Title_En: string;
     Description: string;
     DescriptionHtml: string;
     Options: ProductOption[];
@@ -26,8 +27,16 @@
   export type ProductFeature = {
     Id: string;
     Title: string;
-    Value: string;
+    //Icon: string;
+    Features: Feature[];
   };
+
+  export type Feature = {
+    Id: string;
+    Title: string;
+    //Icon: string;
+    Value: string;
+  }
 
   export type ProductOption = {
     Id: string;

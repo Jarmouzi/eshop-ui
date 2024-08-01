@@ -9,6 +9,11 @@ import { HIDDEN_PRODUCT_TAG } from '@/lib/constants';
 import Link from 'next/link';
 import { getProduct, getProductRecommendations } from '@/lib/services/ProductService';
 import { Image } from '@/lib/types/Product';
+import { Card, CardBody, Tab, Tabs } from '@nextui-org/react';
+import FeatureList from '@/components/list/feature-list';
+import Prose from '@/components/prose';
+import TabInfo from '@/components/tab-info';
+import { TabData } from "@/lib/types/TabData";
 
 //export const runtime = 'edge';
 
@@ -55,6 +60,17 @@ export default async function ProductPage({ params }: { params: { handle: string
 
   if (!product) return notFound();
 
+    const tabData: Array<TabData> = [{
+      Id: 1,
+      Title: "معرفی محصول",
+      Content: <div>{product.Description}</div>
+    }];
+    if(product.Features)
+      tabData.push({
+        Id: 2,
+        Title: "ویژگی های محصول",
+        Content: <FeatureList list={product.Features} title='ویژگی های محصول' ></FeatureList> 
+      });
   // const productJsonLd = {
   //   //'@context': 'https://schema.org',
   //   //'@type': 'Product',
@@ -82,7 +98,7 @@ export default async function ProductPage({ params }: { params: { handle: string
         }}
       /> */}
       <div className="mx-auto max-w-screen-2xl px-4">
-        <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12 lg:flex-row lg:gap-8">
+        <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 mb-3 dark:border-neutral-800 dark:bg-black md:p-12 lg:flex-row lg:gap-8">
           <div className="h-full w-full basis-full lg:basis-2/6 md:basis-1/2">
             <Gallery
               images={product.Images.map((image: Image) => ({
@@ -90,12 +106,14 @@ export default async function ProductPage({ params }: { params: { handle: string
                 altText: image.AltText
               }))}
             />
-          </div>
-
+          </div> 
           <div className="basis-full lg:basis-4/6 md:basis-1/2">
             <ProductDescription product={product} />
           </div>
         </div>
+        
+        <TabInfo key="54564787" title='جزئیات محصول' list={tabData}></TabInfo>
+
         <Suspense>
           <RelatedProducts id={product.Id} />
         </Suspense>

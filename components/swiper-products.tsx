@@ -25,8 +25,9 @@ export default async function SwiperProducts({
         spaceBetween={15}
         centeredSlides={false}
         loop={true}
+        speed={1500}
         autoplay={{
-          delay: 2500,
+          delay: 3000,
           disableOnInteraction: false,
           waitForTransition: false,
           reverseDirection: true,
@@ -38,6 +39,7 @@ export default async function SwiperProducts({
         navigation={true}
         modules={[Autoplay, Navigation]} //, Pagination
         //className="text-teal-600"
+        color='primary'
       >
         {products.map((product, i) => (
             <SwiperSlide className='mb-3'>

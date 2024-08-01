@@ -24,6 +24,9 @@
   }
 }
 
+:root {
+  --swiper-navigation-color: #0d9488;
+}
 
 body {
     font-weight: 1;
@@ -139,12 +142,12 @@ pre {
       background-color: #0d9488;
       content: '';
       display: block;
-      position: absolute;
+      /* position: absolute; */
       margin-right: 50px;
       /* bottom: 0; */
       height: 2px;
-      width: 100%;
-      margin-bottom: 5px;
+      /* width: 100%;
+      margin-bottom: 5px; */
   }
 
 
@@ -173,3 +176,4 @@ pre {
   height: 100%;
   object-fit: cover;
 }
+

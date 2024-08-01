@@ -9,7 +9,9 @@ export default function SlideShowComponent({ banners }: { banners: Banner[] }) {
   
     return (
       <section dir='ltr' className="mx-auto inline-block max-w-screen-2xl gap-4 px-4 max-h-[287px] ">
-      <Carousel autoPlay infiniteLoop showIndicators={false} showThumbs={false}>
+      <Carousel autoPlay infiniteLoop 
+      transitionTime={1500}
+      showIndicators={false} showThumbs={false}>
       {banners.map((item, index) => (
         <div
             key={item.id}
