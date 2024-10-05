@@ -8,11 +8,11 @@ import Link from 'next/link';
 import { GridTileImage } from './grid/tile';
 import { SimpleProduct } from '@/lib/types/Product';
 
-export default async function SwiperProducts({
-  products = [],
+export default function SwiperProducts({
+  products,
   title
 }: {
-  products?: SimpleProduct[];
+  products: SimpleProduct[];
   title?: string;
 }) {
   return (
@@ -42,7 +42,7 @@ export default async function SwiperProducts({
         color='primary'
       >
         {products.map((product, i) => (
-            <SwiperSlide className='mb-3'>
+            <SwiperSlide className='mb-3' key={product.Id}>
               <Link href={`/product/${product.Id}`} className="relative h-full w-full">
                 <GridTileImage
                   alt={product.Title}

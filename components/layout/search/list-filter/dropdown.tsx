@@ -10,7 +10,6 @@ import { createUrl } from '@/lib/utils';
 
 
 export default function FilterItemDropdown({ list, sk }: { list: Menu[], sk: string, }) {
-  console.log('sk in dropdown: ' + sk);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [active, setActive] = useState('');

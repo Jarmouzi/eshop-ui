@@ -1,7 +1,9 @@
 'use server';
 
 import { TAGS } from '@/lib/constants';
-import { addToCart, createCart, getCart, removeFromCart, updateCart } from '@/lib/shopify';
+//import { addToCart, createCart, getCart, removeFromCart, updateCart } from '@/lib/shopify';
+import { addToCart, createCart, getCart, removeFromCart, updateCart } from '@/lib/services/CartService';
+import { Console } from 'console';
 import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 
@@ -10,74 +12,75 @@ export async function addItem(prevState: any, selectedVariantId: string | undefi
   let cart;
 
   if (cartId) {
+    console.log('cartId from cookies fetched: ', cartId);
+
     cart = await getCart(cartId);
+    console.log(cart);
   }
 
   if (!cartId || !cart) {
     cart = await createCart();
-    cartId = cart.id;
+    console.log(cart);
+    cartId = cart.Id;
     cookies().set('cartId', cartId);
+    
+    console.log('cartId added to cookies: ', cartId);
   }
 
   if (!selectedVariantId) {
-    return 'Missing product variant ID';
+    return 'مدل محصول را انتخاب نمایید';//'Missing product variant ID';
   }
 
   try {
-    await addToCart(cartId, [{ merchandiseId: selectedVariantId, quantity: 1 }]);
+    console.log('calling addToCart...');
+    await addToCart(cartId, selectedVariantId, 1 );
     revalidateTag(TAGS.cart);
   } catch (e) {
-    return 'Error adding item to cart';
+    return 'خطا در افزودن محصول به سبد خرید';//'Error adding item to cart';
   }
 }
 
-export async function removeItem(prevState: any, lineId: string) {
+export async function removeItem(prevState: any, itemId: number) {
   const cartId = cookies().get('cartId')?.value;
 
   if (!cartId) {
-    return 'Missing cart ID';
+    return 'اشکال در بازیابی سبد خرید';//'Missing cart ID';
   }
 
   try {
-    await removeFromCart(cartId, [lineId]);
+    await removeFromCart(cartId, itemId);
     revalidateTag(TAGS.cart);
   } catch (e) {
-    return 'Error removing item from cart';
+    return 'خطا در حذف محصول از سبد خرید';//'Error removing item from cart';
   }
 }
 
 export async function updateItemQuantity(
   prevState: any,
   payload: {
-    lineId: string;
-    variantId: string;
+    itemId: number;
+    variantId: number;
     quantity: number;
   }
 ) {
   const cartId = cookies().get('cartId')?.value;
 
   if (!cartId) {
-    return 'Missing cart ID';
+    return 'سبد خرید یافت نشد';//'Missing cart ID';
   }
 
-  const { lineId, variantId, quantity } = payload;
+  const { itemId, variantId, quantity } = payload;
 
   try {
     if (quantity === 0) {
-      await removeFromCart(cartId, [lineId]);
+      await removeFromCart(cartId, itemId);
       revalidateTag(TAGS.cart);
       return;
     }
 
-    await updateCart(cartId, [
-      {
-        id: lineId,
-        merchandiseId: variantId,
-        quantity
-      }
-    ]);
+    await updateCart(cartId, variantId, quantity);
     revalidateTag(TAGS.cart);
   } catch (e) {
-    return 'Error updating item quantity';
+    return 'خطا در بازیابی اطلاعات';//'Error updating item quantity';
   }
 }

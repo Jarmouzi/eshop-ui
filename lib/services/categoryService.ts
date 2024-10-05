@@ -58,7 +58,6 @@ export async function getDataWithToken() {
   }
 
   export async function getCollections(): Promise<Menu[]> {
-    console.log('getCollection called');
     const res = await GetData<Menu[]>({
       path: 'Category/GetFiltered',
     });

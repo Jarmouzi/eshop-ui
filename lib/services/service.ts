@@ -15,18 +15,32 @@ export async function GetData<T>({
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          //'Accept': 'application/json'
           //"Authorization": `Bearer ${token}`,
         },
         //credentials: "include" // Include cookies for authorization
         cache,
         ...(tags && { next: { tags } })
       });
-  
-      const body = await result.json();
-  
-      if (body.errors) {
-        throw body.errors[0];
+        
+
+      const text = await result.text(); // Get raw text first
+      let body;
+      try {
+        body = JSON.parse(text); // Attempt to parse as JSON
+        // if (body.errors) {
+        //   throw body.errors[0];
+        // }
+
+      } catch (error) {
+        console.error('JSON Parse Error:', error);
+        //throw new Error('Response is not valid JSON');
       }
+      //const body = await result.json();
+  
+      // if (body.errors) {
+      //   throw body.errors[0];
+      // }
   
       return {
         status: result.status,
@@ -79,3 +93,60 @@ export async function PostData<T>({
       //handle error
     }
   }
+
+  
+// export async function apiFetch<T>({
+//   cache = 'force-cache',
+//   headers,
+//   query,
+//   tags,
+//   variables
+// }: {
+//   cache?: RequestCache;
+//   headers?: HeadersInit;
+//   query: string;
+//   tags?: string[];
+//   variables?: ExtractVariables<T>;
+// }): Promise<{ status: number; body: T } | never> {
+//   try {
+//     const result = await fetch(endpoint, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'API-Access-Token': key,
+//         ...headers
+//       },
+//       body: JSON.stringify({
+//         ...(query && { query }),
+//         ...(variables && { variables })
+//       }),
+//       cache,
+//       ...(tags && { next: { tags } })
+//     });
+
+//     const body = await result.json();
+
+//     if (body.errors) {
+//       throw body.errors[0];
+//     }
+
+//     return {
+//       status: result.status,
+//       body
+//     };
+//   } catch (e) {
+//     if (isAPIError(e)) {
+//       throw {
+//         cause: e.cause?.toString() || 'unknown',
+//         status: e.status || 500,
+//         message: e.message,
+//         query
+//       };
+//     }
+
+//     throw {
+//       error: e,
+//       query
+//     };
+//   }
+// }

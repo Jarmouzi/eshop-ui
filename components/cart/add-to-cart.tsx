@@ -9,6 +9,8 @@ import { useSearchParams } from 'next/navigation';
 import { useFormState, useFormStatus } from 'react-dom';
 import { ShoppingBagIcon } from '@heroicons/react/16/solid';
 
+import { useEffect } from 'react';
+
 function SubmitButton({
   availableForSale,
   selectedVariantId
@@ -81,10 +83,15 @@ export function AddToCart({
     )
   );
   const selectedVariantId = variant?.Id || defaultVariantId;
-  const actionWithVariant = formAction.bind(null, selectedVariantId);
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    formAction(selectedVariantId);
+  };
+  //const actionWithVariant = formAction.bind(null, selectedVariantId);
 
   return (
-    <form action={actionWithVariant}>
+    <form onSubmit={handleSubmit}>
       <SubmitButton availableForSale={availableForSale} selectedVariantId={selectedVariantId} />
       <p aria-live="polite" className="sr-only" role="status">
         {message}

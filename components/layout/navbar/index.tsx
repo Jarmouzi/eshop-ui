@@ -9,9 +9,8 @@ import { getMenu } from '@/lib/services/CategoryService';
 
 const { SITE_NAME } = process.env;
 
-export default async function Navbar() {
-  const menu = await getMenu()
-  
+export default async function Navbar({menu}: {menu: Menu[];}) {
+    
   return (
     <nav className="relative items-center justify-between p-2 lg:px-3 z-50">
       <div className="block flex-none md:hidden">

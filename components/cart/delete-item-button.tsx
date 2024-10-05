@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { removeItem } from '@/components/cart/actions';
 import LoadingDots from '@/components/loading-dots';
 import { useFormState, useFormStatus } from 'react-dom';
-import type { CartItem } from '@/lib/types/CartItem';
+import { CartItem } from '@/lib/types/Cart';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -36,7 +36,7 @@ function SubmitButton() {
 
 export function DeleteItemButton({ item }: { item: CartItem }) {
   const [message, formAction] = useFormState(removeItem, null);
-  const itemId = item.id;
+  const itemId = item.Id;
   const actionWithVariant = formAction.bind(null, itemId);
 
   return (
