@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { createUrl } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 export function PathFilterItem({ item, sk }: { item: Menu, sk: string }) {
 
@@ -23,15 +24,17 @@ export function PathFilterItem({ item, sk }: { item: Menu, sk: string }) {
   //newParams.delete('q');
 
   return (
-    <li className="mt-2 flex text-black dark:text-white text-small" key={item.Title}>
-      <DynamicTag
-        href={href}
-        className={clsx('w-full px-3 py-1 hover:underline hover:underline-offset-4', {
-          'bg-teal-600 text-white font-semibold rounded-full': active
-        })}
-      >
-        {item.Title}
-      </DynamicTag>
-    </li>
+    <Suspense>
+      <li className="mt-2 flex text-black dark:text-white text-small" key={item.Title}>
+        <DynamicTag
+          href={href}
+          className={clsx('w-full px-3 py-1 hover:underline hover:underline-offset-4', {
+            'bg-teal-600 text-white font-semibold rounded-full': active
+          })}
+        >
+          {item.Title}
+        </DynamicTag>
+      </li>
+    </Suspense>
   );
 }

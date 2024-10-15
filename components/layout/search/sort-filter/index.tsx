@@ -2,13 +2,16 @@ import { SortFilterItem } from '@/lib/constants';
 import FilterItemDropdown from './dropdown';
 import { BarsArrowDownIcon } from '@heroicons/react/16/solid';
 import { SortFilters } from './item';
+import { Suspense } from 'react';
 
 
 function FilterItemList({ list }: { list: SortFilterItem[] }) {
   return (
     <>
       {list.map((item: SortFilterItem, i) => (
-        <SortFilters key={i} item={item} />
+        <Suspense key={i}>
+          <SortFilters key={i} item={item} />
+        </Suspense>
       ))}
     </>
   );
@@ -28,7 +31,9 @@ export default function SortFilter({ list, title, display }: { list: SortFilterI
           <FilterItemList list={list} />
         </ul>
         <ul className="md:hidden">
-          <FilterItemDropdown list={list} />
+          <Suspense>
+            <FilterItemDropdown list={list} />
+          </Suspense>
         </ul>
       </nav>
     </>

@@ -21,7 +21,7 @@ export default function FeatureList({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">                
     {list.map((parent, i) => (
-      <ListboxWrapper>
+      <ListboxWrapper key={i}>
         <Listbox variant="flat" aria-label={title}>  
           <ListboxSection key={parent.Id} title={parent.Title}>  
           {parent.Features.map((feature, i) => (

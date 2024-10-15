@@ -1,100 +1,104 @@
 const domain = process.env.API_Domain;
 
 export async function GetData<T>({
-    path = '',
-    cache = 'force-cache', //'no-store',
-    tags
-  }: {
-    path?: string,
-    cache?: RequestCache;
-    tags?: string[];
-    variables?: T;
-  }): Promise<{ status: number; body: T } | never> {
+  path = "",
+  cache = "force-cache", //'no-store',
+  tags,
+}: {
+  path?: string;
+  cache?: RequestCache;
+  tags?: string[];
+  variables?: T;
+}): Promise<{ status: number; body: T } | never> {
+  try {
+    const result = await fetch(domain + path, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //'Accept': 'application/json'
+        //"Authorization": `Bearer ${token}`,
+      },
+      //credentials: "include" // Include cookies for authorization
+      cache,
+      ...(tags && { next: { tags } }),
+    });
+
     try {
-      const result = await fetch(domain + path, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          //'Accept': 'application/json'
-          //"Authorization": `Bearer ${token}`,
-        },
-        //credentials: "include" // Include cookies for authorization
-        cache,
-        ...(tags && { next: { tags } })
-      });
-        
+      if (!result.ok)
+        return {
+          status: 500,
+          body: undefined as T,
+        };
 
-      const text = await result.text(); // Get raw text first
       let body;
-      try {
-        body = JSON.parse(text); // Attempt to parse as JSON
-        // if (body.errors) {
-        //   throw body.errors[0];
-        // }
+      const text = await result.text();
+      body = JSON.parse(text);
 
-      } catch (error) {
-        console.error('JSON Parse Error:', error);
-        //throw new Error('Response is not valid JSON');
+      if (body.errors) {
+        console.log("Get Data Server Error:", body.errors);
       }
-      //const body = await result.json();
-  
-      // if (body.errors) {
-      //   throw body.errors[0];
-      // }
-  
+
       return {
         status: result.status,
-        body
+        body,
       };
-    } catch (e) {
-      throw e;
-      //handle error
+    } catch (error) {
+      console.error(`JSON Parse Error on GetData from "${path}": `, error);
     }
+  } catch (e) {
+    console.log(`an error acourd on GetData from "${path}": `, e);
   }
+  return {
+    status: 500,
+    body: undefined as T,
+  };
+}
 
 export async function PostData<T>({
-    path = '',
-    cache = 'force-cache',
-    tags,
-    variables
-  }: {
-    path?: string,
-    cache?: RequestCache;
-    tags?: string[];
-    variables?: string;
-  }): Promise<{ status: number; body: T } | never> {
-    try {
-      const result = await fetch(domain + path, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          //"Authorization": `Bearer ${token}`,
-        },
-        //credentials: "include" // Include cookies for authorization
-        body: JSON.stringify({
-          ...(variables && { variables })
-        }),
-        cache,
-        ...(tags && { next: { tags } })
-      });
-  
-      const body = await result.json();
-  
-      if (body.errors) {
-        throw body.errors[0];
-      }
-  
-      return {
-        status: result.status,
-        body
-      };
-    } catch (e) {
-      throw e;
-      //handle error
-    }
-  }
+  path = "",
+  cache = "force-cache",
+  tags,
+  variables,
+}: {
+  path?: string;
+  cache?: RequestCache;
+  tags?: string[];
+  variables?: string;
+}): Promise<{ status: number; body: T } | never> {
+  try {
+    const result = await fetch(domain + path, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //"Authorization": `Bearer ${token}`,
+      },
+      //credentials: "include" // Include cookies for authorization
+      body: JSON.stringify({
+        ...(variables && { variables }),
+      }),
+      cache,
+      ...(tags && { next: { tags } }),
+    });
 
-  
+    const body = await result.json();
+
+    if (body.errors) {
+      console.log("Get Data Server Error:", body.errors);
+    }
+
+    return {
+      status: result.status,
+      body,
+    };
+  } catch (e) {
+    console.log("GetData Fetch Error: ", e);
+    return {
+      status: 500,
+      body: {} as T,
+    };
+  }
+}
+
 // export async function apiFetch<T>({
 //   cache = 'force-cache',
 //   headers,

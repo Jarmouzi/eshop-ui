@@ -1,47 +1,53 @@
-import { SimpleProduct, Product } from '../types/Product';
-import { GetData, PostData } from './service';
+import { SimpleProduct, Product } from "../types/Product";
+import { GetData, PostData } from "./service";
 
-export async function getProduct(id: string): Promise<Product>  {
+export async function getProduct(id: string): Promise<Product> {
   const res = await GetData<Product>({
-    path: 'Product/Get?id=' + id,
+    path: "Product/Get?id=" + id,
   });
 
   return res.body;
-} 
+}
 
-export async function getAllProducts(): Promise<Product[]>  {
-
+export async function getAllProducts(): Promise<Product[]> {
   const res = await GetData<Product[]>({
-    path: 'Product/GetAll',
+    path: "Product/GetAll",
   });
 
   return res.body;
-} 
-export async function getProducts(jp: string): Promise<SimpleProduct[]>  {
-  
+}
+export async function getProducts(jp: string): Promise<SimpleProduct[]> {
   const res = await GetData<SimpleProduct[]>({
-    path: 'Product/GetFiltered?variables=' + jp,
+    path: "Product/GetFiltered?variables=" + jp,
   });
-  
+
   return res.body;
-} 
+}
 
-
-export async function getCollectionProducts(cn: string): Promise<SimpleProduct[]>  {
-
+export async function getCollectionProducts(
+  cn: string
+): Promise<SimpleProduct[]> {
   const res = await GetData<SimpleProduct[]>({
-    path: 'Product/GetCollectionProducts?cn=' + cn
+    path: "Product/GetCollectionProducts?cn=" + cn,
   });
 
   return res.body;
-} 
+}
 
-export async function getProductRecommendations(cn: string): Promise<SimpleProduct[]>  {
-
+export async function getProductRecommendations(
+  cn: string
+): Promise<SimpleProduct[]> {
   const res = await GetData<SimpleProduct[]>({
-    path: 'Product/GetCollectionProducts?cn=' + cn
+    path: "Product/GetCollectionProducts?cn=" + cn,
   });
 
   return res.body;
-} 
+}
 
+export async function getProductHandles(): Promise<{ handle: string }[]> {
+  const res = await GetData<{ handle: string }[]>({
+    path: "Product/GetAll",
+  });
+
+  return res.body;
+}

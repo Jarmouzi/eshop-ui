@@ -1,5 +1,7 @@
-import { getCollections, getPages, getProducts } from '@/lib/shopify';
-import { MetadataRoute } from 'next';
+//import { getCollections, getPages, getProducts } from "@/lib/shopify";
+import { getCollections } from "@/lib/services/CategoryService";
+import { getProducts } from "@/lib/services/ProductService";
+import { MetadataRoute } from "next";
 
 type Route = {
   url: string;
@@ -8,42 +10,43 @@ type Route = {
 
 const baseUrl = process.env.NEXT_PUBLIC_URL
   ? `https://${process.env.NEXT_PUBLIC_URL}`
-  : 'http://localhost:3000';
+  : "http://localhost:3000";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-
-  const routesMap = [''].map((route) => ({
+  const routesMap = [""].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date().toISOString()
+    lastModified: new Date().toISOString(),
   }));
 
   const collectionsPromise = getCollections().then((collections) =>
     collections.map((collection) => ({
-      url: `${baseUrl}${collection.path}`,
-      lastModified: collection.updatedAt
+      url: `${baseUrl}${collection.PageAddress}`,
+      lastModified: new Date().toISOString(), //collection.updatedAt,
     }))
   );
 
-  const productsPromise = getProducts({}).then((products) =>
+  const productsPromise = getProducts("").then((products) =>
     products.map((product) => ({
-      url: `${baseUrl}/product/${product.handle}`,
-      lastModified: product.updatedAt
+      url: `${baseUrl}/product/${product.Id}`,
+      lastModified: new Date().toISOString(), //product.updatedAt,
     }))
   );
 
-  const pagesPromise = getPages().then((pages) =>
-    pages.map((page) => ({
-      url: `${baseUrl}/${page.handle}`,
-      lastModified: page.updatedAt
-    }))
-  );
+  // const pagesPromise = getPages().then((pages) =>
+  //   pages.map((page) => ({
+  //     url: `${baseUrl}/${page.handle}`,
+  //     lastModified: page.updatedAt,
+  //   }))
+  // );
 
   let fetchedRoutes: Route[] = [];
 
   try {
-    fetchedRoutes = (await Promise.all([collectionsPromise, productsPromise, pagesPromise])).flat();
+    fetchedRoutes = (await Promise.all([collectionsPromise, productsPromise])) //, pagesPromise])
+      .flat();
   } catch (error) {
-    throw JSON.stringify(error, null, 2);
+    //throw JSON.stringify(error, null, 2);
+    console.error("Error fetching routes:", error);
   }
 
   return [...routesMap, ...fetchedRoutes];

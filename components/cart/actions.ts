@@ -12,27 +12,20 @@ export async function addItem(prevState: any, selectedVariantId: string | undefi
   let cart;
 
   if (cartId) {
-    console.log('cartId from cookies fetched: ', cartId);
-
     cart = await getCart(cartId);
-    console.log(cart);
   }
 
   if (!cartId || !cart) {
     cart = await createCart();
-    console.log(cart);
     cartId = cart.Id;
-    cookies().set('cartId', cartId);
-    
-    console.log('cartId added to cookies: ', cartId);
+    cookies().set('cartId', cartId);    
   }
 
   if (!selectedVariantId) {
     return 'مدل محصول را انتخاب نمایید';//'Missing product variant ID';
   }
 
-  try {
-    console.log('calling addToCart...');
+  try {    
     await addToCart(cartId, selectedVariantId, 1 );
     revalidateTag(TAGS.cart);
   } catch (e) {

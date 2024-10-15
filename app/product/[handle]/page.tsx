@@ -7,7 +7,7 @@ import { Gallery } from '@/components/product/gallery';
 import { ProductDescription } from '@/components/product/product-description';
 import { HIDDEN_PRODUCT_TAG } from '@/lib/constants';
 import Link from 'next/link';
-import { getProduct, getProductRecommendations } from '@/lib/services/ProductService';
+import { getProduct, getProductHandles, getProductRecommendations } from '@/lib/services/ProductService';
 import { Image } from '@/lib/types/Product';
 import { Card, CardBody, Tab, Tabs } from '@nextui-org/react';
 import FeatureList from '@/components/list/feature-list';
@@ -24,8 +24,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const product = await getProduct(params.handle);
 
-  if (!product) return notFound();
-
+  if (!product.Title) {
+    return {
+      title: 'محصول مورد نظر یافت نشد',
+    }
+  }
   const { Url: url, Width: width, Height: height, AltText: alt } = product.FeaturedImage || {};
   const indexable = true; //!product.Tags.includes(HIDDEN_PRODUCT_TAG);
 
@@ -58,7 +61,7 @@ export async function generateMetadata({
 export default async function ProductPage({ params }: { params: { handle: string } }) {
   const product = await getProduct(params.handle);
 
-  if (!product) return notFound();
+  if (!product.Title) return notFound();
 
     const tabData: Array<TabData> = [{
       Id: 1,
@@ -100,12 +103,14 @@ export default async function ProductPage({ params }: { params: { handle: string
       <div className="mx-auto max-w-screen-2xl px-4">
         <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 mb-3 dark:border-neutral-800 dark:bg-black md:p-12 lg:flex-row lg:gap-8">
           <div className="h-full w-full basis-full lg:basis-2/6 md:basis-1/2">
-            <Gallery
-              images={product.Images.map((image: Image) => ({
-                src: image.Url,
-                altText: image.AltText
-              }))}
-            />
+            <Suspense>
+              <Gallery
+                images={product.Images.map((image: Image) => ({
+                  src: image.Url,
+                  altText: image.AltText
+                }))}
+              />
+            </Suspense>
           </div> 
           <div className="basis-full lg:basis-4/6 md:basis-1/2">
             <ProductDescription product={product} />
@@ -148,7 +153,7 @@ async function RelatedProducts({ id }: { id: string }) {
                   currencyCode: 'IRI', //product.priceRange.maxVariantPrice.currencyCode
                 }}
                 src={product.FeaturedImage}
-                //fill
+                fill
                 sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
               />
             </Link>
@@ -158,3 +163,7 @@ async function RelatedProducts({ id }: { id: string }) {
     </div>
   );
 }
+
+// export async function generateStaticParams() {
+//   return await getProductHandles();
+// }

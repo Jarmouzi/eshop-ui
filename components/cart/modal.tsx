@@ -35,7 +35,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
       // Always update the quantity reference
       quantityRef.current = cart?.Quantity;
     }
-  }, [cart?.Quantity]);
+  }, [cart?.Quantity, isOpen]);
 
   return (
     <>
@@ -101,13 +101,13 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                           className="flex w-full flex-col border-b border-neutral-300 dark:border-neutral-700"
                         >
                           <div className="relative flex w-full flex-row justify-between px-1 py-4">
-                            <div className="absolute z-40 -mt-2 mr-[55px]">
+                            <div className="absolute z-40 -mt-2 float-right">
                               <DeleteItemButton item={item} />
                             </div>
                             <Link
                               href={ProductVariantUrl}
                               onClick={closeCart}
-                              className="z-30 flex flex-row space-x-4"
+                              className="z-30 flex flex-row space-x-2"
                             >
                               <div className="relative h-16 w-16 cursor-pointer overflow-hidden rounded-md border border-neutral-300 bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">
                                 <Image
@@ -123,7 +123,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                               </div>
 
                               <div className="flex flex-1 flex-col text-base">
-                                <span className="leading-tight">
+                                <span className="leading-tight text-sm pr-1">
                                   {item.ProductVariant.Product.Title}
                                 </span>
                                 {/* {item.ProductVariant.Title !== DEFAULT_OPTION ? (
@@ -138,7 +138,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                                 className="flex justify-end space-y-2 text-right text-sm"
                                 amount={item.Amount}
                               />
-                              <div className="mr-auto flex h-9 flex-row items-center rounded-full border border-neutral-200 dark:border-neutral-700">
+                              <div className="mr-auto flex h-9 flex-row items-center rounded-full border border-neutral-300 dark:border-neutral-700">
                                 <EditItemQuantityButton item={item} type="minus" />
                                 <p className="w-6 text-center">
                                   <span className="w-full text-sm">{item.Quantity}</span>
@@ -172,8 +172,8 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                     </div>
                   </div>
                   <a
-                    href={cart.CheckoutUrl}
-                    className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+                    href={'/payment/'}
+                    className="block w-full rounded-full bg-teal-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
                   >
                     تکمیل سفارش
                   </a>

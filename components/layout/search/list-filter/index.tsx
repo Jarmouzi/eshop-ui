@@ -2,12 +2,15 @@ import FilterItemDropdown from './dropdown';
 import { BarsArrowDownIcon } from '@heroicons/react/16/solid';
 import { PathFilterItem } from './item';
 import { FilterItem } from '@/lib/types/Filter';
+import { Suspense } from 'react';
 
 function FilterItemList({ list, sk }: { list: Menu[], sk: string }) {
   return (
     <>
       {list.map((item: Menu, i) => (
-        <PathFilterItem key={i} item={item} sk={sk} />
+        <Suspense key={i}>
+          <PathFilterItem key={i} item={item} sk={sk} />
+        </Suspense>
       ))}
     </>
   );
@@ -26,7 +29,9 @@ export default function FilterList({ list, title, sk }: { list: Menu[]; title?: 
           <FilterItemList list={list} />
         </ul> */}
         <ul className='p-2'>
-          <FilterItemDropdown list={list} sk={sk} />
+          <Suspense key={1}>
+            <FilterItemDropdown list={list} sk={sk} />
+          </Suspense>
         </ul>
       </nav>
     </>

@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import FilterList from './list-filter';
 import { getCollections } from '@/lib/services/CategoryService';
 import { PriceFilter } from './price-filter';
-import SwitchFilter from './switch-filter';
+//import SwitchFilter from './switch-filter';
 import CheckboxFilter from './checkbox-filter';
 
 async function CollectionList() {
@@ -40,15 +40,16 @@ export default function Collections() {
      > 
         <CollectionList/>
       </Suspense>
-
+      <Suspense>
         <PriceFilter minPrice={10000} maxPrice={100000000} />
-
+      </Suspense>
         {/* <SwitchFilter title='فقط کالاهای موجود' sk='e' /> */}
-
+      <Suspense>
         <CheckboxFilter title='فقط کالاهای تخفیف دار' sk='b'/>
-
+      </Suspense>
+      <Suspense>
         <CheckboxFilter title='ارسال امروز' sk='d' imageUrl='https://dkstatics-public.digikala.com/digikala-static/262c38c0e4990522af759e0016a287508bbc84f6_1684761217.png'/>
-
+      </Suspense>
     </div>
   );
 }

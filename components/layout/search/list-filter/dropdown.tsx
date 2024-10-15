@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { FilterItem } from '@/lib/types/Filter';
@@ -33,31 +33,35 @@ export default function FilterItemDropdown({ list, sk }: { list: Menu[], sk: str
         setActive(listItem.Title);
       }
     });
-  }, [pathname, list, searchParams]);
+  }, [pathname, list, searchParams, sk]);
 
   return (
-    <div className="relative" ref={ref}>
-      <div
-        onClick={() => {
-          setOpenSelect(!openSelect);
-        }}
-        className="flex w-full items-center justify-between rounded border border-black/30 px-4 py-2 text-sm dark:border-white/30"
-      >
-        <div>{active}</div>
-        <ChevronDownIcon className="h-4" />
-      </div>
-      {openSelect && (
+    <Suspense>
+      <div className="relative" ref={ref}>
         <div
           onClick={() => {
-            setOpenSelect(false);
+            setOpenSelect(!openSelect);
           }}
-          className="absolute z-40 w-full rounded-b-md bg-white shadow-md p-1 dark:bg-black"
+          className="flex w-full items-center justify-between rounded border border-black/30 px-4 py-2 text-sm dark:border-white/30"
         >
-          {list.map((item: Menu, i) => (
-            <PathFilterItem key={i} item={item} sk={sk} />
-          ))}
+          <div>{active}</div>
+          <ChevronDownIcon className="h-4" />
         </div>
-      )}
-    </div>
+        {openSelect && (
+          <div
+            onClick={() => {
+              setOpenSelect(false);
+            }}
+            className="absolute z-40 w-full rounded-b-md bg-white shadow-md p-1 dark:bg-black"
+          >
+            {list.map((item: Menu, i) => (
+              <Suspense  key={i}>
+                <PathFilterItem key={i} item={item} sk={sk} />
+              </Suspense>
+            ))}
+          </div>
+        )}
+      </div>
+    </Suspense>
   );
 }

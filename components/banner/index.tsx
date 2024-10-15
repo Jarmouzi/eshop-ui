@@ -1,6 +1,5 @@
-import { getCart } from '@/lib/shopify';
-import { Image } from '@/lib/types/Product';
 import { cookies } from 'next/headers';
+import Image from 'next/image';
 import Link from 'next/link';
 
 
@@ -15,8 +14,13 @@ export default async function Banner({title, src, path, size}: {title: string, s
 
 
   return (
-    <Link className={`${width} block relative`} target="_blank" href={path}>
-      <img className='p-2 rounded-3xl  hover:shadow-md hover:shadow-teal-600' src={src} alt={title} title={title} />
+    <Link className={`${width} block relative h-full`} target="_blank" href={path}>
+      <Image className='p-2 rounded-3xl  hover:shadow-md hover:shadow-teal-600' 
+        src={src} 
+        alt={title} 
+        title={title} 
+        fill 
+        style={{ objectFit: 'cover' }}/>
     </Link>
   );
 }

@@ -17,7 +17,7 @@ export default function ProductGridItems({ products }: { products: SimpleProduct
                 currencyCode: "تومان"
               }}
               src={product.FeaturedImage}
-              //fill
+              fill
               sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
             />
           </Link>

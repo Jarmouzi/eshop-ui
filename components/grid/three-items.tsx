@@ -1,6 +1,6 @@
 import { GridTileImage } from '@/components/grid/tile';
-import { getCollectionProducts } from '@/lib/shopify';
-import type { Product } from '@/lib/types/Product';
+import { getCollectionProducts } from '@/lib/services/ProductService';
+import type { Product, SimpleProduct } from '@/lib/types/Product';
 import Link from 'next/link';
 
 function ThreeItemGridItem({
@@ -8,7 +8,7 @@ function ThreeItemGridItem({
   size,
   priority
 }: {
-  item: Product;
+  item: SimpleProduct;
   size: 'full' | 'half';
   priority?: boolean;
 }) {
@@ -16,10 +16,10 @@ function ThreeItemGridItem({
     <div
       className={size === 'full' ? 'md:col-span-4 md:row-span-2' : 'md:col-span-2 md:row-span-1'}
     >
-      <Link className="relative block aspect-square h-full w-full" href={`/product/${item.handle}`}>
+      <Link className="relative block aspect-square h-full w-full" href={`/product/${item.Id}`}>
         <GridTileImage
-          src={item.FeaturedImage.Url}
-          //fill
+          src={item.FeaturedImage}
+          fill
           sizes={
             size === 'full' ? '(min-width: 768px) 66vw, 100vw' : '(min-width: 768px) 33vw, 100vw'
           }
@@ -39,9 +39,7 @@ function ThreeItemGridItem({
 
 export async function ThreeItemGrid() {
   // Collections that start with `hidden-*` are hidden from the search page.
-  const homepageItems = await getCollectionProducts({
-    collection: 'hidden-homepage-featured-items'
-  });
+  const homepageItems = await getCollectionProducts('fav');
 
   if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
 

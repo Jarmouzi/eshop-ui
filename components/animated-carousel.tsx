@@ -34,7 +34,7 @@ export async function AnimatedCarousel({
                   currencyCode: 'IRI' //product.priceRange.maxVariantPrice.currencyCode
                 }}
                 src={product.FeaturedImage}//?.url}
-                //fill
+                fill
                 sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
               />
             </Link>

@@ -5,16 +5,17 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
 import Search from './search';
-import { getMenu } from '@/lib/services/CategoryService';
 
 const { SITE_NAME } = process.env;
 
-export default async function Navbar({menu}: {menu: Menu[];}) {
+export default function Navbar({menu}: {menu: Menu[];}) {
     
   return (
     <nav className="relative items-center justify-between p-2 lg:px-3 z-50">
       <div className="block flex-none md:hidden">
-        <MobileMenu menu={menu} />
+        <Suspense>
+          <MobileMenu menu={menu} />
+        </Suspense>
       </div>
       <div className="flex w-full items-center py-1">
         <div className="flex w-full md:w-1/3">
@@ -26,7 +27,9 @@ export default async function Navbar({menu}: {menu: Menu[];}) {
           </Link>
         </div>
         <div className="hidden justify-center md:flex md:w-1/3">
-          <Search />
+          <Suspense>
+            <Search />
+          </Suspense>
         </div>
         <div className="flex justify-end md:w-1/3">
           <Suspense fallback={<OpenCart />}>
@@ -34,7 +37,7 @@ export default async function Navbar({menu}: {menu: Menu[];}) {
           </Suspense>
         </div>
       </div>
-      <div className="container mx-auto flex justify-between">
+      <div className="container mx-auto flex justify-between border-b-1 border-neutral-200">
            {menu.length ? (
               <ul className="hidden gap-2 text-sm md:flex md:items-center">
                {menu.map((item: Menu) => {

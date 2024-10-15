@@ -1,6 +1,6 @@
 'use client';
 import {Slider} from "@nextui-org/slider";
-import React from "react";
+import React, { Suspense } from "react";
 import Search from "../../navbar/search";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { createUrl } from "@/lib/utils";
@@ -27,26 +27,15 @@ export function PriceFilter({minPrice, maxPrice} : {minPrice: number, maxPrice: 
       current.set("hp", value[1].toString());
     }
   const href = createUrl(pathname, current);
-  //router.push(href, undefined, {shallow: true});
 
-
-
-//   const pathname = usePathname();
-//   const searchParams = useSearchParams();
-//   console.log(searchParams);
-//   const active = searchParams.get('p') === item.slug;
-//   const q = searchParams.get('q');
-//   const href = createUrl(
-//     pathname,
-//     new URLSearchParams({
-//       ...(q && { q }),
-//       ...(item.slug && item.slug.length && { sort: item.slug })
-//     })
-//   );
-//   const DynamicTag = active ? 'p' : Link;
+  const handleSliderChange = (newValue: number | number[]) => {
+    if (Array.isArray(newValue)) {
+      setValue(newValue);
+    }
+  };
 
   return (
-    <>
+    <Suspense>
       <div className="block gap-2 w-full max-w-md items-start justify-center pb-4">
         <Slider 
             label="حدود قیمت"
@@ -58,7 +47,7 @@ export function PriceFilter({minPrice, maxPrice} : {minPrice: number, maxPrice: 
             minValue={minPrice}
             hideValue={true}
             value={value} 
-            onChange={setValue}   
+            onChange={handleSliderChange}   
             classNames={{
               base: "max-w-md font-semibold text-sm text-neutral-500 dark:text-neutral-400 p-2",
               filler: "bg-teal-600",
@@ -101,7 +90,6 @@ export function PriceFilter({minPrice, maxPrice} : {minPrice: number, maxPrice: 
         ))}
         </div> */}
       </div>
-
-    </>
+    </Suspense>
   );
 }

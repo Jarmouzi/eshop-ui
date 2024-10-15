@@ -1,27 +1,25 @@
-import { GetData, PostData } from './service';
+import { FilterItem } from "../types/Filter";
+import { GetData, PostData } from "./service";
 
-export async function getFilter(id: string): Promise<Filter>  {
-
-  const res = await GetData<Filter>({
-    path: 'Filter/Get?' + id,
+export async function getFilter(id: string): Promise<FilterItem> {
+  const res = await GetData<FilterItem>({
+    path: "Filter/Get?" + id,
   });
 
   return res.body;
-} 
-export async function getAllFilters(): Promise<Filter[]>  {
-
-  const res = await GetData<Filter[]>({
-    path: 'Filter/GetAll',
+}
+export async function getAllFilters(): Promise<FilterItem[]> {
+  const res = await GetData<FilterItem[]>({
+    path: "Filter/GetAll",
   });
 
   return res.body;
-} 
-export async function getFilters(jp: string): Promise<Filter[]>  {
-
-  const res = await PostData<Filter[]>({
-    path: 'Filter/GetFiltered',
+}
+export async function getFilters(jp: string): Promise<FilterItem[]> {
+  const res = await PostData<FilterItem[]>({
+    path: "Filter/GetFiltered",
     variables: jp,
   });
 
   return res.body;
-} 
+}

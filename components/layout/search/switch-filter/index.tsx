@@ -3,7 +3,7 @@ import { createUrl } from "@/lib/utils";
 import { Switch } from "@nextui-org/switch";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { ReadonlyURLSearchParams, usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { isValidElement } from "react";
+import React, { isValidElement, Suspense } from "react";
 //import {Switch} from "@nextui-org/react";
 
 
@@ -23,12 +23,14 @@ export default function SwitchFilter({title, sk}: ({title: string, sk: string}))
 
 
   return (
-    <div className="flex flex-col gap-2">
-      <Switch isSelected={active} onValueChange={(value) => onChange({value: value, sk: sk, router: router, pathname: pathname, params: current})} key={sk} color="primary" className="text-teal-600 p-2">
-        <span className="font-semibold text-sm text-neutral-500 dark:text-neutral-400 p-2">        
-            {title}
-        </span>
-      </Switch>  
-    </div>
+    <Suspense>
+      <div className="flex flex-col gap-2">
+        <Switch isSelected={active} onValueChange={(value) => onChange({value: value, sk: sk, router: router, pathname: pathname, params: current})} key={sk} color="primary" className="text-teal-600 p-2">
+          <span className="font-semibold text-sm text-neutral-500 dark:text-neutral-400 p-2">        
+              {title}
+          </span>
+        </Switch>  
+      </div>
+    </Suspense>
   )  
 }

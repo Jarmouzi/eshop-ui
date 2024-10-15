@@ -5,23 +5,28 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import Link from 'next/link';
-import { GridTileImage } from './grid/tile';
+import { GridTileImage } from '../grid/tile';
 import { SimpleProduct } from '@/lib/types/Product';
 
-export default function SwiperProducts({
-  products,
-  title
-}: {
-  products: SimpleProduct[];
-  title?: string;
-}) {
+export default function SwiperProducts({ products }: {products: SimpleProduct[];}) {
+
   return (
-    <div className="px-6 my-2 collection">
-      <div className="collection">
-        <h1>{title}</h1>
-      </div>
       <Swiper
-        slidesPerView={6}
+        //slidesPerView={6}
+        breakpoints={{
+          640: {
+              slidesPerView: 2, 
+          },
+          768: {
+              slidesPerView: 3, 
+          },
+          1024: {
+              slidesPerView: 6, 
+          },
+          1200: {
+              slidesPerView: 7, 
+          }
+        }}
         spaceBetween={15}
         centeredSlides={false}
         loop={true}
@@ -52,13 +57,13 @@ export default function SwiperProducts({
                     currencyCode: 'IRI' //product.priceRange.maxVariantPrice.currencyCode
                   }}
                   src={product.FeaturedImage}//?.url}
-                  //fill
+                  fill
+                  //style={{ objectFit: 'cover' }}
                   sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
                 />
               </Link>
             </SwiperSlide>
           ))}
       </Swiper>
-    </div>
   );
 };

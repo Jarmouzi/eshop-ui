@@ -4,6 +4,7 @@ import Prose from '@/components/prose';
 import { VariantSelector } from './variant-selector';
 import { Product } from '@/lib/types/Product';
 import { Chip } from '@nextui-org/react';
+import { Suspense } from 'react';
 
 export function ProductDescription({ product }: { product: Product }) {
   return (
@@ -18,8 +19,9 @@ export function ProductDescription({ product }: { product: Product }) {
           />
         </div>
       </div>
-      <VariantSelector options={product.Options} variants={product.Variants} />
-
+      <Suspense>
+        <VariantSelector options={product.Options} variants={product.Variants} />
+      </Suspense>
       {/* {product.Description ? (
         <Prose
           className="mb-6 text-sm leading-tight dark:text-white/[60%]"
@@ -31,8 +33,9 @@ export function ProductDescription({ product }: { product: Product }) {
         variant="faded"
         color="success"
       ></Chip> */}
-
-      <AddToCart variants={product.Variants} availableForSale={product.AvailableForSale} />
+      <Suspense>
+        <AddToCart variants={product.Variants} availableForSale={product.AvailableForSale} />
+      </Suspense>
     </>
   );
 }

@@ -9,7 +9,7 @@ import { useSearchParams } from 'next/navigation';
 import { useFormState, useFormStatus } from 'react-dom';
 import { ShoppingBagIcon } from '@heroicons/react/16/solid';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 
 function SubmitButton({
   availableForSale,
@@ -91,11 +91,13 @@ export function AddToCart({
   //const actionWithVariant = formAction.bind(null, selectedVariantId);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <SubmitButton availableForSale={availableForSale} selectedVariantId={selectedVariantId} />
-      <p aria-live="polite" className="sr-only" role="status">
-        {message}
-      </p>
-    </form>
+    <Suspense>
+      <form onSubmit={handleSubmit}>
+        <SubmitButton availableForSale={availableForSale} selectedVariantId={selectedVariantId} />
+        <p aria-live="polite" className="sr-only" role="status">
+          {message}
+        </p>
+      </form>
+    </Suspense>
   );
 }

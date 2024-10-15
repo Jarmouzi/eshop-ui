@@ -5,6 +5,7 @@ import { createUrl } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { SortFilterItem } from '@/lib/constants';
+import { Suspense } from 'react';
 
 export function SortFilters({ item }: { item: SortFilterItem }) {
   const pathname = usePathname();
@@ -27,17 +28,19 @@ export function SortFilters({ item }: { item: SortFilterItem }) {
   const DynamicTag = active ? 'p' : Link;
 
   return (
-    <li className="text-sm text-black dark:text-white" key={item.title}>
-      <DynamicTag
-        prefetch={!active ? false : undefined}
-        href={href}
-        className={clsx('w-full py-1 px-2 hover:underline hover:underline-offset-4', {
-          'bg-teal-600 text-white font-semibold rounded-full -mt-1': active
-        })}
-      >
-        {item.title}
-      </DynamicTag>
-    </li>
+    <Suspense>
+      <li className="text-sm text-black dark:text-white" key={item.title}>
+        <DynamicTag
+          prefetch={!active ? false : undefined}
+          href={href}
+          className={clsx('w-full py-1 px-2 hover:underline hover:underline-offset-4', {
+            'bg-teal-600 text-white font-semibold rounded-full -mt-1': active
+          })}
+        >
+          {item.title}
+        </DynamicTag>
+      </li>
+    </Suspense>
   );
 }
 
