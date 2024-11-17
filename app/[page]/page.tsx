@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
 import Prose from '@/components/prose';
-import { getPage } from '@/lib/shopify';
+//import { getPage } from '@/lib/shopify';
 import { notFound } from 'next/navigation';
+import { getPage } from '@/lib/services/PageService';
 
 export const runtime = 'edge';
 
@@ -18,8 +19,8 @@ export async function generateMetadata({
   if (!page) return notFound();
 
   return {
-    title: page.seo?.title || page.title,
-    description: page.seo?.description || page.bodySummary,
+    title: page.seo?.Title || page.title,
+    description: page.seo?.Description || page.bodySummary,
     openGraph: {
       publishedTime: page.createdAt,
       modifiedTime: page.updatedAt,

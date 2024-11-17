@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FooterMenu from './footer-menu';
 import LogoSquare from '@/components/logo-square';
 import { Suspense } from 'react';
+import Copyright from '../copyright';
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
 
@@ -48,10 +49,7 @@ export default function Footer({menu}: {menu: Menu[];}) {
     </div>
     <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
-        <p>
-          &copy; {copyrightDate} 
-          تمامی حقوق این سامانه متعلق به {copyrightName} می باشد.
-        </p>
+        <Copyright />
         <hr className="mx-4 hidden h-4 w-[1px] border-l border-neutral-400 md:inline-block" />
         <p className="md:mr-auto">
           <a href="https://kasebyar.com" className="text-black dark:text-white">

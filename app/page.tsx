@@ -1,9 +1,12 @@
 import { AnimatedCarousel } from '@/components/animated-carousel';
 import Banner from '@/components/banner';
 import { ThreeItemGrid } from '@/components/grid/three-items';
+import Footer from '@/components/layout/footer';
+import Navbar from '@/components/layout/navbar';
 import SlideShowComponent from '@/components/layout/slideshow';
 import Swiper from '@/components/swiper';
 import { getAllBanners } from '@/lib/services/BannerService';
+import { getMenu } from '@/lib/services/CategoryService';
 import { getCollectionProducts } from '@/lib/services/ProductService';
 import { SimpleProduct } from '@/lib/types/Product';
 import { Suspense } from 'react';
@@ -33,10 +36,12 @@ export const metadata = {
 export default async function HomePage() {
   const bannerData = getAllBanners();
   const productData: Promise<SimpleProduct[]> = getCollectionProducts('fav');
+  const menu = await getMenu();
 
   //const[banners, products] = await Promise.all([bannerData, productData]);
   return (
     <>
+        <Navbar menu={menu}/>
       <Suspense fallback={<h1>Loading...</h1>}>
         <SlideShowComponent promise={bannerData}/>
       </Suspense>
@@ -54,6 +59,9 @@ export default async function HomePage() {
           <Banner title='ساعت هوشمند' src='202302071358587162.png' path='' />
         </div>
       </Suspense>
+        <Suspense>
+          <Footer menu={menu}/>
+        </Suspense> 
     </>
   );
 }
