@@ -47,14 +47,14 @@ export default function LoginPage() {
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
               کلمه عبور
             </label>
-            <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="کلمه عبور" />
+            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="کلمه عبور" />
             <p className="text-red-500 text-xs italic"></p>
           </div>
           <div className="flex items-center justify-between">
-            <button className="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            <button className="bg-primary hover:bg-primary-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
               ورود
             </button>
-            <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+            <a className="inline-block align-baseline font-bold text-sm text-primary hover:text-primary-800" href="#">
               رمز عبور را فراموش کردم
             </a>
           </div>

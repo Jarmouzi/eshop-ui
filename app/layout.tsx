@@ -25,7 +25,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <head>
 
       </head>
-      <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
+      <body className="bg-neutral-50 text-black selection:bg-primary dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
         
         {/* <Suspense> */}
           <main>{children}</main>

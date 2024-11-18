@@ -29,7 +29,7 @@ export function PathFilterItem({ item, sk }: { item: Menu, sk: string }) {
         <DynamicTag
           href={href}
           className={clsx('w-full px-3 py-1 hover:underline hover:underline-offset-4', {
-            'bg-teal-600 text-white font-semibold rounded-full': active
+            'bg-primary text-white font-semibold rounded-full': active
           })}
         >
           {item.Title}

@@ -18,7 +18,7 @@ const items = 'bg-neutral-400 dark:bg-neutral-700';
 
 export default function Collections() {
   return (
-    <div className='group h-full w-full top-1 rounded-lg border bg-white hover:border-teal-600 dark:bg-black'>
+    <div className='group h-full w-full top-1 rounded-lg border bg-white hover:border-primary dark:bg-black'>
       <h1 className="text-lg font-semibold text-neutral-600 dark:text-neutral-300 p-2 pb-3">
         فیلترهای جستجو
       </h1>

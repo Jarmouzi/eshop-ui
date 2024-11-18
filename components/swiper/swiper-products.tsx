@@ -43,7 +43,7 @@ export default function SwiperProducts({ products }: {products: SimpleProduct[];
         // }}
         navigation={true}
         modules={[Autoplay, Navigation]} //, Pagination
-        //className="text-teal-600"
+        //className="text-primary"
         color='primary'
       >
         {products.map((product, i) => (

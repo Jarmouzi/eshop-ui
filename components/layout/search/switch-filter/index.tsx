@@ -25,7 +25,7 @@ export default function SwitchFilter({title, sk}: ({title: string, sk: string}))
   return (
     <Suspense>
       <div className="flex flex-col gap-2">
-        <Switch isSelected={active} onValueChange={(value) => onChange({value: value, sk: sk, router: router, pathname: pathname, params: current})} key={sk} color="primary" className="text-teal-600 p-2">
+        <Switch isSelected={active} onValueChange={(value) => onChange({value: value, sk: sk, router: router, pathname: pathname, params: current})} key={sk} color="primary" className="text-primary p-2">
           <span className="font-semibold text-sm text-neutral-500 dark:text-neutral-400 p-2">        
               {title}
           </span>

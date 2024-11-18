@@ -57,7 +57,7 @@ export default function Navbar({menu}: {menu: Menu[];}) {
                               child.Children.length ? (
                               <ul className="px-2 w-full sm:w-1/3 lg:w-1/6  pb-2 pt-2 lg:pt-3">
                                 <li className='mb-3' key={child.Id}>
-                                <a href={item.PageAddress} className="font-bold text-xs lg:text-sm text-neutral-800 text-bold border-teal-600 pr-1 border-r-2">{child.Title}</a>
+                                <a href={item.PageAddress} className="font-bold text-xs lg:text-sm text-neutral-800 text-bold border-primary pr-1 border-r-2">{child.Title}</a>
                                 </li>
                                 {child.Children.map((gc: Menu) => { return (                                                                            
                                   <li key={gc.Id}>
@@ -68,7 +68,7 @@ export default function Navbar({menu}: {menu: Menu[];}) {
                               ) :
                               (
                                 <ul className="px-1 w-full sm:w-1/3 lg:w-1/6 pb-1 pt-2 lg:pt-3">
-                                  <a href={item.PageAddress} className="font-bold text-xs text-neutral-800 text-bold mb-1 border-teal-600 pr-1 border-r-2">{child.Title}</a>     
+                                  <a href={item.PageAddress} className="font-bold text-xs text-neutral-800 text-bold mb-1 border-primary pr-1 border-r-2">{child.Title}</a>     
                                 </ul>
                               )
                             )

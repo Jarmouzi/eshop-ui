@@ -20,7 +20,7 @@ function SubmitButton({
 }) {
   const { pending } = useFormStatus();
   const buttonClasses =
-    'relative flex items-center rounded-full left-0 bg-teal-600 p-4 pr-16 tracking-wide text-white float-end';
+    'relative flex items-center rounded-full left-0 bg-primary p-4 pr-16 tracking-wide text-white float-end';
   const disabledClasses = 'cursor-not-allowed opacity-60 hover:opacity-60';
 
   if (!availableForSale) {

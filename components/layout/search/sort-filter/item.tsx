@@ -34,7 +34,7 @@ export function SortFilters({ item }: { item: SortFilterItem }) {
           prefetch={!active ? false : undefined}
           href={href}
           className={clsx('w-full py-1 px-2 hover:underline hover:underline-offset-4', {
-            'bg-teal-600 text-white font-semibold rounded-full -mt-1': active
+            'bg-primary text-white font-semibold rounded-full -mt-1': active
           })}
         >
           {item.title}

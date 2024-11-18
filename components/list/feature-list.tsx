@@ -11,7 +11,7 @@ import { ListboxWrapper } from "./Listbox-wrapper";
 export default function FeatureList({
     title,
     list,
-    iconClasses = "text-xl text-default-500 pointer-events-none flex-shrink-0"
+    iconClasses = "text-xl text-primary pointer-events-none flex-shrink-0"
   }: {
     title: string;
     list: ProductFeature[];

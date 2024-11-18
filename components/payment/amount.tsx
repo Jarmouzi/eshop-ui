@@ -27,7 +27,7 @@ export default function CartAmount({ cart }: { cart: Cart | undefined }) {
           <p>هزینه حمل</p>
           <p className="text-right">پس کرایه، به عهده مشتری</p>
       </div>
-      <div className="mb-4 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700 text-teal-600 dark:text-teal-600">
+      <div className="mb-4 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700 text-primary dark:text-primary">
           <p>سود شما از خرید</p>
           <Price
           className="text-right text-base"
@@ -43,7 +43,7 @@ export default function CartAmount({ cart }: { cart: Cart | undefined }) {
       </div>
       <a
       href={cart? cart.CheckoutUrl : ''}
-      className="block w-full rounded-full bg-teal-600 p-3 mt-5 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+      className="block w-full rounded-full bg-primary p-3 mt-5 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
       >
       تایید و ادامه
       </a>

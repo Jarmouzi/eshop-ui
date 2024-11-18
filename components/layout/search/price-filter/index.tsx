@@ -50,12 +50,12 @@ export function PriceFilter({minPrice, maxPrice} : {minPrice: number, maxPrice: 
             onChange={handleSliderChange}   
             classNames={{
               base: "max-w-md font-semibold text-sm text-neutral-500 dark:text-neutral-400 p-2",
-              filler: "bg-teal-600",
+              filler: "bg-primary",
             }}
             renderThumb={({index, ...props}) => (
               <div
                 {...props}
-                className="group p-1 top-1/2 bg-background border-8 border-teal-600 shadow-medium rounded-full cursor-grab data-[dragging=true]:cursor-grabbing"
+                className="group p-1 top-1/2 bg-background border-8 border-primary shadow-medium rounded-full cursor-grab data-[dragging=true]:cursor-grabbing"
               >
                 {/* <span
                   className={cn(
@@ -74,7 +74,7 @@ export function PriceFilter({minPrice, maxPrice} : {minPrice: number, maxPrice: 
           </pre>
           
           <div className="float-left mr-0 pt-1">
-            <Link className="text-teal-600" href={href}> 
+            <Link className="text-primary" href={href}> 
               <MagnifyingGlassCircleIcon width="32" height="32" /> 
             </Link>
           </div>

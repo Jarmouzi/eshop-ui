@@ -15,7 +15,7 @@ export default async function Banner({title, src, path, size}: {title: string, s
 
   return (
     <Link className={`${width} block relative h-full`} target="_blank" href={path}>
-      <Image className='p-2 rounded-3xl  hover:shadow-md hover:shadow-teal-600' 
+      <Image className='p-2 rounded-3xl  hover:shadow-md hover:shadow-primary' 
         src={src} 
         alt={title} 
         title={title} 

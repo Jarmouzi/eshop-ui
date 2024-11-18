@@ -13,7 +13,7 @@ export function ProductDescription({ product }: { product: Product }) {
         <h1 className="mb-2 text-xl font-medium">{product.Title}</h1>
         
         <h6 className="flex mb-2 text-xs font-light text-neutral-600 justify-start">{product.Title_En}</h6>
-        <div className="flex mr-auto w-auto rounded-full bg-teal-600 p-2 text-sm text-white justify-end">
+        <div className="flex mr-auto w-auto rounded-full bg-primary p-2 text-sm text-white justify-end">
           <Price
             amount={product.Price} //priceRange.maxVariantPrice.amount}
           />
