@@ -22,16 +22,19 @@ export async function login(username: string, password: string) {
   const response = await fetch(`${domain}api/Auth/Login`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: JSON.stringify(data),
+    body: new URLSearchParams({
+      Username: username,
+      Password: password,
+      grant_type: "password",
+    }),
   });
 
-  // if (response.ok) {
-  const responseData = await response.json();
-  return responseData;
-  // } else {
-  //   // Handle the error response
-  //   return null;
-  // }
+  if (response.ok) {
+    const responseData = await response.json();
+    return responseData;
+  } else {
+    return null;
+  }
 }

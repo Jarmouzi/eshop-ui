@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
 import Search from './search';
-//import UserDropdown from '@/components/profile/user-dropdown';
+import UserDropdown from '@/components/profile/user-dropdown';
+import Profile from '@/components/profile';
 
 const { SITE_NAME } = process.env;
 
@@ -33,6 +34,7 @@ export default function Navbar({menu}: {menu: Menu[];}) {
           </Suspense>
         </div>
         <div className="flex justify-end md:w-1/3">
+          <Profile />
           <Suspense fallback={<OpenCart />}>
             <Cart />
           </Suspense>

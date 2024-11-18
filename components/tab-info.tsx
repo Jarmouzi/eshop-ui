@@ -23,10 +23,10 @@ export default function TabInfo({
     variant="underlined"
     fullWidth= {fullWidth}
     classNames={{
-      tabList: "gap-6 relative rounded-none p-0 border-b border-divider",
-      cursor: "w-full bg-[#22d3ee]",
-      tab: "min-w-fit w-1/3 px-0 h-12",
-      tabContent: "group-data-[selected=true]:text-[#06b6d4]"
+      tabList: "gap-6 relative rounded-none p-0 border-b",
+      cursor: "w-full bg-primary",
+      tab: "min-w-fit w-1/3 px-0 h-12 border-0",
+      tabContent: "group-data-[selected=true]:text-primary"
 
     }}
   >

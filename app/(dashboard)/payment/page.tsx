@@ -45,18 +45,16 @@ export default async function PaymentPage() {
   //const payments: RadioItem[]= [{Id: "3", Title: "کیپا", Description: "پرداخت اقساطی 12 ماهه ویژه بیمه شدگان تامین اجتماعی"}];
   const tabData: Array<TabData> = [{
     Id: 1,
-    Title: <div className="flex items-center space-x-2 w-1/3">
+    Title: <div className="flex items-center space-x-12">
     <ShoppingBagIcon className='h-6' />
-    <span>سبد خرید</span>
   </div>,
     Content: <Suspense><PaymentBasket cart={cart} /> </Suspense>
   },
   {
     Id: 2,
     Title: 
-    <div className="flex items-center space-x-2 w-1/3">
-      <span>محل دریافت</span> 
-      <MapPinIcon  className='h-6' />   
+    <div className="flex items-center space-x-12">
+      <MapPinIcon className='h-6' />   
     </div>,
     Content: <p>انتخاب آدرس</p>//<RadioList title="انتخاب آدرس" items={adresses} />
   },
@@ -64,7 +62,6 @@ export default async function PaymentPage() {
     Id: 3,
     Title: (
     <div className="flex items-center space-x-12">
-      <span>نحوه پرداخت</span>
       <BanknotesIcon className='h-6' />
     </div>),
     Content: <p>نحوه پرداخت</p>//<RadioList title="" items={payments} />

@@ -1,13 +1,10 @@
+'use client'
 import { UserIcon } from "@heroicons/react/24/outline";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User} from "@nextui-org/react";
-import { cookies } from "next/headers";
 
-export default function UserDropdown() {
-    const currentUser = cookies().get("currentUser")?.value;
-    let display = "";
-    //if(!currentUser) display = "hidden";
+export default function UserDropdown({display} :{display: string | ''}) {
   return (
-    <div className={`${display} relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white`}>
+    <div className={`${display} relative flex h-11 w-11 mx-2 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white`}>
       <Dropdown placement="bottom-end">
         <DropdownTrigger>
             <UserIcon className='h-4 transition-all ease-in-out hover:scale-110' />
@@ -19,28 +16,23 @@ export default function UserDropdown() {
           /> */}
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
-          <DropdownItem key="profile" className="h-14 gap-2">
-            <p className="font-semibold">Signed in as</p>
-            <p className="font-semibold">zoey@example.com</p>
+          <DropdownItem key="profile" className="h-14 min-w-24 gap-2">
+            <p className="font-semibold">کاربر گرامی <span className="font-normal">خوش آمدید</span></p>            
           </DropdownItem>
-          <DropdownItem key="settings">
-            My Settings
-          </DropdownItem>
-          <DropdownItem key="team_settings">Team Settings</DropdownItem>
           <DropdownItem key="analytics">
-            Analytics
+            سوابق خرید
           </DropdownItem>
-          <DropdownItem key="system">System</DropdownItem>
-          <DropdownItem key="configurations">Configurations</DropdownItem>
+          <DropdownItem key="system">پیام ها</DropdownItem>
+          <DropdownItem key="configurations">پشتیبانی</DropdownItem>
           <DropdownItem key="help_and_feedback">
-            Help & Feedback
+            راهنما
           </DropdownItem>
           <DropdownItem key="logout" color="danger">
-            Log Out
+            خروج
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
-      <Dropdown placement="bottom-start">
+      {/* <Dropdown placement="bottom-start">
         <DropdownTrigger>
           <User
             as="button"
@@ -74,7 +66,7 @@ export default function UserDropdown() {
             Log Out
           </DropdownItem>
         </DropdownMenu>
-      </Dropdown>
+      </Dropdown> */}
     </div>
   );
 }
