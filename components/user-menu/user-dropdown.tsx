@@ -1,10 +1,12 @@
 'use client'
 import { UserIcon } from "@heroicons/react/24/outline";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User} from "@nextui-org/react";
+import { useRouter } from 'next/navigation'
 
-export default function UserDropdown({display} :{display: string | ''}) {
+export default function UserDropdown() { //{display} :{display: string | ''}) {
+  const router = useRouter()
   return (
-    <div className={`${display} relative flex h-11 w-11 mx-2 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white`}>
+    <div className={'relative flex h-11 w-11 mx-2 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white'}>
       <Dropdown placement="bottom-end">
         <DropdownTrigger>
             <UserIcon className='h-4 transition-all ease-in-out hover:scale-110' />
@@ -15,16 +17,24 @@ export default function UserDropdown({display} :{display: string | ''}) {
             src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
           /> */}
         </DropdownTrigger>
-        <DropdownMenu aria-label="Profile Actions" variant="flat">
+        <DropdownMenu 
+          aria-label="Profile Actions" 
+          variant="light"
+          color="primary"
+          onAction={(key) => { router.push(`/${key}`)}}>
+
           <DropdownItem key="profile" className="h-14 min-w-24 gap-2">
             <p className="font-semibold">کاربر گرامی <span className="font-normal">خوش آمدید</span></p>            
           </DropdownItem>
-          <DropdownItem key="analytics">
+          <DropdownItem key="profile">
+            پروفایل
+          </DropdownItem>
+          <DropdownItem key="old-payments">
             سوابق خرید
           </DropdownItem>
-          <DropdownItem key="system">پیام ها</DropdownItem>
-          <DropdownItem key="configurations">پشتیبانی</DropdownItem>
-          <DropdownItem key="help_and_feedback">
+          <DropdownItem key="message">پیام ها</DropdownItem>
+          <DropdownItem key="support">پشتیبانی</DropdownItem>
+          <DropdownItem key="help">
             راهنما
           </DropdownItem>
           <DropdownItem key="logout" color="danger">

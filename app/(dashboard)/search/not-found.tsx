@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <div className='grid h-full w-full p-14 m-24 sm:{ m-3 p-3 } justify-center max-w-96 max-h-96 overflow-hidden rounded-lg border bg-white hover:border-primary dark:bg-black'>
     <Image 
-      src='/notfound.png' 
+      src='https://localhost:7029/Statistics?path=notfound.png&width=640&height=-1' 
       alt='محصول مورد نظر یافت نشد' 
       className='relative object-contain' 
       fill 

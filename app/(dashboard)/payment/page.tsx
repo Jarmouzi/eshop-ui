@@ -37,7 +37,6 @@ export async function generateMetadata({
 export default async function PaymentPage() {
   const cartId = cookies().get('cartId')?.value;
   let cart;
-  console.log('payment called');
   if (cartId) {
     cart = await getCart(cartId);
   }

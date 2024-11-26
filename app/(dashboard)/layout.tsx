@@ -22,7 +22,7 @@ export const metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
+export default async function DashboardLayout({ children }: { children: ReactNode }) {
   const menu = await getMenu();
   return (
     <>

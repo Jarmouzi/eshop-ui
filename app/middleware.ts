@@ -21,7 +21,6 @@ export function middleware(request: NextRequest) {
   // }
 
   if (!currentUser && isProtectedRoute) {
-    console.log("Response is redirected by middleware");
     return Response.redirect(new URL("/login", request.url));
   }
 }

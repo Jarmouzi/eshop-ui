@@ -6,6 +6,8 @@ import { getCollections } from '@/lib/services/CategoryService';
 import { PriceFilter } from './price-filter';
 //import SwitchFilter from './switch-filter';
 import CheckboxFilter from './checkbox-filter';
+import { Card, CardBody, CardHeader } from '@nextui-org/card';
+import { Divider } from '@nextui-org/react';
 
 async function CollectionList() {
   const collections = await getCollections();
@@ -18,11 +20,13 @@ const items = 'bg-neutral-400 dark:bg-neutral-700';
 
 export default function Collections() {
   return (
-    <div className='group h-full w-full top-1 rounded-lg border bg-white hover:border-primary dark:bg-black'>
-      <h1 className="text-lg font-semibold text-neutral-600 dark:text-neutral-300 p-2 pb-3">
-        فیلترهای جستجو
-      </h1>
-     <Suspense
+    <Card shadow='sm' className="min-h-[80vh]  dark:bg-neutral-900">
+    <CardHeader className="font-semibold text-nowrap w-fit">
+      فیلترهای جستجو
+    </CardHeader>      
+    <Divider/>
+    <CardBody>
+    <Suspense
       //  fallback={
       //    <div className="col-span-2 hidden h-[400px] w-full flex-none py-4 lg:block">
       //      <div className={clsx(skeleton, activeAndTitles)} />
@@ -50,6 +54,40 @@ export default function Collections() {
       <Suspense>
         <CheckboxFilter title='ارسال امروز' sk='d' imageUrl='https://dkstatics-public.digikala.com/digikala-static/262c38c0e4990522af759e0016a287508bbc84f6_1684761217.png'/>
       </Suspense>
-    </div>
+    </CardBody>
+  </Card>
+    // <div className='group h-full w-full top-1 rounded-lg border bg-white hover:border-primary dark:bg-black'>
+    //   <h1 className="text-lg font-semibold text-neutral-600 dark:text-neutral-300 p-2 pb-3">
+    //     فیلترهای جستجو
+    //   </h1>
+    //  <Suspense
+    //   //  fallback={
+    //   //    <div className="col-span-2 hidden h-[400px] w-full flex-none py-4 lg:block">
+    //   //      <div className={clsx(skeleton, activeAndTitles)} />
+    //   //      <div className={clsx(skeleton, activeAndTitles)} />
+    //   //      <div className={clsx(skeleton, items)} />
+    //   //      <div className={clsx(skeleton, items)} />
+    //   //      <div className={clsx(skeleton, items)} />
+    //   //      <div className={clsx(skeleton, items)} />
+    //   //      <div className={clsx(skeleton, items)} />
+    //   //      <div className={clsx(skeleton, items)} />
+    //   //      <div className={clsx(skeleton, items)} />
+    //   //      <div className={clsx(skeleton, items)} />
+    //   //    </div>
+    //   //  }
+    //  > 
+    //     <CollectionList/>
+    //   </Suspense>
+    //   <Suspense>
+    //     <PriceFilter minPrice={10000} maxPrice={100000000} />
+    //   </Suspense>
+    //     {/* <SwitchFilter title='فقط کالاهای موجود' sk='e' /> */}
+    //   <Suspense>
+    //     <CheckboxFilter title='فقط کالاهای تخفیف دار' sk='b'/>
+    //   </Suspense>
+    //   <Suspense>
+    //     <CheckboxFilter title='ارسال امروز' sk='d' imageUrl='https://dkstatics-public.digikala.com/digikala-static/262c38c0e4990522af759e0016a287508bbc84f6_1684761217.png'/>
+    //   </Suspense>
+    // </div>
   );
 }
