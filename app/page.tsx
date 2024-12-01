@@ -52,7 +52,7 @@ export default async function HomePage() {
         <Swiper promise={productData} title='پیشنهادات ویژه' />
       </Suspense>
       <Suspense>
-        <div className='inline-flex pl-2 pr-6 py-3 justify-center'>
+        <div className='flex pl-2 pr-6 py-3 justify-center'>
           <Banner title='لوازم خانگی' src='202302071335259013.png' path='' />
           <Banner title='گوشی و تبلت' src='202302071337043448.png' path='' />
           <Banner title='لوازم جانبی' src='202302071338425222.png' path='' />

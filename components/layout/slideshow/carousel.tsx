@@ -14,7 +14,7 @@ export default function CarouselComponent({ banners }: { banners: Banner[] }) {
         <div
             key={item.id}
             onClick={() => window.open(item.path)}
-            className='h-1/2'
+            className='h-[50vh] w-[85vw]'
         >
             <Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover' }}/>
         </div>
