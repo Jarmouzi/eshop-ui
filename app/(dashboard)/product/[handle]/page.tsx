@@ -12,7 +12,7 @@ import { Image } from '@/lib/types/Product';
 import { Card, CardBody, Tab, Tabs } from '@nextui-org/react';
 import FeatureList from '@/components/list/feature-list';
 import Prose from '@/components/prose';
-import TabInfo from '@/components/tab-info';
+import TabInfo from '@/components/tab/tab-info';
 import { TabData } from "@/lib/types/TabData";
 
 //export const runtime = 'edge';

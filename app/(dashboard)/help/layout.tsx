@@ -1,10 +1,10 @@
 
 import VerticalTab from '@/components/tab/vertical-tab';
-import { UserMenuData } from '@/lib/constants';
+import { HelpMenuData, } from '@/lib/constants';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
 import { Divider } from '@nextui-org/react';
 
-export default async function UserLayout({ children }: { children: React.ReactNode }) {
+export default function HelpLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
@@ -12,11 +12,11 @@ export default async function UserLayout({ children }: { children: React.ReactNo
         <div className="hidden order-first max-w-[355px] self-start sticky top-0 col-span-1 md:flex">
           <Card shadow="none" className="border-1 border-primary-200 min-h-[70vh]">
             <CardHeader className="font-semibold text-nowrap w-fit">
-            کاربر گرامی خوش آمدید 
+            راهنمای خرید از انار چین 
             </CardHeader>      
             <Divider/>
             <CardBody>
-              <VerticalTab list={UserMenuData} />
+              <VerticalTab list={HelpMenuData} />
             </CardBody>
           </Card>
         </div>

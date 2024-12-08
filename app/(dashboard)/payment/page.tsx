@@ -6,7 +6,7 @@ import { cookies } from 'next/headers';
 import { getCart } from '@/lib/services/CartService';
 import PaymentBasket from "@/components/payment/basket";
 import { TabData } from "@/lib/types/TabData";
-import TabInfo from "@/components/tab-info";
+import TabInfo from "@/components/tab/tab-info";
 import CartAmount from "@/components/payment/amount";
 // import RadioList from "@/components/radio-list";
 // import { RadioItem } from "@/lib/types/RadioItem";
@@ -43,14 +43,14 @@ export default async function PaymentPage() {
   //const adresses: RadioItem[]= [{Id: "1", Title: "درب فروشگاه", Description: "یافت آباد شرقی، کوچه مسجد حاج ولی، روبروی پارکینگ شهرداری، مبلمان ملل"}];
   //const payments: RadioItem[]= [{Id: "3", Title: "کیپا", Description: "پرداخت اقساطی 12 ماهه ویژه بیمه شدگان تامین اجتماعی"}];
   const tabData: Array<TabData> = [{
-    Id: 1,
+    Id: "1",
     Title: <div className="flex items-center space-x-12">
     <ShoppingBagIcon className='h-6' />
   </div>,
     Content: <Suspense><PaymentBasket cart={cart} /> </Suspense>
   },
   {
-    Id: 2,
+    Id: "2",
     Title: 
     <div className="flex items-center space-x-12">
       <MapPinIcon className='h-6' />   
@@ -58,7 +58,7 @@ export default async function PaymentPage() {
     Content: <p>انتخاب آدرس</p>//<RadioList title="انتخاب آدرس" items={adresses} />
   },
   {
-    Id: 3,
+    Id: "3",
     Title: (
     <div className="flex items-center space-x-12">
       <BanknotesIcon className='h-6' />

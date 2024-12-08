@@ -4,6 +4,7 @@ import FooterMenu from './footer-menu';
 import LogoSquare from '@/components/logo-square';
 import { Suspense } from 'react';
 import Copyright from '../copyright';
+import { Menu } from '@/lib/types/Menu';
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
 

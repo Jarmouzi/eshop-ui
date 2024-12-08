@@ -12,7 +12,7 @@ export default function SearchLayout({ children }: { children: React.ReactNode }
         <div className="order-first w-full flex-none md:max-w-[255px] self-start sticky top-0 col-span-1">
           <Collections />
         </div>
-        <div className="order-last min-h-screen w-full md:order-none col-span-4">
+        <div className="order-last min-h-[70vh] w-full md:order-none col-span-4">
           <div className="order-none flex-none text-xs">
             <SortFilter list={sorting} title="مرتب سازی بر اساس" display="inline-flex" />
           </div>

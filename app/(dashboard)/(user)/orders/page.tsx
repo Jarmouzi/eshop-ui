@@ -26,7 +26,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function OldPaymentPage() {
+export default async function ordersPage() {
 
 
   return (

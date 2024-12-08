@@ -20,7 +20,7 @@ const items = 'bg-neutral-400 dark:bg-neutral-700';
 
 export default function Collections() {
   return (
-    <Card shadow='sm' className="min-h-[80vh]  dark:bg-neutral-900">
+    <Card shadow="none" className="border-1 border-primary-200 min-h-[70vh] dark:bg-neutral-900">
     <CardHeader className="font-semibold text-nowrap w-fit">
       فیلترهای جستجو
     </CardHeader>      

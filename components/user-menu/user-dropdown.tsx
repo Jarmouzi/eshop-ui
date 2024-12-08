@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 export default function UserDropdown() { //{display} :{display: string | ''}) {
   const router = useRouter()
   return (
-    <div className={'relative flex h-11 w-11 mx-2 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white'}>
+    <div className={'relative flex h-11 w-11 ml-2 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white'}>
       <Dropdown placement="bottom-end">
         <DropdownTrigger>
             <UserIcon className='h-4 transition-all ease-in-out hover:scale-110' />
@@ -29,7 +29,7 @@ export default function UserDropdown() { //{display} :{display: string | ''}) {
           <DropdownItem key="profile">
             پروفایل
           </DropdownItem>
-          <DropdownItem key="old-payments">
+          <DropdownItem key="orders">
             سوابق خرید
           </DropdownItem>
           <DropdownItem key="message">پیام ها</DropdownItem>

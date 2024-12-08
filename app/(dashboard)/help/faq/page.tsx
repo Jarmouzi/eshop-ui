@@ -16,7 +16,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 
   return {
-    title: 'راهنما',
+    title: 'پشتیبانی',
     description: '',
     openGraph: {
       // publishedTime: page.createdAt,
@@ -26,14 +26,14 @@ export async function generateMetadata({
   };
 }
 
-export default async function HelpPage() {
+export default async function FAQPage() {
 
 
   return (
     <Suspense>            
       <Card shadow="none">
         <CardBody>
-          راهنما
+          بخش پشتیبانی
         </CardBody>
       </Card>
      </Suspense>

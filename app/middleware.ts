@@ -12,9 +12,13 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const currentUser = request.cookies.get("currentUser")?.value;
   //const session = await getSession({ request });
-  const isProtectedRoute = ["/payment", "/profile"].includes(
-    request.nextUrl.pathname
-  );
+  const isProtectedRoute = [
+    "/payment",
+    "/profile",
+    "/message",
+    "/orders",
+    "/support",
+  ].includes(request.nextUrl.pathname);
 
   // if (currentUser && !request.nextUrl.pathname.startsWith('/dashboard')) {
   //   return Response.redirect(new URL('/dashboard', request.url))

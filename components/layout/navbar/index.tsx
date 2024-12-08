@@ -8,6 +8,8 @@ import Search from './search';
 import UserDropdown from '@/components/user-menu/user-dropdown';
 import Profile from '@/components/user-menu';
 import UserMenu from '@/components/user-menu';
+import { Menu } from '@/lib/types/Menu';
+import HelpMenu from '@/components/help/help-menu';
 
 const { SITE_NAME } = process.env;
 
@@ -35,6 +37,7 @@ export default function Navbar({menu}: {menu: Menu[];}) {
           </Suspense>
         </div>
         <div className="flex justify-end md:w-1/3">
+          <HelpMenu />
           <UserMenu />
           <Suspense fallback={<OpenCart />}>
             <Cart />

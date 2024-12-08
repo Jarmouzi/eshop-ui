@@ -21,7 +21,7 @@ export default function ProfileTabs(){
       onSelectionChange={handleTabChange}> 
       <Tab key="/profile" title="پروفایل کاربر">
       </Tab>
-      <Tab key="/old-payments" title="سوابق خرید">
+      <Tab key="/orders" title="سوابق خرید">
       </Tab>
       <Tab key="/message" title="پیام ها">
       </Tab>
