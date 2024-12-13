@@ -20,6 +20,7 @@ export default function LoginPage() {
     })
  
     if (response.ok) {
+      response
       router.back()
       //router.push('/profile')
     } else {

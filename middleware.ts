@@ -13,8 +13,8 @@ const corsOptions = {
 };
 const legacyPrefixes = ["/payment", "/profile"];
 
-export function middleware(request: NextRequest) {
-  const currentUser = cookies().get("currentUser"); // request.cookies.get('currentUser')?.value
+export async function middleware(request: NextRequest) {
+  const currentUser = (await cookies()).get("currentUser"); // request.cookies.get('currentUser')?.value
 
   const { pathname } = request.nextUrl;
 

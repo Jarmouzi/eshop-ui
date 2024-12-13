@@ -4,8 +4,9 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { removeItem } from '@/components/cart/actions';
 import LoadingDots from '@/components/loading-dots';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import { CartItem } from '@/lib/types/Cart';
+import { useActionState } from 'react';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -35,7 +36,7 @@ function SubmitButton() {
 }
 
 export function DeleteItemButton({ item }: { item: CartItem }) {
-  const [message, formAction] = useFormState(removeItem, null);
+  const [message, formAction] = useActionState(removeItem, null);
   const itemId = item.Id;
   const actionWithVariant = formAction.bind(null, itemId);
 

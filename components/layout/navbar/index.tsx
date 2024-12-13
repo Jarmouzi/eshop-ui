@@ -45,7 +45,7 @@ export default function Navbar({menu}: {menu: Menu[];}) {
         </div>
       </div>
       <div className="container mx-auto flex justify-between border-b-1 border-neutral-200">
-           {menu.length ? (
+           {menu && menu.length ? (
               <ul className="hidden gap-2 text-sm md:flex md:items-center">
                {menu.map((item: Menu) => {
                 return (
@@ -57,9 +57,9 @@ export default function Navbar({menu}: {menu: Menu[];}) {
                         {item.Children.map((child: Menu) => {
                             return (
                               child.Children.length ? (
-                              <ul className="px-2 w-full sm:w-1/3 lg:w-1/6  pb-2 pt-2 lg:pt-3">
-                                <li className='mb-3' key={child.Id}>
-                                <a href={item.PageAddress} className="font-bold text-xs lg:text-sm text-neutral-800 text-bold border-primary pr-1 border-r-2">{child.Title}</a>
+                              <ul className="px-2 w-full sm:w-1/3 lg:w-1/6  pb-2 pt-2 lg:pt-3" key={child.Id}>
+                                <li className='mb-3'>
+                                <a href={child.PageAddress} className="font-bold text-xs lg:text-sm text-neutral-800 text-bold border-primary pr-1 border-r-2">{child.Title}</a>
                                 </li>
                                 {child.Children.map((gc: Menu) => { return (                                                                            
                                   <li key={gc.Id}>
@@ -69,7 +69,7 @@ export default function Navbar({menu}: {menu: Menu[];}) {
                               </ul>
                               ) :
                               (
-                                <ul className="px-1 w-full sm:w-1/3 lg:w-1/6 pb-1 pt-2 lg:pt-3">
+                                <ul className="px-1 w-full sm:w-1/3 lg:w-1/6 pb-1 pt-2 lg:pt-3" key={child.Id}>
                                   <a href={item.PageAddress} className="font-bold text-xs text-neutral-800 text-bold mb-1 border-primary pr-1 border-r-2">{child.Title}</a>     
                                 </ul>
                               )

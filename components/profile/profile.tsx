@@ -1,31 +1,38 @@
 'use client'
+import { updateUserProfile } from "@/lib/services/UserProfileService";
+import { UserProfile } from "@/lib/types/UserProfile";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Divider } from "@nextui-org/react";
 import {Tabs, Tab} from "@nextui-org/tabs";
 import { usePathname, useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 
-export default function Profile(){
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-      event.preventDefault()
-      const formData = new FormData(event.currentTarget)
-      const username = formData.get('username')
-      const password = formData.get('password')
+export default function Profile({userProfile} :{userProfile: UserProfile}){
+
+  const [formData, setFormData] = useState(userProfile);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      updateUserProfile(formData)
+      // const response = await fetch(`/api/auth/login?username=${username}&password=${password}`, {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      // })
    
-      const response = await fetch(`/api/auth/login?username=${username}&password=${password}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      })
-   
-      if (response.ok) {
-        //router.push('/profile')
-      } else {
-        // Handle errors
-      }
+      // if (response.ok) {
+      //   //router.push('/profile')
+      // } else {
+      //   // Handle errors
+      // }
     }
   
     return (         
-        <Card shadow="sm" className="min-h-[80vh]">
+        <Card shadow="sm" className="min-h-[70vh]">
           <CardHeader className="font-semibold">
               پروفایل
           </CardHeader>      
@@ -33,29 +40,41 @@ export default function Profile(){
           <CardBody>
           <form onSubmit={handleSubmit}>
             <div className="gap-2 grid grid-cols-3 grid-rows-2 w-full text-right">
-            <div className="mb-4 col-span-1">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+            {/* <div className="mb-4 col-span-1">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Username">
               نام کاربری 
               </label>
-              <input id="username" name="username" type="text" placeholder="نام کاربری" disabled className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
-            </div>
-            <div className="mb-4 col-span-1">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+              <input id="Username" name="Username" type="text" placeholder="نام کاربری" disabled className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+            </div> */}
+            <div className="mb-4 col-span-3 sm:col-span-1">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Name">
                 نام
               </label>
-              <input id="name" name="name" type="text" placeholder="نام" className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
-            </div>
-            <div className="mb-4 col-span-1">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="family">
-                نام خانوادگی
-              </label>
-              <input id="family" name="family" type="text" placeholder="نام خانوادگی" className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+              <input id="Name" name="Name" type="text" value={userProfile.Name} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
             </div>
             <div className="mb-4 col-span-3 sm:col-span-1">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Family">
+                نام خانوادگی
+              </label>
+              <input id="Family" name="Family" type="text" value={userProfile.Family} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+            </div>
+            <div className="mb-4 col-span-3 sm:col-span-1">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="NationalCode">
                 کد ملی
               </label>
-              <input id="name" name="name" type="text" placeholder="کد ملی" className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+              <input id="NationalCode" name="NationalCode" type="number" value={userProfile.NationalCode || ''} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+            </div>
+            <div className="mb-4 col-span-3 sm:col-span-1">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="PhoneNumber">
+                شماره تماس
+              </label>
+              <input id="PhoneNumber" name="PhoneNumber" type="number" value={userProfile.PhoneNumber || ''} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+            </div>
+            <div className="mb-4 col-span-3 sm:col-span-1">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Email">
+                ایمیل
+              </label>
+              <input id="Email" name="Email" type="email" value={userProfile.Email} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
             </div>
             </div>
             <div className="items-end">

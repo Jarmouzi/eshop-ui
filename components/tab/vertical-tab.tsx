@@ -9,6 +9,7 @@ export default function VerticalTab({list}: {list: SimpleMenu[]}) {
     const router = useRouter();
 
     const handleTabChange = (key: any) => {
+        console.log(key)
         router.push(key ); 
     };
 
@@ -20,10 +21,10 @@ export default function VerticalTab({list}: {list: SimpleMenu[]}) {
         variant="light"
         color="primary"
         aria-label="Options" 
-        selectedKey={pathname} 
+        selectedKey={`${pathname}`} 
         onSelectionChange={handleTabChange}> 
             {list.map((tab, i) => (
-                <Tab key={tab.PageAddress} title={tab.Title}>            
+                <Tab key={`${tab.PageAddress}`} title={tab.Title}>            
                     {tab.Content} 
                 </Tab>
             ))}

@@ -22,7 +22,8 @@ export async function generateMetadata({
 }: {
   params: { handle: string };
 }): Promise<Metadata> {
-  const product = await getProduct(params.handle);
+  const { handle } = await params; 
+  const product = await getProduct(handle);
 
   if (!product.Title) {
     return {
@@ -59,18 +60,19 @@ export async function generateMetadata({
 }
 
 export default async function ProductPage({ params }: { params: { handle: string } }) {
-  const product = await getProduct(params.handle);
+  const { handle } = await params; 
+  const product = await getProduct(handle);
 
   if (!product.Title) return notFound();
 
     const tabData: Array<TabData> = [{
-      Id: 1,
+      Id: "1",
       Title: "معرفی محصول",
       Content: <div>{product.Description}</div>
     }];
     if(product.Features)
       tabData.push({
-        Id: 2,
+        Id: "2",
         Title: "ویژگی های محصول",
         Content: <FeatureList list={product.Features} title='ویژگی های محصول' ></FeatureList> 
       });

@@ -1,11 +1,10 @@
-import { WindowSize } from '@/lib/utilities/window-size';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 
 
 export default async function Banner({title, src, path, size}: {title: string, src: string, path: string, size?: string | "sm"}) {
-  const cartId = cookies().get('cartId')?.value;
+  const cartId = (await cookies()).get('cartId')?.value;
   
   let width = "w-1/4"
   if(size == "sm")

@@ -1,9 +1,12 @@
 'use client'
+import { UserProfile } from "@/lib/types/UserProfile";
 import { UserIcon } from "@heroicons/react/24/outline";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User} from "@nextui-org/react";
 import { useRouter } from 'next/navigation'
 
-export default function UserDropdown() { //{display} :{display: string | ''}) {
+export default function UserDropdown({userProfile} :{userProfile: UserProfile | undefined}) {
+  const user = userProfile?.Name? `${userProfile.Name} ${userProfile.Family} `: 'کاربر گرامی ';
+
   const router = useRouter()
   return (
     <div className={'relative flex h-11 w-11 ml-2 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white'}>
@@ -23,8 +26,8 @@ export default function UserDropdown() { //{display} :{display: string | ''}) {
           color="primary"
           onAction={(key) => { router.push(`/${key}`)}}>
 
-          <DropdownItem key="profile" className="h-14 min-w-24 gap-2">
-            <p className="font-semibold">کاربر گرامی <span className="font-normal">خوش آمدید</span></p>            
+          <DropdownItem key="profile/" className="h-14 min-w-24 gap-2">
+            <p className="font-semibold"> {user} <span className="font-normal">خوش آمدید</span></p>            
           </DropdownItem>
           <DropdownItem key="profile">
             پروفایل

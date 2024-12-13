@@ -1,9 +1,11 @@
 import { cookies } from 'next/headers';
 import UserDropdown from './user-dropdown';
 import { UserIcon } from '@heroicons/react/24/outline';
+import { getUserProfile } from '@/lib/services/UserProfileService';
+import { Suspense } from 'react';
 
 export default async function UserMenu() {    
-  const currentUser = cookies().get("currentUser")?.value;
+  const currentUser = (await cookies()).get("currentUser")?.value;
   
   if(!currentUser) 
   {
@@ -15,5 +17,8 @@ export default async function UserMenu() {
       </a> );
   }
   else 
-    return <UserDropdown  />;
+  {
+    const profile = await getUserProfile();
+    return <Suspense> <UserDropdown userProfile={profile}  /></Suspense>;
+  }
 }

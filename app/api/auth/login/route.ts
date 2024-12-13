@@ -1,4 +1,5 @@
 import { login } from "@/lib/services/AuthService";
+import { getUserProfile } from "@/lib/services/UserProfileService";
 import { NextApiRequest, NextApiResponse } from "next";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -16,7 +17,7 @@ export async function POST(request: Request) {
     if (res) {
       const sessionData = res;
 
-      cookies().set("currentUser", sessionData, {
+      (await cookies()).set("currentUser", sessionData.token, {
         httpOnly: true,
         secure: true,
         maxAge: 60 * 60 * 24,

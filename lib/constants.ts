@@ -46,7 +46,7 @@ export const UserMenuData: SimpleMenu[] = [
   {
     Id: "1",
     Title: "پروفایل",
-    PageAddress: "/profie",
+    PageAddress: "/profile",
     Content: null,
   },
   {

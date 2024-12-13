@@ -1,15 +1,14 @@
 'use client';
 
-import { PlusIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { addItem } from '@/components/cart/actions';
 import LoadingDots from '@/components/loading-dots';
 import { ProductVariant } from '@/lib/types/Product';
 import { useSearchParams } from 'next/navigation';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import { ShoppingBagIcon } from '@heroicons/react/16/solid';
 
-import { Suspense, useEffect } from 'react';
+import React, { startTransition, Suspense, useActionState } from 'react';
 
 function SubmitButton({
   availableForSale,
@@ -74,7 +73,7 @@ export function AddToCart({
   variants: ProductVariant[];
   availableForSale: boolean;
 }) {
-  const [message, formAction] = useFormState(addItem, null);
+  const [message, formAction] = useActionState(addItem, null);
   const searchParams = useSearchParams();
   const defaultVariantId = variants.length === 1 ? variants[0]?.Id : undefined;
   const variant = variants.find((variant: ProductVariant) =>
@@ -86,7 +85,9 @@ export function AddToCart({
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    formAction(selectedVariantId);
+    startTransition(() => {
+      formAction(selectedVariantId); 
+    });
   };
   //const actionWithVariant = formAction.bind(null, selectedVariantId);
 

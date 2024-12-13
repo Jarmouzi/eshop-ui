@@ -3,9 +3,10 @@
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import LoadingDots from '@/components/loading-dots';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import { CartItem } from '@/lib/types/Cart';
 import { updateItemQuantity } from './actions';
+import { useActionState } from 'react';
 
 function SubmitButton({ type }: { type: 'plus' | 'minus' }) {
   const { pending } = useFormStatus();
@@ -38,7 +39,7 @@ function SubmitButton({ type }: { type: 'plus' | 'minus' }) {
 }
 
 export function EditItemQuantityButton({ item, type }: { item: CartItem; type: 'plus' | 'minus' }) {
-  const [message, formAction] = useFormState(updateItemQuantity, null);
+  const [message, formAction] = useActionState(updateItemQuantity, null);
   const payload = {
     itemId: item.Id,
     variantId: item.ProductVariant.Id,

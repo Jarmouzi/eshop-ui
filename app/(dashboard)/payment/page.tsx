@@ -35,11 +35,11 @@ export async function generateMetadata({
 }
 
 export default async function PaymentPage() {
-  const cartId = cookies().get('cartId')?.value;
+  const cartId = (await cookies()).get('cartId')?.value;
   let cart;
-  if (cartId) {
+  //if (cartId) {
     cart = await getCart(cartId);
-  }
+  //}
   //const adresses: RadioItem[]= [{Id: "1", Title: "درب فروشگاه", Description: "یافت آباد شرقی، کوچه مسجد حاج ولی، روبروی پارکینگ شهرداری، مبلمان ملل"}];
   //const payments: RadioItem[]= [{Id: "3", Title: "کیپا", Description: "پرداخت اقساطی 12 ماهه ویژه بیمه شدگان تامین اجتماعی"}];
   const tabData: Array<TabData> = [{
