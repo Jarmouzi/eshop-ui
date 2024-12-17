@@ -1,10 +1,12 @@
 'use server'
 import { FormEvent, Suspense } from "react";
 import { Metadata } from "next";
-import ProfileTabs from "@/components/profile/profile-tabs";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Divider } from "@nextui-org/react";
-import Profile from "@/components/profile";
+import Address from "@/components/address/index";
+import { getUserAddress, getUserAddresses } from "@/lib/services/UserAddressService";
+import { getAllStates } from "@/lib/services/StateService";
+import { getAllCities } from "@/lib/services/CityService";
 //import { useRouter } from "next/navigation";
 
 //export const runtime = 'edge';
@@ -18,7 +20,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 
   return {
-    title: 'پروفایل کاربر',
+    title: 'آدرس های کاربر',
     description: '',
     openGraph: {
       // publishedTime: page.createdAt,
@@ -28,11 +30,14 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProfilePage() {
+export default async function AddressPage() {
+  const addresses = await getUserAddresses();
+  const states = await getAllStates();
+  const cities = await getAllCities();
 
   return (
     <Suspense>            
-      <Profile />
+      <Address userAddresses={addresses} states={states} cities={cities} />
      </Suspense>
   );
 }

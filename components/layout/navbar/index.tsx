@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
 import Search from './search';
-import UserDropdown from '@/components/user-menu/user-dropdown';
-import Profile from '@/components/user-menu';
 import UserMenu from '@/components/user-menu';
 import { Menu } from '@/lib/types/Menu';
 import HelpMenu from '@/components/help/help-menu';

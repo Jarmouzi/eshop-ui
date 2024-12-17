@@ -73,7 +73,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                 </button>
               </div>
 
-              {!cart || cart.Items.length === 0 ? (
+              {!cart || !cart.Items || cart.Items?.length === 0 ? (
                 <div className="mt-20 flex text-neutral-500 w-full flex-col items-center justify-center overflow-hidden">
                   <ShoppingCartIcon className="h-16" />
                   <p className="mt-6 text-center text-2xl font-bold">سبد خرید شما خالیست.</p>

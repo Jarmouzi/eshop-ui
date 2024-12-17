@@ -28,7 +28,7 @@ export default function PaymentBasket({ cart }: { cart: Cart | undefined }) {
   return (
     <div className="">
 
-        {!cart || cart.Items.length === 0 ? (
+        {!cart || !cart.Items || cart.Items?.length === 0 ? (
         <div className="m-24 flex text-neutral-300 w-full items-center justify-center overflow-hidden">
             <ShoppingCartIcon className="h-16" />
             <p className="text-center text-2xl font-bold">سبد خرید شما خالیست.</p>

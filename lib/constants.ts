@@ -50,6 +50,12 @@ export const UserMenuData: SimpleMenu[] = [
     Content: null,
   },
   {
+    Id: "5",
+    Title: "آدرس ها",
+    PageAddress: "/address",
+    Content: null,
+  },
+  {
     Id: "2",
     Title: "سوابق خرید",
     PageAddress: "/orders",

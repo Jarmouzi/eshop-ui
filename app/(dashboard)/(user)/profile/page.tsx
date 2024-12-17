@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import ProfileTabs from "@/components/profile/profile-tabs";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Divider } from "@nextui-org/react";
-import Profile from "@/components/profile/profile";
+import Profile from "@/components/profile";
 import { getUserProfile } from "@/lib/services/UserProfileService";
 //import { useRouter } from "next/navigation";
 
