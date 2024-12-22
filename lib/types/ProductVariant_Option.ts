@@ -1,4 +1,5 @@
-type ProductVariant_Option =  { 
-	'ProductVariantId': number | null, 
-	'Product_OptionId': number | null, 
-} 
+export type ProductVariant_Option = {
+  Id: number;
+  ProductVariantId: number | null;
+  Product_OptionId: number | null;
+};

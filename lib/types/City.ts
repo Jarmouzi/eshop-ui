@@ -1,5 +1,6 @@
 export type City = {
-  Id: number;
-  StateId: number;
-  Title: string;
+  id: number;
+  stateId: number;
+  title: string;
+  modifiedBy: string;
 };

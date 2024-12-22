@@ -37,6 +37,7 @@ export async function GetData<T>({
 
       let body;
       const text = await result.text();
+
       body = JSON.parse(text);
 
       if (body.errors) {

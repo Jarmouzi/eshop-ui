@@ -41,7 +41,7 @@ export default function SingleSelectDropDown({ list, hasDefault = false, selecte
         onSelectionChange={handleOnDropdownChange}
       >
 
-        {list.map((item, i) => (
+        {list && list.map((item, i) => (
             <DropdownItem key={item.Id}>            
                 {item.Title}
             </DropdownItem>

@@ -1,4 +1,5 @@
-type Supplier_Brand =  { 
-	'SupplierId': number | null, 
-	'BrandId': number | null, 
-} 
+export type Supplier_Brand = {
+  Id: number;
+  SupplierId: number | null;
+  BrandId: number | null;
+};

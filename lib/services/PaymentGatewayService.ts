@@ -1,28 +1,27 @@
-import { UserAddress } from '../types/PaymentGateway';
-import { GetData, PostData } from './service';
+import { PaymentGateway } from "../types/PaymentGateway";
+import { GetData, PostData } from "./service";
 
-export async function getPaymentGateway(id: string): Promise<PaymentGateway>  {
-
+export async function getPaymentGateway(id: string): Promise<PaymentGateway> {
   const res = await GetData<PaymentGateway>({
-    path: 'PaymentGateway/Get?' + id,
+    path: "PaymentGateway/Get?" + id,
   });
 
   return res.body;
-} 
-export async function getAllPaymentGateways(): Promise<PaymentGateway[]>  {
-
+}
+export async function getAllPaymentGateways(): Promise<PaymentGateway[]> {
   const res = await GetData<PaymentGateway[]>({
-    path: 'PaymentGateway/GetAll',
+    path: "PaymentGateway/GetAll",
   });
 
   return res.body;
-} 
-export async function getPaymentGateways(jp: string): Promise<PaymentGateway[]>  {
-
+}
+export async function getPaymentGateways(
+  jp: string
+): Promise<PaymentGateway[]> {
   const res = await PostData<PaymentGateway[]>({
-    path: 'PaymentGateway/GetFiltered',
+    path: "PaymentGateway/GetFiltered",
     variables: jp,
   });
 
   return res.body;
-} 
+}
