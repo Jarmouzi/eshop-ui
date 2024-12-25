@@ -50,31 +50,31 @@ export default function Profile({userProfile} :{userProfile: UserProfile}){
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Name">
                 نام
               </label>
-              <input id="Name" name="Name" type="text" value={userProfile.Name} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+              <input id="Name" name="Name" type="text" value={formData.Name} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
             </div>
             <div className="mb-4 col-span-3 sm:col-span-1">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Family">
                 نام خانوادگی
               </label>
-              <input id="Family" name="Family" type="text" value={userProfile.Family} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+              <input id="Family" name="Family" type="text" value={formData.Family} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
             </div>
             <div className="mb-4 col-span-3 sm:col-span-1">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="NationalCode">
                 کد ملی
               </label>
-              <input id="NationalCode" name="NationalCode" type="number" value={userProfile.NationalCode || ''} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+              <input id="NationalCode" name="NationalCode" type="number" value={formData.NationalCode || ''} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
             </div>
             <div className="mb-4 col-span-3 sm:col-span-1">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="PhoneNumber">
                 شماره تماس
               </label>
-              <input id="PhoneNumber" name="PhoneNumber" type="number" value={userProfile.PhoneNumber || ''} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+              <input id="PhoneNumber" name="PhoneNumber" type="number" value={formData.PhoneNumber || ''} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
             </div>
             <div className="mb-4 col-span-3 sm:col-span-1">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Email">
                 ایمیل
               </label>
-              <input id="Email" name="Email" type="email" value={userProfile.Email} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+              <input id="Email" name="Email" type="email" value={formData.Email} onChange={handleChange} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
             </div>
             </div>
             <div className="items-end">

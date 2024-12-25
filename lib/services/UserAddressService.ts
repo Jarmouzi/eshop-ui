@@ -1,13 +1,13 @@
 import { json } from "stream/consumers";
 import { UserAddress } from "../types/UserAddress";
-import { GetData, PostData, PutData } from "./service";
+import { GetData, PostData, PostDataModel, PutData } from "./service";
 
 export async function createUserAddress(
   data: UserAddress
 ): Promise<UserAddress> {
-  const res = await PostData<UserAddress>({
+  const res = await PostDataModel<UserAddress>({
     path: "UserAddress/Add",
-    variables: JSON.stringify(data),
+    model: data,
   });
   return res.body; //return reshapeUserAddress(res.body.data.UserAddressCreate.UserAddress);
 }

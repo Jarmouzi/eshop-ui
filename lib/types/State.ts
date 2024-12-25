@@ -1,3 +1,4 @@
-type State =  { 
-	'Title': string | null, 
-} 
+type State = {
+  id: number;
+  title: string;
+};

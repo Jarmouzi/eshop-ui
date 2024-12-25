@@ -13,12 +13,17 @@ export default function SingleSelectDropDown({ list, hasDefault = false, selecte
   
   const [selectedKeys, setSelectedKeys] = React.useState<Set<string>>(new Set([selectedKey]))
 
-  if(hasDefault) list.unshift({Id: "", Title: 'انتخاب نمایید'})
+  if(hasDefault) list.unshift({id: "", title: 'انتخاب نمایید'})
 
-  const selectedValue = React.useMemo(
-    () => Array.from(selectedKeys).join(", ").replace(/_/g, ""),
-    [selectedKeys],
-  );
+  // const selectedValue = React.useMemo(
+  //   () => Array.from(selectedKeys).join(", ").replace(/_/g, ""),
+  //   [selectedKeys],
+  // );
+  const selectedValue = React.useMemo(() => {
+    const key = Array.from(selectedKeys)[0]; 
+    const selectedItem = list.find(item => item.id === key); 
+    return selectedItem ? selectedItem.title : 'انتخاب نمایید'; 
+  }, [selectedKeys, list]);
 
   const handleOnDropdownChange = (keys: SharedSelection) => {
     setSelectedKeys(keys as Set<string>);
@@ -26,9 +31,9 @@ export default function SingleSelectDropDown({ list, hasDefault = false, selecte
   }
 
   return (
-    <Dropdown>
+    <Dropdown  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
       <DropdownTrigger>
-        <Button className="capitalize" variant="bordered">
+        <Button variant="bordered" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
           {selectedValue}
         </Button>
       </DropdownTrigger>
@@ -42,8 +47,8 @@ export default function SingleSelectDropDown({ list, hasDefault = false, selecte
       >
 
         {list && list.map((item, i) => (
-            <DropdownItem key={item.Id}>            
-                {item.Title}
+            <DropdownItem key={item.id} value={item.id}>            
+                {item.title}
             </DropdownItem>
         ))}
 

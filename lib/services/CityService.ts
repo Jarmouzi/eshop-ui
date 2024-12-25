@@ -28,33 +28,26 @@ export function getFilteredCities(
   cities: City[],
   stateId: number | null
 ): SelectItem[] {
-  //if (!cities || cities.length == 0) return [] as SelectItem[];
+  if (!cities || cities.length == 0) return [] as SelectItem[];
 
-  console.log("cities: ", cities);
-  return [{ Id: "1", Title: "تهران" }] as SelectItem[];
-  // if (stateId) {
-  //   return (
-  //     cities &&
-  //     cities
-  //       .filter((city) => city.stateId === stateId)
-  //       .map(
-  //         (city) =>
-  //           ({
-  //             Id: city.id,
-  //             Title: city.title,
-  //           }) as unknown as SelectItem
-  //       )
-  //   );
-  // }
+  //return [{ id: "1", title: "تهران" }] as SelectItem[];
+  if (stateId) {
+    return (
+      cities &&
+      cities
+        .filter((city) => city.stateId === stateId)
+        .map((city) => ({
+          id: city.id.toString(),
+          title: city.title,
+        }))
+    );
+  }
 
-  // return (
-  //   cities &&
-  //   cities.map(
-  //     (city) =>
-  //       ({
-  //         Id: city.id,
-  //         Title: city.title,
-  //       }) as unknown as SelectItem
-  //   )
-  // );
+  return (
+    cities &&
+    cities.map((city) => ({
+      id: city.id.toString(),
+      title: city.title,
+    }))
+  );
 }

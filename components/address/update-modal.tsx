@@ -22,11 +22,11 @@ export default function UpdateAddressModal({ address, states, cities }: { addres
   const openAddress = () => setIsOpen(true);
   const closeAddress = () => setIsOpen(false);
 
-  useEffect(() => {
-      if (!isOpen) {
-        setIsOpen(true);
-      }
-  }, [isOpen]);
+  // useEffect(() => {
+  //     if (!isOpen) {
+  //       setIsOpen(true);
+  //     }
+  // }, [isOpen]);
 
   const handleSubmit = async (formData: UserAddress) => {
       updateUserAddress(formData)

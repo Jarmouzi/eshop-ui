@@ -1,4 +1,4 @@
 export type SelectItem = {
-  Id: string;
-  Title: string;
+  id: string;
+  title: string;
 };

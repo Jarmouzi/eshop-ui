@@ -41,7 +41,7 @@ export async function GetData<T>({
       body = JSON.parse(text);
 
       if (body.errors) {
-        console.log("Get Data Server Error:", body.errors);
+        console.log(` Server Error on GetData from "${path}": ${body.error}`);
       }
 
       return {
@@ -72,6 +72,11 @@ export async function PostData<T>({
   variables?: string;
 }): Promise<{ status: number; body: T } | never> {
   try {
+    console.log(
+      JSON.stringify({
+        ...(variables && { variables }),
+      })
+    );
     const token = (await cookies()).get("currentUser")?.value;
     const result = await fetch(domain + path, {
       method: "POST",
@@ -90,7 +95,7 @@ export async function PostData<T>({
     const body = await result.json();
 
     if (body.errors) {
-      console.log("Get Data Server Error:", body.errors);
+      console.log(`Post Data Server Error for "${path}": ${body.error}`);
     }
 
     return {
@@ -98,7 +103,52 @@ export async function PostData<T>({
       body,
     };
   } catch (e) {
-    console.log("GetData Fetch Error: ", e);
+    console.log(`PostData Fetch Error for "${path}": ${e}`);
+    return {
+      status: 500,
+      body: {} as T,
+    };
+  }
+}
+
+export async function PostDataModel<T>({
+  path = "",
+  //cache = "force-cache",
+  tags,
+  model,
+}: {
+  path?: string;
+  //cache?: RequestCache;
+  tags?: string[];
+  model?: T;
+}): Promise<{ status: number; body: T } | never> {
+  try {
+    console.log(JSON.stringify(model));
+    const token = (await cookies()).get("currentUser")?.value;
+    const result = await fetch(domain + path, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      //credentials: "include" // Include cookies for authorization
+      body: JSON.stringify(model),
+      //cache,
+      ...(tags && { next: { tags } }),
+    });
+
+    const body = await result.json();
+
+    if (body.errors) {
+      console.log(`PostDataModel Error for "${path}": ${body.error}`);
+    }
+
+    return {
+      status: result.status,
+      body,
+    };
+  } catch (e) {
+    console.log(`PostDataModel Fetch Error for "${path}": ${e}`);
     return {
       status: 500,
       body: {} as T,
@@ -118,6 +168,7 @@ export async function PutData<T>({
   model?: T;
 }): Promise<{ status: number; body: T } | never> {
   try {
+    console.log(JSON.stringify(model));
     const token = (await cookies()).get("currentUser")?.value;
     const result = await fetch(domain + path, {
       method: "PUT",
@@ -134,7 +185,7 @@ export async function PutData<T>({
     const body = await result.json();
 
     if (body.errors) {
-      console.log("Update Data Error:", body.errors);
+      console.log(`Update Data Error for "${path}": ${body.error}`);
     }
 
     return {
@@ -142,7 +193,7 @@ export async function PutData<T>({
       body,
     };
   } catch (e) {
-    console.log("Update Fetch Error: ", e);
+    console.log(`Update Fetch Error for "${path}": ${e}`);
     return {
       status: 500,
       body: {} as T,
