@@ -37,39 +37,23 @@ const OpenStreetMap: React.FC<OpenStreetMapProps> = ({ onLocationSelect }) => {
         );
     }, []);
 
-    
-    // Handle dragging of the marker
     const eventHandlers = {
         dragend() {
             const marker = markerRef.current;
             if (marker != null) {
-                setPosition(marker.getLatLng()); // Update position on drag end
+                setPosition(marker.getLatLng()); 
                 onLocationSelect(marker.getLatLng()); 
             }
         },
     };
 
-    // Handle map events to keep the marker centered
     useMapEvents({
         moveend(e) {
-            const map = e.target; // Accessing the Leaflet map instance
-            const center = map.getCenter(); // Get the current center of the map
-            setPosition(center); // Update marker position to map center
+            const map = e.target; 
+            const center = map.getCenter(); 
+            setPosition(center); 
         },
     });
-    
-    // // Handle map click events
-    // const MapClickHandler = () => {
-    //     useMapEvents({
-    //         click(e) {
-    //             e.originalEvent.preventDefault();
-    //             const latlng: LatLng = e.latlng;
-    //             setPosition(e.latlng); 
-    //             onLocationSelect(e.latlng); 
-    //         },
-    //     });
-    //     return null;
-    // };
 
     return (
         <MapContainer center={position} zoom={13} style={{ height: "400px", width: "100%" }}>
@@ -77,10 +61,7 @@ const OpenStreetMap: React.FC<OpenStreetMapProps> = ({ onLocationSelect }) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            {/* <MapClickHandler /> */}
             {position && (
-                // <Marker position={position}  icon={customIcon}>
-                // </Marker>
                 
                 <Marker 
                     position={position} 
@@ -93,5 +74,4 @@ const OpenStreetMap: React.FC<OpenStreetMapProps> = ({ onLocationSelect }) => {
         </MapContainer>
     );
 };
-
 export default OpenStreetMap;

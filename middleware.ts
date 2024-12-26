@@ -12,6 +12,7 @@ const corsOptions = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
 const legacyPrefixes = ["/payment", "/profile"];
+const authPrefixes = ["/login", "/signup"];
 
 export async function middleware(request: NextRequest) {
   const currentUser = (await cookies()).get("currentUser"); // request.cookies.get('currentUser')?.value
@@ -49,6 +50,13 @@ export async function middleware(request: NextRequest) {
     legacyPrefixes.some((prefix) => pathname.startsWith(prefix))
   ) {
     return Response.redirect(new URL("/login", request.url));
+  }
+
+  if (
+    currentUser &&
+    authPrefixes.some((prefix) => pathname.startsWith(prefix))
+  ) {
+    return Response.redirect(new URL("/", request.url));
   }
 
   return response;

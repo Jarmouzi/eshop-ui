@@ -20,9 +20,23 @@ export default function LoginPage() {
     })
  
     if (response.ok) {
-      response
-      router.back()
-      //router.push('/profile')
+      const historyState = window.history.state;
+      
+      // If history state is empty or no previous entry, redirect to home
+      if (!historyState || !historyState.idx || historyState.idx <= 0) {
+        router.push('/'); 
+        return;
+      }
+
+      const previousUrl = document.referrer;
+      // Check if the previous URL is from your domain
+      const isExternal = !previousUrl.includes(window.location.hostname);
+
+      if (isExternal) {
+        router.push('/'); 
+      } else {
+        router.back(); 
+      }
     } else {
       // Handle errors
     }
