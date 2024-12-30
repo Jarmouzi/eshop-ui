@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
+import { isAuthenticated } from "./lib/services/AuthService";
 
 const allowedOrigins = [
   process.env.API_Domain,
@@ -11,12 +12,25 @@ const corsOptions = {
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
-const legacyPrefixes = ["/payment", "/profile"];
+const legacyPrefixes = [
+  "/payment",
+  "/profile",
+  "/address",
+  "/message",
+  "/orders",
+  "/support",
+];
 const authPrefixes = ["/login", "/signup"];
 
 export async function middleware(request: NextRequest) {
-  const currentUser = (await cookies()).get("currentUser"); // request.cookies.get('currentUser')?.value
-
+  let currentUser: string | undefined = (await cookies()).get(
+    "currentUser"
+  )?.value;
+  if (currentUser && !(await isAuthenticated())) {
+    (await cookies()).set("currentUser", "", { expires: new Date(0) });
+    currentUser = undefined;
+    console.log("currentUser expired!");
+  }
   const { pathname } = request.nextUrl;
 
   // Check the origin from the request

@@ -40,7 +40,7 @@ export default function UserDropdown({userProfile} :{userProfile: UserProfile | 
           <DropdownItem key="help">
             راهنما
           </DropdownItem>
-          <DropdownItem key="logout" color="danger">
+          <DropdownItem key="signout" color="danger">
             خروج
           </DropdownItem>
         </DropdownMenu>

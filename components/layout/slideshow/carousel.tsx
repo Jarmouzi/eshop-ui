@@ -7,9 +7,14 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 export default function CarouselComponent({ banners }: { banners: Banner[] }) {
 
     return (
-      <Carousel autoPlay infiniteLoop 
-      transitionTime={1500}
-      showIndicators={false} showThumbs={false}>
+      <Carousel 
+        autoPlay 
+        infiniteLoop 
+        stopOnHover
+        transitionTime={2500}
+        showIndicators={false} 
+        showThumbs={false}
+        interval={10000}>
       {banners.map((item, index) => (
         <div
             key={item.id}

@@ -3,7 +3,7 @@
 import { Checkbox, Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
 import { FormEvent, Fragment, useEffect, useRef, useState } from 'react';
 import { UserAddress } from '@/lib/types/UserAddress';
-import { PencilIcon } from '@heroicons/react/24/outline';
+import { PencilIcon } from '@heroicons/react/24/solid';
 import CloseAddress from './close-address';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
 import { Divider, Dropdown } from '@nextui-org/react';
@@ -30,12 +30,13 @@ export default function UpdateAddressModal({ address, states, cities }: { addres
 
   const handleSubmit = async (formData: UserAddress) => {
       updateUserAddress(formData)
+      closeAddress();
     }
 
   return (
     <>
       <button aria-label="Open address" onClick={openAddress}>
-        <PencilIcon className="h-4 transition-all ease-in-out hover:scale-110"/>
+        <PencilIcon className="h-6 transition-all ease-in-out hover:scale-110 text-primary"/>
       </button>
       <Transition show={isOpen}>
         <Dialog onClose={closeAddress} className="relative z-50">
@@ -59,20 +60,12 @@ export default function UpdateAddressModal({ address, states, cities }: { addres
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <DialogPanel className="flex justify-center h-full w-full">
-              
-              <div className="flex items-center justify-between text-neutral-500">
-                <p className="text-lg font-semibold">ویرایش آدرس</p>
-
-                <button aria-label="Close address" onClick={closeAddress}>
-                  <CloseAddress className='text-neutral-500' />
-                </button>
-              </div>
-              <Card shadow="sm" className="min-h-[70vh] min-w-[70vw]">
-                <CardHeader className="font-semibold">
+            <DialogPanel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col">                         
+              <Card shadow="sm" className="min-h-[70vh] min-w-[70vw] p-1 md:m-14">
+                <CardHeader className="font-semibold pr-1">
                   ویرایش آدرس
-                  <button aria-label="Close address" onClick={closeAddress}>
-                    <CloseAddress className='text-neutral-500' />
+                  <button aria-label="Close address" onClick={closeAddress} className='absolute left-2'>
+                    <CloseAddress />
                   </button>
                 </CardHeader>      
                 <Divider/>
@@ -80,7 +73,6 @@ export default function UpdateAddressModal({ address, states, cities }: { addres
                   <AddressForm address={address} submit={handleSubmit} states={states} cities={cities} />
                 </CardBody>
               </Card>
-
             </DialogPanel>
           </TransitionChild>
         </Dialog>

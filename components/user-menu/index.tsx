@@ -1,8 +1,8 @@
-import { cookies } from 'next/headers';
 import UserDropdown from './user-dropdown';
 import { UserIcon } from '@heroicons/react/24/outline';
 import { getUserProfile } from '@/lib/services/UserProfileService';
 import { Suspense } from 'react';
+import { cookies } from 'next/headers';
 
 export default async function UserMenu() {    
   const currentUser = (await cookies()).get("currentUser")?.value;

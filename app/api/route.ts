@@ -5,7 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({ req });
+  //const session = await getSession({ req });
 
   // Check if the user is authenticated
   // if (!session) {

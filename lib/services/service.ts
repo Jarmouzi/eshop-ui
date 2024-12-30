@@ -1,5 +1,4 @@
 "use server";
-import { SearchParams } from "next/dist/server/request/search-params";
 import { cookies } from "next/headers";
 
 const domain = process.env.API_Domain;
@@ -29,12 +28,12 @@ export async function GetData<T>({
     });
 
     try {
-      if (!result.ok)
+      if (!result.ok) {
         return {
           status: 500,
           body: undefined as T,
         };
-
+      }
       let body;
       const text = await result.text();
 
@@ -72,11 +71,6 @@ export async function PostData<T>({
   variables?: string;
 }): Promise<{ status: number; body: T } | never> {
   try {
-    console.log(
-      JSON.stringify({
-        ...(variables && { variables }),
-      })
-    );
     const token = (await cookies()).get("currentUser")?.value;
     const result = await fetch(domain + path, {
       method: "POST",
@@ -91,7 +85,12 @@ export async function PostData<T>({
       //cache,
       ...(tags && { next: { tags } }),
     });
-
+    if (!result.ok) {
+      return {
+        status: 500,
+        body: undefined as T,
+      };
+    }
     const body = await result.json();
 
     if (body.errors) {
@@ -123,7 +122,6 @@ export async function PostDataModel<T>({
   model?: T;
 }): Promise<{ status: number; body: T } | never> {
   try {
-    console.log(JSON.stringify(model));
     const token = (await cookies()).get("currentUser")?.value;
     const result = await fetch(domain + path, {
       method: "POST",
@@ -136,7 +134,12 @@ export async function PostDataModel<T>({
       //cache,
       ...(tags && { next: { tags } }),
     });
-
+    if (!result.ok) {
+      return {
+        status: 500,
+        body: undefined as T,
+      };
+    }
     const body = await result.json();
 
     if (body.errors) {
@@ -168,7 +171,6 @@ export async function PutData<T>({
   model?: T;
 }): Promise<{ status: number; body: T } | never> {
   try {
-    console.log(JSON.stringify(model));
     const token = (await cookies()).get("currentUser")?.value;
     const result = await fetch(domain + path, {
       method: "PUT",
@@ -181,18 +183,22 @@ export async function PutData<T>({
       //cache,
       ...(tags && { next: { tags } }),
     });
-
+    if (!result.ok) {
+      return {
+        status: 500,
+        body: undefined as T,
+      };
+    }
     const body = await result.json();
-
     if (body.errors) {
       console.log(`Update Data Error for "${path}": ${body.error}`);
     }
-
     return {
       status: result.status,
-      body,
+      body: body,
     };
   } catch (e) {
+    console.log(e);
     console.log(`Update Fetch Error for "${path}": ${e}`);
     return {
       status: 500,
@@ -200,6 +206,8 @@ export async function PutData<T>({
     };
   }
 }
+
+export async function expierCurrentUser() {}
 
 // export async function apiFetch<T>({
 //   cache = 'force-cache',

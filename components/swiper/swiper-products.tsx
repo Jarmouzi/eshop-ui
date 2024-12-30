@@ -32,7 +32,7 @@ export default function SwiperProducts({ products }: {products: SimpleProduct[];
         loop={true}
         speed={1500}
         autoplay={{
-          delay: 3000,
+          delay: 7000,
           disableOnInteraction: false,
           waitForTransition: false,
           reverseDirection: true,

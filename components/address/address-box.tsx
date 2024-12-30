@@ -6,15 +6,18 @@ import { Divider, Radio } from "@nextui-org/react";
 import UpdateAddressModal from "./update-modal";
 import { SelectItem } from "@/lib/types/SelectItem";
 import { City } from "@/lib/types/City";
+import { CheckIcon } from "@heroicons/react/24/outline";
+import { CheckBadgeIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
 
 export default function AddressBox({userAddress, states, cities} :{userAddress: UserAddress, states: SelectItem[], cities: City[]}){
 
     return (         
-        <Card shadow="sm" className="min-h-52">
+        <Card shadow="sm" className="min-h-48 mb-2">
           <CardHeader className="font-semibold">
-            <Radio value={`آدرس ${userAddress.Title}`} ></Radio>
-            <div className="absolute right-0 mr-4">
-                <UpdateAddressModal address={userAddress} states={states} cities={cities}/>
+            { userAddress.isDefault ? <CheckCircleIcon className="h-8 right-2 pl-4 text-teal-500" /> : null }
+            <h3> {`آدرس ${userAddress.title ? userAddress.title : ""}`}  </h3>
+            <div className="absolute left-2 ml-4">
+                <UpdateAddressModal address={userAddress} states={states} cities={cities} />
                 {/* <form onSubmit={handleSubmit}>
                     <button type="submit" >
                         <PencilIcon />
@@ -23,21 +26,27 @@ export default function AddressBox({userAddress, states, cities} :{userAddress: 
             </div>
           </CardHeader>      
           <Divider/>
-          <CardBody>
-            <h3> {userAddress.Address} </h3>
-            <br/>
-            {userAddress.Number ? (<><h3>پلاک: </h3> <h4>{userAddress.Number}</h4></>) : null}
-            {userAddress.Unit ? (<><h3>واحد: </h3> <h4>{userAddress.Unit}</h4></>) : null}
-            <h3>کد پستی: </h3> <h4>{userAddress.PostalCode}</h4>
-            {userAddress.ReceiverName == null ? (
-                <h3>گیرنده خودم هستم</h3>
+          <CardBody className="text-right leading-9">
+            <p> 
+                {userAddress.stateId ? (<b> {states.filter((state) => Number(state.id) === userAddress.stateId).map((state) => (state.title))}, </b>) : null} 
+                {userAddress.cityId ? (<b> {cities.filter((city) => Number(city.id) === userAddress.cityId).map((city) => (city.title))}, </b>) : null} 
+                {userAddress.address} 
+            </p>      
+            <p>     
+                {userAddress.number ? (<span className="pl-4"><b>پلاک: </b>{userAddress.number}</span>) : null}
+                {userAddress.unit ? (<span className="pl-4"><b>واحد: </b>{userAddress.unit}</span>) : null}
+                <span><b>کد پستی: </b>{userAddress.postalCode}</span>
+            </p> 
+            {userAddress.receiverName == null ? (
+                <p><b>گیرنده خودم هستم</b></p>
             ): 
             (
-                <>
-                    <h3>نام و نام خانوادگی گیرنده: </h3> <h4>{userAddress.ReceiverName}</h4>
-                    <h3>شماره تماس گیرنده: </h3> <h4>{userAddress.ReceiverPhoneNumber}</h4>
-                </>
+                <p>
+                    <span className="pl-4"><b> نام و نام خانوادگی گیرنده: </b> {userAddress.receiverName} </span> 
+                    <span><b> شماره تماس گیرنده: </b> {userAddress.receiverPhoneNumber} </span>
+                </p>
             )}
+
           </CardBody>
         </Card>
     );

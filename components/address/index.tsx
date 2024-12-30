@@ -13,7 +13,7 @@ export default function Address({userAddresses, states, cities} :{userAddresses:
   return (     
     <Card shadow="sm" className="min-h-[70vh]">
       <CardHeader className="font-semibold">
-        آدرس ها ی شما
+        آدرس های شما
       </CardHeader>    
       <Divider/>
       <CardBody>
