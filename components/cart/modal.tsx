@@ -7,7 +7,7 @@ import { DEFAULT_OPTION } from '@/lib/constants';
 import { createUrl } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment, useState } from 'react';
 import CloseCart from './close-cart';
 import { DeleteItemButton } from './delete-item-button';
 import { EditItemQuantityButton } from './edit-item-quantity-button';
@@ -20,22 +20,22 @@ type ProductVariantSearchParams = {
 
 export default function CartModal({ cart }: { cart: Cart | undefined }) {
   const [isOpen, setIsOpen] = useState(false);
-  const quantityRef = useRef(cart?.Quantity);
+  //const quantityRef = useRef(cart?.Quantity);
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
 
-  useEffect(() => {
-    // Open cart modal when quantity changes.
-    if (cart?.Quantity !== quantityRef.current) {
-      // But only if it's not already open (quantity also changes when editing items in cart).
-      if (!isOpen) {
-        setIsOpen(true);
-      }
+  // useEffect(() => {
+  //   // Open cart modal when quantity changes.
+  //   if (cart?.Quantity !== quantityRef.current) {
+  //     // But only if it's not already open (quantity also changes when editing items in cart).
+  //     if (!isOpen) {
+  //       setIsOpen(true);
+  //     }
 
-      // Always update the quantity reference
-      quantityRef.current = cart?.Quantity;
-    }
-  }, [cart?.Quantity, isOpen]);
+  //     // Always update the quantity reference
+  //     quantityRef.current = cart?.Quantity;
+  //   }
+  // }, [cart?.Quantity, isOpen]);
 
   return (
     <>

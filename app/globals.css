@@ -25,11 +25,11 @@
     url("../font/Vazir-Bold.ttf") format("truetype");
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
 
 :root {
   --swiper-navigation-color: #b01116;

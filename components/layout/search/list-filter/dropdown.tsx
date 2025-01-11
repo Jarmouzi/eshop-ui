@@ -1,31 +1,29 @@
 'use client';
 
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
-import { FilterItem } from '@/lib/types/Filter';
 import { PathFilterItem } from './item';
-import { createUrl } from '@/lib/utils';
-
+import { Menu } from '@/lib/types/Menu';
 
 export default function FilterItemDropdown({ list, sk }: { list: Menu[], sk: string, }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [active, setActive] = useState('');
   const [openSelect, setOpenSelect] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  //const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setOpenSelect(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (ref.current && !ref.current.contains(event.target as Node)) {
+  //       setOpenSelect(false);
+  //     }
+  //   };
 
-    window.addEventListener('click', handleClickOutside);
-    return () => window.removeEventListener('click', handleClickOutside);
-  }, []);
+  //   window.addEventListener('click', handleClickOutside);
+  //   return () => window.removeEventListener('click', handleClickOutside);
+  // }, []);
 
   useEffect(() => {
     list.forEach((listItem: Menu) => {
@@ -37,7 +35,7 @@ export default function FilterItemDropdown({ list, sk }: { list: Menu[], sk: str
 
   return (
     <Suspense>
-      <div className="relative" ref={ref}>
+      <div className="relative"> {/* ref={ref}> */}
         <div
           onClick={() => {
             setOpenSelect(!openSelect);

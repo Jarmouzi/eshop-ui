@@ -44,13 +44,13 @@ export default function LoginPage() {
  
   return (
     <>
-    <div className='flex justify-center items-center h-screen w-screen '>
+    <div className='flex justify-center items-center h-screen w-screen'>
       <div className="w-full max-w-xs">
         <div className="flex justify-center mb-3">
           <LogoSquare />
           <label className="block text-red-700 text-xl font-bold pr-2 mt-2">انار چین</label>
         </div>
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+        <form className="bg-white dark:bg-black shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
             نام کاربری 

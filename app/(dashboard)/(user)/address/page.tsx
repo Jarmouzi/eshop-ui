@@ -1,10 +1,8 @@
 'use server'
-import { FormEvent, Suspense } from "react";
+import { Suspense } from "react";
 import { Metadata } from "next";
-import { Card, CardBody, CardHeader } from "@nextui-org/card";
-import { Divider } from "@nextui-org/react";
 import Address from "@/components/address/index";
-import { getUserAddress, getUserAddresses } from "@/lib/services/UserAddressService";
+import { getUserAddresses } from "@/lib/services/UserAddressService";
 import { getAllStates } from "@/lib/services/StateService";
 import { getAllCities } from "@/lib/services/CityService";
 //import { useRouter } from "next/navigation";

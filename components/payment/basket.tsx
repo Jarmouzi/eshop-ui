@@ -1,10 +1,9 @@
 'use client';
-
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import Price from '@/components/price';
 import { DEFAULT_OPTION } from '@/lib/constants';
 import { createUrl } from '@/lib/utils';
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { DeleteItemButton } from '../cart/delete-item-button';
 import { EditItemQuantityButton } from '../cart/edit-item-quantity-button';
 import { Cart } from '@/lib/types/Cart';
@@ -17,11 +16,11 @@ type ProductVariantSearchParams = {
 
 export default function PaymentBasket({ cart }: { cart: Cart | undefined }) {
 
-  const quantityRef = useRef(cart?.Quantity);
+  const [quantity, setQuantity] = useState(cart?.Quantity);
 
   useEffect(() => {
-    if (cart?.Quantity !== quantityRef.current) {
-      quantityRef.current = cart?.Quantity;
+    if (cart?.Quantity !== quantity) {
+      setQuantity(cart?.Quantity);
     }
   }, [cart?.Quantity]);
 

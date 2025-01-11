@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, SharedSelection} from "@nextui-org/react";
 import { SelectItem } from "@/lib/types/SelectItem";
 
@@ -11,7 +11,7 @@ interface SingleSelectDropDownProps {
 
 export default function SingleSelectDropDown({ list, hasDefault = false, selectedKey = "", onSelectionChange }: SingleSelectDropDownProps) {
   
-  const [selectedKeys, setSelectedKeys] = React.useState<Set<string>>(new Set([selectedKey]))
+  const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set([selectedKey]))
 
   if(hasDefault) list.unshift({id: "", title: 'انتخاب نمایید'})
 

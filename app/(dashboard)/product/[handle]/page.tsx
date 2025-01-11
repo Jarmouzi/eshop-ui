@@ -1,17 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
-
 import { GridTileImage } from '@/components/grid/tile';
 import { Gallery } from '@/components/product/gallery';
 import { ProductDescription } from '@/components/product/product-description';
-import { HIDDEN_PRODUCT_TAG } from '@/lib/constants';
 import Link from 'next/link';
-import { getProduct, getProductHandles, getProductRecommendations } from '@/lib/services/ProductService';
+import { getProduct, getProductRecommendations } from '@/lib/services/ProductService';
 import { Image } from '@/lib/types/Product';
-import { Card, CardBody, Tab, Tabs } from '@nextui-org/react';
 import FeatureList from '@/components/list/feature-list';
-import Prose from '@/components/prose';
 import TabInfo from '@/components/tab/tab-info';
 import { TabData } from "@/lib/types/TabData";
 

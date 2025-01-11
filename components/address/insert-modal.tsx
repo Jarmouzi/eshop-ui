@@ -1,7 +1,7 @@
 'use client';
 
-import { Checkbox, Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
-import { FormEvent, Fragment, useEffect, useRef, useState } from 'react';
+import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
+import { Fragment, useState } from 'react';
 import { UserAddress } from '@/lib/types/UserAddress';
 import { PencilIcon, PlusIcon } from '@heroicons/react/24/outline';
 import CloseAddress from './close-address';

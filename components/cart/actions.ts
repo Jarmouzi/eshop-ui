@@ -20,12 +20,10 @@ export async function addItem(
   let cartId = (await cookies()).get("cartId")?.value;
   let cart;
 
-  //if (cartId) {
   cart = await getCart(cartId);
-  //}
+  console.log("cart in actions: ", cart);
 
   if (!cart) {
-    //!cartId ||
     cart = await createCart();
   }
   cartId = cart?.Id;

@@ -1,5 +1,5 @@
 import { Checkbox } from "@nextui-org/checkbox";
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { UserAddress } from '@/lib/types/UserAddress';
 import SingleSelectDropDown from '../dropdown/singleSelectDropDown';
 import { getFilteredCities } from '@/lib/services/CityService';
@@ -58,8 +58,7 @@ export default function AddressForm({ address, submit, states, cities }: { addre
         formData['receiverName'] = null;        
         formData['receiverPhoneNumber'] = null;
       }
-      useEffect(() => { submit(formData); }, []);
-      
+      submit(formData);      
     }
 
   return (

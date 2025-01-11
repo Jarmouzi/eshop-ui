@@ -1,12 +1,12 @@
 'use client';
 
-import { Checkbox, Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
-import { FormEvent, Fragment, useEffect, useRef, useState } from 'react';
+import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
+import { Fragment, useState } from 'react';
 import { UserAddress } from '@/lib/types/UserAddress';
 import { PencilIcon } from '@heroicons/react/24/solid';
 import CloseAddress from './close-address';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
-import { Divider, Dropdown } from '@nextui-org/react';
+import { Divider } from '@nextui-org/react';
 import { updateUserAddress } from '@/lib/services/UserAddressService';
 import AddressForm from './form';
 import { SelectItem } from '@/lib/types/SelectItem';

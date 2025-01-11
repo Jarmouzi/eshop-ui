@@ -1,7 +1,6 @@
 'use server'
 import { Suspense } from "react";
 import { Metadata } from "next";
-import ProfileTabs from "@/components/profile/profile-tabs";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import Image from "next/image";
 import Link from "next/link";

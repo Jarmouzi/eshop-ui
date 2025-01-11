@@ -41,12 +41,12 @@ export default function CartAmount({ cart }: { cart: Cart | undefined }) {
           amount={cart? cart.TotalAmount : 0}
           />
       </div>
-      <a
+      {/* <a
       href={cart? cart.CheckoutUrl : ''}
       className="block w-full rounded-full bg-primary p-3 mt-5 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
       >
       تایید و ادامه
-      </a>
+      </a> */}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { SortFilterItem } from '@/lib/constants';
@@ -12,18 +12,18 @@ export default function FilterItemDropdown({ list }: { list: SortFilterItem[] })
   const searchParams = useSearchParams();
   const [active, setActive] = useState('');
   const [openSelect, setOpenSelect] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  //const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setOpenSelect(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (ref.current && !ref.current.contains(event.target as Node)) {
+  //       setOpenSelect(false);
+  //     }
+  //   };
 
-    window.addEventListener('click', handleClickOutside);
-    return () => window.removeEventListener('click', handleClickOutside);
-  }, []);
+  //   window.addEventListener('click', handleClickOutside);
+  //   return () => window.removeEventListener('click', handleClickOutside);
+  // }, []);
 
   useEffect(() => {
     list.forEach((listItem: SortFilterItem) => {
@@ -38,7 +38,7 @@ export default function FilterItemDropdown({ list }: { list: SortFilterItem[] })
 
   return (
     <Suspense>
-      <div className="relative" ref={ref}>
+      <div className="relative"> {/* ref={ref}> */}
         <div
           onClick={() => {
             setOpenSelect(!openSelect);

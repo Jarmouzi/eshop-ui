@@ -1,6 +1,6 @@
 import { GridTileImage } from '@/components/grid/tile';
 import { getCollectionProducts } from '@/lib/services/ProductService';
-import type { Product, SimpleProduct } from '@/lib/types/Product';
+import type { SimpleProduct } from '@/lib/types/Product';
 import Link from 'next/link';
 
 function ThreeItemGridItem({

@@ -1,10 +1,8 @@
 'use server'
 import { FormEvent, Suspense } from "react";
 import { Metadata } from "next";
-import ProfileTabs from "@/components/profile/profile-tabs";
-import { Card, CardBody, CardHeader } from "@nextui-org/card";
-import { Divider } from "@nextui-org/react";
 import Profile from "@/components/profile";
+import { Card, CardBody } from "@nextui-org/card";
 //import { useRouter } from "next/navigation";
 
 //export const runtime = 'edge';
@@ -31,8 +29,12 @@ export async function generateMetadata({
 export default async function ProfilePage() {
 
   return (
-    <Suspense>            
-      <Profile />
+    <Suspense>               
+      <Card shadow="none">
+        <CardBody>
+          بخش پشتیبانی
+        </CardBody>
+      </Card>
      </Suspense>
   );
 }

@@ -1,5 +1,6 @@
 import { ReactNode, Suspense } from 'react';
 import './globals.css';
+import { Providers } from './providers';
 
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
@@ -26,10 +27,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
       </head>
       <body className="bg-neutral-50 text-black selection:bg-primary dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
-        
+        <Providers>
         {/* <Suspense> */}
           <main>{children}</main>
-        {/* </Suspense> */}                                                                                         
+        {/* </Suspense> */} 
+        </Providers>                                                                                        
       </body>
     </html>
   );
