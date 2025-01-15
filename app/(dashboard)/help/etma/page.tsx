@@ -1,4 +1,3 @@
-'use server'
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { Card, CardBody } from "@nextui-org/card";
@@ -8,11 +7,7 @@ import { Card, CardBody } from "@nextui-org/card";
 
 //export const revalidate = 60; // 12 hours in seconds
 
-export async function generateMetadata({
-  params
-}: {
-  params: { page: string };
-}): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: 'سوابق خرید',

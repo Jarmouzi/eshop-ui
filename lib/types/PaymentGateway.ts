@@ -1,6 +1,7 @@
 export type PaymentGateway = {
-  Title: string | null;
-  Description: string | null;
-  Url: string | null;
-  IsPublic: boolean | null;
+  id: number;
+  title: string | null;
+  description: string | null;
+  url: string | null;
+  isPublic: boolean | null;
 };

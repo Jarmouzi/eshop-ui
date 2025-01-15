@@ -1,8 +1,6 @@
 import Collections from '@/components/layout/search/collections';
 import SortFilter from '@/components/layout/search/sort-filter';
-import FilterList from '@/components/layout/search/sort-filter';
 import { sorting } from '@/lib/constants';
-import { Suspense } from 'react';
 
 export default function SearchLayout({ children }: { children: React.ReactNode }) {
   return (

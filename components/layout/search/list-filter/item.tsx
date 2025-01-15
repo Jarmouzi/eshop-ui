@@ -5,6 +5,7 @@ import { createUrl } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
+import { Menu } from '@/lib/types/Menu';
 
 export function PathFilterItem({ item, sk }: { item: Menu, sk: string }) {
 

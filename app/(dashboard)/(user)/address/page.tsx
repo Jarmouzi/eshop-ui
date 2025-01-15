@@ -11,11 +11,7 @@ import { getAllCities } from "@/lib/services/CityService";
 
 //export const revalidate = 60; // 12 hours in seconds
 
-export async function generateMetadata({
-  params
-}: {
-  params: { page: string };
-}): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: 'آدرس های کاربر',

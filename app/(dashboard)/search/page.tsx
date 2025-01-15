@@ -2,12 +2,12 @@ import Grid from '@/components/grid';
 import ProductGridItems from '@/components/layout/product-grid-items';
 import { defaultSort, sorting } from '@/lib/constants';
 import { getProducts } from '@/lib/services/ProductService';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 
 export const runtime = 'edge';
 
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 export const metadata = {
   title: '[جستجو]',
   description: 'جستجوی محصولات در فروشگاه '
@@ -16,9 +16,9 @@ export const metadata = {
 export default async function SearchPage({
   searchParams
 }: {
-  searchParams?: { [key: string]: string | string[] | undefined };
+  searchParams?: SearchParams
 }) {
-  const { sort, q: searchValue } = searchParams as { [key: string]: string };
+  const { sort, q: searchValue } = await searchParams as { [key: string]: string };
   const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
 
   //const products = await getProducts(`{"k": "${searchValue}", "sk": "${sortKey}", "r": "${reverse}"}`);

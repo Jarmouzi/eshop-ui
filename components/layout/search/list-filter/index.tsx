@@ -1,8 +1,7 @@
 import FilterItemDropdown from './dropdown';
-import { BarsArrowDownIcon } from '@heroicons/react/16/solid';
 import { PathFilterItem } from './item';
-import { FilterItem } from '@/lib/types/Filter';
 import { Suspense } from 'react';
+import { Menu } from '@/lib/types/Menu';
 
 function FilterItemList({ list, sk }: { list: Menu[], sk: string }) {
   return (

@@ -1,6 +1,5 @@
 import { UserIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import { cookies } from 'next/headers';
 
 export default function OpenUser({
   className,

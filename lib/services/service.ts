@@ -2,7 +2,6 @@
 import { cookies } from "next/headers";
 
 const domain = process.env.API_Domain;
-
 export async function GetData<T>({
   path = "",
   cache = "force-cache", //'no-store',
@@ -11,7 +10,59 @@ export async function GetData<T>({
   path?: string;
   cache?: RequestCache;
   tags?: string[];
-  variables?: T;
+}): Promise<{ status: number; body: T } | never> {
+  try {
+    const result = await fetch(domain + path, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //'Accept': 'application/json'
+      },
+      //credentials: "include" // Include cookies for authorization
+      cache,
+      ...(tags && { next: { tags } }),
+    });
+
+    try {
+      if (!result.ok) {
+        return {
+          status: 500,
+          body: undefined as T,
+        };
+      }
+      let body;
+      const text = await result.text();
+
+      body = JSON.parse(text);
+
+      if (body.errors) {
+        console.log(` Server Error on GetData from "${path}": ${body.error}`);
+      }
+
+      return {
+        status: result.status,
+        body,
+      };
+    } catch (error) {
+      console.error(`JSON Parse Error on GetData from "${path}": `, error);
+    }
+  } catch (e) {
+    console.log(`an error acourd on GetData from "${path}": `, e);
+  }
+  return {
+    status: 500,
+    body: undefined as T,
+  };
+}
+
+export async function AuthGetData<T>({
+  path = "",
+  cache = "force-cache", //'no-store',
+  tags,
+}: {
+  path?: string;
+  cache?: RequestCache;
+  tags?: string[];
 }): Promise<{ status: number; body: T } | never> {
   try {
     const token = (await cookies()).get("currentUser")?.value;

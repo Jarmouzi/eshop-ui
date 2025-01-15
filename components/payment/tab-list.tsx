@@ -5,9 +5,17 @@ import PaymentBasket from "@/components/payment/basket";
 import {Tabs, Tab} from "@nextui-org/react";
 import { UserAddress } from "@/lib/types/UserAddress";
 import { Cart } from "@/lib/types/Cart";
+import AddressList from "../address/address-list";
+import { SelectItem } from "@/lib/types/SelectItem";
+import { City } from "@/lib/types/City";
+import { PaymentGateway } from "@/lib/types/PaymentGateway";
+import GatewayList from "./gateway-list";
 
-export default function PaymentTablist({cart, addresses}:{cart: Cart | undefined; addresses: UserAddress[];}) {
+export default function PaymentTablist({cart, addresses, states, cities, gateways}:{cart: Cart | undefined, addresses: UserAddress[], states: SelectItem[], cities: City[], gateways: PaymentGateway[]}) {
 
+  const handleGatewayChange = (value: string) => {
+    //setFormData({ ...formData, cityId: Number(key) }); 
+  } 
   return (
     <Tabs 
     aria-label="Options" 
@@ -37,7 +45,7 @@ export default function PaymentTablist({cart, addresses}:{cart: Cart | undefined
               <MapPinIcon className='h-6' />   
             </div>} >            
           <div className="flex rounded-lg border border-neutral-200 bg-white p-2 dark:border-neutral-800 dark:bg-black md:p-12">
-            <p>نحوه پرداخت</p>
+            <AddressList addresses={addresses} states={states} cities={cities}/>
           </div>  
       </Tab>
       }
@@ -47,7 +55,7 @@ export default function PaymentTablist({cart, addresses}:{cart: Cart | undefined
             <BanknotesIcon className='h-6' />
           </div>} >            
         <div className="flex rounded-lg border border-neutral-200 bg-white p-2 dark:border-neutral-800 dark:bg-black md:p-12">
-          <p>نحوه پرداخت</p>
+           <GatewayList gateways={gateways} onValueChange={handleGatewayChange} />
         </div>  
       </Tab>
     </Tabs>

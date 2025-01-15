@@ -54,7 +54,12 @@ export async function isAuthenticated() {
     }
   );
   if (response.ok) {
-    return await response.json();
+    const result = await response.json();
+
+    if (!result)
+      (await cookies()).set("currentUser", "", { expires: new Date(0) });
+
+    return result;
   } else {
     return null;
   }

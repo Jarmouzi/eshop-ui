@@ -23,21 +23,10 @@ const legacyPrefixes = [
 const authPrefixes = ["/login", "/signup"];
 
 export async function middleware(request: NextRequest) {
-  let currentUser: string | undefined = (await cookies()).get(
-    "currentUser"
-  )?.value;
-  if (currentUser && !(await isAuthenticated())) {
-    (await cookies()).set("currentUser", "", { expires: new Date(0) });
-    currentUser = undefined;
-    console.log("currentUser expired!");
-  }
   const { pathname } = request.nextUrl;
-
-  // Check the origin from the request
   const origin = request.headers.get("origin") ?? "";
   const isAllowedOrigin = allowedOrigins.includes(origin);
 
-  // Handle preflighted requests
   const isPreflight = request.method === "OPTIONS";
 
   if (isPreflight) {
@@ -59,18 +48,14 @@ export async function middleware(request: NextRequest) {
     response.headers.set(key, value);
   });
 
-  if (
-    !currentUser &&
-    legacyPrefixes.some((prefix) => pathname.startsWith(prefix))
-  ) {
-    return Response.redirect(new URL("/login", request.url));
+  if (legacyPrefixes.some((prefix) => pathname.startsWith(prefix))) {
+    if (!(await isAuthenticated()))
+      return Response.redirect(new URL("/login", request.url));
   }
 
-  if (
-    currentUser &&
-    authPrefixes.some((prefix) => pathname.startsWith(prefix))
-  ) {
-    return Response.redirect(new URL("/", request.url));
+  if (authPrefixes.some((prefix) => pathname.startsWith(prefix))) {
+    if (await isAuthenticated())
+      return Response.redirect(new URL("/", request.url));
   }
 
   return response;

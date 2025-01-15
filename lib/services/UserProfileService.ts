@@ -1,8 +1,8 @@
 import { UserProfile } from "../types/UserProfile";
-import { GetData, PutData } from "./service";
+import { AuthGetData, PutData } from "./service";
 
 export async function createUserProfile(): Promise<UserProfile> {
-  const res = await GetData<UserProfile>({
+  const res = await AuthGetData<UserProfile>({
     path: "UserProfile/Add",
     cache: "no-store",
   });
@@ -14,7 +14,7 @@ export async function addToUserProfile(
   productVariantId: string,
   quantity: number
 ): Promise<UserProfile> {
-  const res = await GetData<UserProfile>({
+  const res = await AuthGetData<UserProfile>({
     path: `UserProfile/AddToUserProfile?json=${JSON.stringify({ id: UserProfileId, pv: productVariantId, q: quantity })}`,
     cache: "no-store",
   });
@@ -26,7 +26,7 @@ export async function removeFromUserProfile(
   UserProfileId: string,
   cardItemId: number
 ): Promise<UserProfile> {
-  const res = await GetData<UserProfile>({
+  const res = await AuthGetData<UserProfile>({
     path: `UserProfile/RemoveFromUserProfile?json=${JSON.stringify({ id: UserProfileId, ci: cardItemId })}`,
     cache: "no-store",
   });
@@ -46,7 +46,7 @@ export async function updateUserProfile(
 }
 
 export async function getUserProfile(): Promise<UserProfile> {
-  const res = await GetData<UserProfile>({
+  const res = await AuthGetData<UserProfile>({
     path: `UserProfile/Get`,
   });
 

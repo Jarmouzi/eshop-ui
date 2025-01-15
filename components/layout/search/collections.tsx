@@ -1,10 +1,9 @@
-import clsx from 'clsx';
+'use client'
 import { Suspense } from 'react';
 
 import FilterList from './list-filter';
 import { getCollections } from '@/lib/services/CategoryService';
 import { PriceFilter } from './price-filter';
-//import SwitchFilter from './switch-filter';
 import CheckboxFilter from './checkbox-filter';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
 import { Divider } from '@nextui-org/react';
@@ -14,9 +13,9 @@ async function CollectionList() {
   return <FilterList list={collections} title="گروه محصولات" sk="c"/>;
 }
 
-const skeleton = 'mb-3 h-4 w-5/6 animate-pulse rounded';
-const activeAndTitles = 'bg-neutral-800 dark:bg-neutral-300';
-const items = 'bg-neutral-400 dark:bg-neutral-700';
+// const skeleton = 'mb-3 h-4 w-5/6 animate-pulse rounded';
+// const activeAndTitles = 'bg-neutral-800 dark:bg-neutral-300';
+// const items = 'bg-neutral-400 dark:bg-neutral-700';
 
 export default function Collections() {
   return (

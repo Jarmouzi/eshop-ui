@@ -22,7 +22,7 @@ export default function PaymentBasket({ cart }: { cart: Cart | undefined }) {
     if (cart?.Quantity !== quantity) {
       setQuantity(cart?.Quantity);
     }
-  }, [cart?.Quantity]);
+  }, [cart?.Quantity, quantity]);
 
   return (
     <div className="">

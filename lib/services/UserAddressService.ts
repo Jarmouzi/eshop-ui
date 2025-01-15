@@ -1,6 +1,6 @@
 import { json } from "stream/consumers";
 import { UserAddress } from "../types/UserAddress";
-import { GetData, PostData, PostDataModel, PutData } from "./service";
+import { AuthGetData, PostData, PostDataModel, PutData } from "./service";
 
 export async function createUserAddress(
   data: UserAddress
@@ -27,7 +27,7 @@ export async function deleteUserAddress(
   UserAddressId: string,
   cardItemId: number
 ): Promise<UserAddress> {
-  const res = await GetData<UserAddress>({
+  const res = await AuthGetData<UserAddress>({
     path: `UserAddress/Delete?json=${JSON.stringify({ id: UserAddressId, ci: cardItemId })}`,
     cache: "no-store",
   });
@@ -36,14 +36,14 @@ export async function deleteUserAddress(
 }
 
 export async function getUserAddress(id: string): Promise<UserAddress> {
-  const res = await GetData<UserAddress>({
+  const res = await AuthGetData<UserAddress>({
     path: "UserAddress/Get?" + id,
   });
 
   return res.body;
 }
 export async function getUserAddresses(): Promise<UserAddress[]> {
-  const res = await GetData<UserAddress[]>({
+  const res = await AuthGetData<UserAddress[]>({
     path: "UserAddress/GetAll",
   });
 

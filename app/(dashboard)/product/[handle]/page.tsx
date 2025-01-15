@@ -12,12 +12,9 @@ import TabInfo from '@/components/tab/tab-info';
 import { TabData } from "@/lib/types/TabData";
 
 //export const runtime = 'edge';
+type Params = Promise<{ handle: string; }>
 
-export async function generateMetadata({
-  params
-}: {
-  params: { handle: string };
-}): Promise<Metadata> {
+export async function generateMetadata({params}: {params: Params}): Promise<Metadata> {
   const { handle } = await params; 
   const product = await getProduct(handle);
 
@@ -55,7 +52,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProductPage({ params }: { params: { handle: string } }) {
+export default async function ProductPage({ params }: { params: Params }) {
   const { handle } = await params; 
   const product = await getProduct(handle);
 

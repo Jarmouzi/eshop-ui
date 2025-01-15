@@ -11,7 +11,7 @@ import { getCollectionProducts } from '@/lib/services/ProductService';
 import { SimpleProduct } from '@/lib/types/Product';
 import { Suspense } from 'react';
 
-export const runtime = 'edge';
+//export const runtime = 'edge';
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
 
 export const metadata = {
@@ -65,3 +65,5 @@ export default async function HomePage() {
     </>
   );
 }
+
+

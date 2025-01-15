@@ -34,7 +34,7 @@ export default function InsertAddressModal({states, cities} :{states: SelectItem
 
   return (
     <>
-      <button aria-label="Open address" onClick={openAddress}>
+      <button aria-label="Open address" onClick={openAddress} className='w-full'>
       <Card shadow="sm">
         <CardBody className='text-right py-5 min-h-24'>
           <div className="absolute right-0 mr-4">

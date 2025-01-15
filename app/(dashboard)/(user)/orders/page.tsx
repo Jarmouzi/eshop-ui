@@ -9,11 +9,7 @@ import { Divider } from "@nextui-org/react";
 
 //export const revalidate = 60; // 12 hours in seconds
 
-export async function generateMetadata({
-  params
-}: {
-  params: { page: string };
-}): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: 'سوابق خرید',
@@ -27,7 +23,6 @@ export async function generateMetadata({
 }
 
 export default async function ordersPage() {
-
 
   return (
     <Suspense>            

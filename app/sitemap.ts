@@ -1,6 +1,5 @@
-//import { getCollections, getPages, getProducts } from "@/lib/shopify";
 import { getCollections } from "@/lib/services/CategoryService";
-import { getProducts } from "@/lib/services/ProductService";
+import { getAllProducts } from "@/lib/services/ProductService";
 import { MetadataRoute } from "next";
 
 type Route = {
@@ -25,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
-  const productsPromise = getProducts("").then((products) =>
+  const productsPromise = getAllProducts().then((products) =>
     products.map((product) => ({
       url: `${baseUrl}/product/${product.Id}`,
       lastModified: new Date().toISOString(), //product.updatedAt,
