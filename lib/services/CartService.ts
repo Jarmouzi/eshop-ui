@@ -1,8 +1,8 @@
 import { Cart } from "../types/Cart";
-import { GetData, PostData } from "./service";
+import { AuthGetData } from "./service";
 
 export async function createCart(): Promise<Cart> {
-  const res = await GetData<Cart>({
+  const res = await AuthGetData<Cart>({
     path: "Cart/Add",
     cache: "no-store",
   });
@@ -14,7 +14,7 @@ export async function addToCart(
   productVariantId: string,
   quantity: number
 ): Promise<Cart> {
-  const res = await GetData<Cart>({
+  const res = await AuthGetData<Cart>({
     path: `Cart/AddToCart?json=${JSON.stringify({ id: cartId, pv: productVariantId, q: quantity })}`,
     cache: "no-store",
   });
@@ -26,7 +26,7 @@ export async function removeFromCart(
   cartId: string,
   cardItemId: number
 ): Promise<Cart> {
-  const res = await GetData<Cart>({
+  const res = await AuthGetData<Cart>({
     path: `Cart/RemoveFromCart?json=${JSON.stringify({ id: cartId, ci: cardItemId })}`,
     cache: "no-store",
   });
@@ -39,7 +39,7 @@ export async function updateCart(
   productVariantId: number,
   quantity: number
 ): Promise<Cart> {
-  const res = await GetData<Cart>({
+  const res = await AuthGetData<Cart>({
     path: `Cart/Update?json=${JSON.stringify({ id: cartId, pv: productVariantId, q: quantity })}`,
     cache: "no-store",
   });
@@ -50,7 +50,7 @@ export async function updateCart(
 export async function getCart(
   cartId: string | undefined
 ): Promise<Cart | undefined> {
-  const res = await GetData<Cart>({
+  const res = await AuthGetData<Cart>({
     path: `Cart/Get?id=${cartId}`,
     cache: "no-store",
   });

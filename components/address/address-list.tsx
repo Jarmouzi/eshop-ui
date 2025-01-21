@@ -3,17 +3,26 @@ import InsertAddressModal from "./insert-modal";
 import { UserAddress } from "@/lib/types/UserAddress";
 import { SelectItem } from "@/lib/types/SelectItem";
 import { City } from "@/lib/types/City";
+import { useState } from "react";
 
 
-export default function AddressList({addresses, states, cities} :{addresses: UserAddress[], states: SelectItem[], cities: City[]}) {
+export default function AddressList({addressId, addresses, states, cities, onValueChange} :{addressId: number | null, addresses: UserAddress[], states: SelectItem[], cities: City[], onValueChange: (value: string) => void}) {
 
+    const [selectedValue, setSelectedValue] = useState('')
+
+    const handleValueChange = (value: string) => {
+        setSelectedValue(value);
+        onValueChange(value);
+    }
   return (
     <div className="w-full ">
-      <RadioGroup label="انتخاب محل دریافت:" className="w-fullt mb-1">
+      <RadioGroup label="انتخاب محل دریافت:" className="w-fullt mb-1" 
+        onChange={(e) => handleValueChange(e.target.value)}>
         {addresses && addresses.map((address, i) => (
           // <Card shadow="sm" key={i} className="overflow-hidden">
           //   <CardBody className='text-right py-5 min-h-24 overflow-hidden'>
               <Radio description={address.address} value={address.id.toString()} key={address.id}
+              checked={addressId? address.id == addressId: address.isDefault}
               classNames={{
                 base: cn(
                   "inline-flex m-1 hover:bg-stone-100",
@@ -29,7 +38,7 @@ export default function AddressList({addresses, states, cities} :{addresses: Use
           // </Card> 
         ))}
       </RadioGroup>
-      <InsertAddressModal states={states} cities={cities}/>
+      <InsertAddressModal states={states} cities={cities} />
     </div>
   );
 }

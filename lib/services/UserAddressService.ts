@@ -1,6 +1,7 @@
-import { json } from "stream/consumers";
+"use server";
 import { UserAddress } from "../types/UserAddress";
 import { AuthGetData, PostData, PostDataModel, PutData } from "./service";
+import { revalidateTag } from "next/cache";
 
 export async function createUserAddress(
   data: UserAddress
@@ -9,6 +10,9 @@ export async function createUserAddress(
     path: "UserAddress/Add",
     model: data,
   });
+
+  revalidateTag("address");
+
   return res.body; //return reshapeUserAddress(res.body.data.UserAddressCreate.UserAddress);
 }
 
@@ -38,6 +42,7 @@ export async function deleteUserAddress(
 export async function getUserAddress(id: string): Promise<UserAddress> {
   const res = await AuthGetData<UserAddress>({
     path: "UserAddress/Get?" + id,
+    tags: ["address"],
   });
 
   return res.body;
@@ -45,6 +50,7 @@ export async function getUserAddress(id: string): Promise<UserAddress> {
 export async function getUserAddresses(): Promise<UserAddress[]> {
   const res = await AuthGetData<UserAddress[]>({
     path: "UserAddress/GetAll",
+    tags: ["address"],
   });
 
   return res.body;
@@ -53,6 +59,7 @@ export async function getUserAddresss(jp: string): Promise<UserAddress[]> {
   const res = await PostData<UserAddress[]>({
     path: "UserAddress/GetFiltered",
     variables: jp,
+    tags: ["address"],
   });
 
   return res.body;

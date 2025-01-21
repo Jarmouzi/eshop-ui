@@ -1,27 +1,26 @@
-import { GetData, PostData } from './service';
+import { AuthGetData, PostData } from "./service";
 
-export async function getUserOrderStatus(id: string): Promise<UserOrderStatus>  {
-
-  const res = await GetData<UserOrderStatus>({
-    path: 'UserOrderStatus/Get?' + id,
+export async function getUserOrderStatus(id: string): Promise<UserOrderStatus> {
+  const res = await AuthGetData<UserOrderStatus>({
+    path: "UserOrderStatus/Get?" + id,
   });
 
   return res.body;
-} 
-export async function getAllUserOrderStatuss(): Promise<UserOrderStatus[]>  {
-
-  const res = await GetData<UserOrderStatus[]>({
-    path: 'UserOrderStatus/GetAll',
+}
+export async function getAllUserOrderStatuss(): Promise<UserOrderStatus[]> {
+  const res = await AuthGetData<UserOrderStatus[]>({
+    path: "UserOrderStatus/GetAll",
   });
 
   return res.body;
-} 
-export async function getUserOrderStatuss(jp: string): Promise<UserOrderStatus[]>  {
-
+}
+export async function getUserOrderStatuss(
+  jp: string
+): Promise<UserOrderStatus[]> {
   const res = await PostData<UserOrderStatus[]>({
-    path: 'UserOrderStatus/GetFiltered',
+    path: "UserOrderStatus/GetFiltered",
     variables: jp,
   });
 
   return res.body;
-} 
+}

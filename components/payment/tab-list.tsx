@@ -10,11 +10,17 @@ import { SelectItem } from "@/lib/types/SelectItem";
 import { City } from "@/lib/types/City";
 import { PaymentGateway } from "@/lib/types/PaymentGateway";
 import GatewayList from "./gateway-list";
+import { useState } from "react";
 
-export default function PaymentTablist({cart, addresses, states, cities, gateways}:{cart: Cart | undefined, addresses: UserAddress[], states: SelectItem[], cities: City[], gateways: PaymentGateway[]}) {
+export default function PaymentTablist({userOrder, cart, addresses, states, cities, gateways}:{userOrder: UserOrder, cart: Cart | undefined, addresses: UserAddress[], states: SelectItem[], cities: City[], gateways: PaymentGateway[]}) {
 
-  const handleGatewayChange = (value: string) => {
-    //setFormData({ ...formData, cityId: Number(key) }); 
+  const [formData, setFormData] = useState(userOrder);
+
+  const handleSelectedGatewayChange = (value: string) => {
+    setFormData({ ...formData, PaymentGatewayId: Number(value) }); 
+  } 
+  const handleSelectedAddressChange = (value: string) => {
+    setFormData({ ...formData, UserAddressId: Number(value) }); 
   } 
   return (
     <Tabs 
@@ -45,7 +51,7 @@ export default function PaymentTablist({cart, addresses, states, cities, gateway
               <MapPinIcon className='h-6' />   
             </div>} >            
           <div className="flex rounded-lg border border-neutral-200 bg-white p-2 dark:border-neutral-800 dark:bg-black md:p-12">
-            <AddressList addresses={addresses} states={states} cities={cities}/>
+            <AddressList addressId={userOrder?.UserAddressId} addresses={addresses} states={states} cities={cities} onValueChange={handleSelectedAddressChange}/>
           </div>  
       </Tab>
       }
@@ -55,7 +61,7 @@ export default function PaymentTablist({cart, addresses, states, cities, gateway
             <BanknotesIcon className='h-6' />
           </div>} >            
         <div className="flex rounded-lg border border-neutral-200 bg-white p-2 dark:border-neutral-800 dark:bg-black md:p-12">
-           <GatewayList gateways={gateways} onValueChange={handleGatewayChange} />
+           <GatewayList gateways={gateways} onValueChange={handleSelectedGatewayChange} />
         </div>  
       </Tab>
     </Tabs>
