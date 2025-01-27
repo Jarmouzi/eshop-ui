@@ -66,6 +66,7 @@ export async function AuthGetData<T>({
 }): Promise<{ status: number; body: T } | never> {
   try {
     const token = (await cookies()).get("currentUser")?.value;
+    console.log("api: ", domain + path);
     const result = await fetch(domain + path, {
       method: "GET",
       headers: {

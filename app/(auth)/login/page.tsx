@@ -3,12 +3,14 @@ import { FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import LogoSquare from '@/components/logo-square';
 import Copyright from '@/components/layout/copyright';
-import { Console } from 'console';
 
-export default function LoginPage() {
+type SearchParams = Promise<{ [key: string]: string | undefined }>
+
+export default function LoginPage({searchParams} : {searchParams?: SearchParams }) {
   const router = useRouter()
  
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const username = formData.get('username')
@@ -20,6 +22,12 @@ export default function LoginPage() {
     })
  
     if (response.ok) {
+      const { backTo } = await searchParams as { [key: string]: string | undefined};
+      if(backTo)
+      {
+        router.push(backTo); 
+        return;
+      }
       const historyState = window.history.state;
       
       // If history state is empty or no previous entry, redirect to home

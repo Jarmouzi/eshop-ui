@@ -4,4 +4,5 @@ export type PaymentGateway = {
   description: string | null;
   url: string | null;
   isPublic: boolean | null;
+  logo: string | null;
 };

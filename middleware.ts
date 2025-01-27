@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 import { isAuthenticated } from "./lib/services/AuthService";
 
@@ -49,13 +48,15 @@ export async function middleware(request: NextRequest) {
   });
 
   if (legacyPrefixes.some((prefix) => pathname.startsWith(prefix))) {
-    if (!(await isAuthenticated()))
-      return Response.redirect(new URL("/login", request.url));
+    if (!(await isAuthenticated())) {
+      const loginUrl = new URL(`/login?backTo=${pathname}`, request.url);
+      return NextResponse.redirect(loginUrl);
+    }
   }
 
   if (authPrefixes.some((prefix) => pathname.startsWith(prefix))) {
     if (await isAuthenticated())
-      return Response.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
   }
 
   return response;

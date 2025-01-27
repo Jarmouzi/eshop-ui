@@ -33,7 +33,7 @@ export default function TabInfo({
     {/* <Tabs aria-label={title} color="primary" radius="full"> */}
     {list.map((tab, i) => (
         <Tab key={tab.Id} title={tab.Title}>            
-            <div className="flex rounded-lg border border-neutral-200 bg-white p-2 dark:border-neutral-800 dark:bg-black md:p-12">
+            <div className="flex rounded-lg border border-neutral-200 bg-white p-2 dark:border-neutral-800 dark:bg-black p-2">
                 {tab.Content}
             </div>  
         </Tab>

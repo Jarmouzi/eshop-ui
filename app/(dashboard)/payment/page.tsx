@@ -33,8 +33,6 @@ export default async function PaymentPage() {
   const gateways = await getAllPaymentGateways();
 
   let userOrder = await getUserOrder(cart?.Id || cartId || "")
-
-  console.log(gateways, userOrder)
   
   return (
     <div className="mx-auto max-w-screen-2xl px-4">

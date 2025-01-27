@@ -1,19 +1,23 @@
 import {RadioGroup, Radio, cn} from "@nextui-org/react";
 import { PaymentGateway } from "@/lib/types/PaymentGateway";
 import { useState } from "react";
+import Image from "next/image";
 
-export default function GatewayList({gateways, onValueChange} :{gateways: PaymentGateway[], onValueChange: (value: string) => void;}) {
+export default function GatewayList({gatewayId, gateways, onValueChange} :{gatewayId: number | null, gateways: PaymentGateway[], onValueChange: (value: string) => void;}) {
  
-    const [selectedValue, setSelectedValue] = useState('')
+    const [selectedValue, setSelectedValue] = useState(gatewayId?.toString())
 
     const handleValueChange = (value: string) => {
         setSelectedValue(value);
         onValueChange(value);
     }
   return (
-    <div className="w-full ">
-      <RadioGroup label="انتخاب محل دریافت:" className="w-fullt mb-1" value={selectedValue} 
-        onChange={(e) => handleValueChange(e.target.value)}>
+    <div className="w-full">
+      <RadioGroup 
+        label="انتخاب محل دریافت:" 
+        className="w-full mb-1" 
+        onValueChange={handleValueChange} 
+        value={selectedValue}>
         {gateways && gateways.map((gateway, i) => (
             <Radio description={gateway.description} value={gateway.id.toString()} key={gateway.id}
             classNames={{
@@ -25,7 +29,16 @@ export default function GatewayList({gateways, onValueChange} :{gateways: Paymen
                 "data-[selected=true]:border-primary",
             ),
             }}>
-            {gateway.title}
+              { gateway.logo? 
+                <Image
+                          className="h-full w-full max-h-10 max-w-20 object-cover"
+                          width={80}
+                          height={40}
+                  alt={gateway.title as string}
+                  src={gateway.logo as string}
+                />
+              : gateway.title }
+
             </Radio>
         ))}
       </RadioGroup>

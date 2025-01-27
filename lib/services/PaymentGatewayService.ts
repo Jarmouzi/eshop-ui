@@ -1,15 +1,15 @@
 import { PaymentGateway } from "../types/PaymentGateway";
-import { GetData, PostData } from "./service";
+import { AuthGetData, PostData } from "./service";
 
 export async function getPaymentGateway(id: string): Promise<PaymentGateway> {
-  const res = await GetData<PaymentGateway>({
+  const res = await AuthGetData<PaymentGateway>({
     path: "PaymentGateway/Get?" + id,
   });
 
   return res.body;
 }
 export async function getAllPaymentGateways(): Promise<PaymentGateway[]> {
-  const res = await GetData<PaymentGateway[]>({
+  const res = await AuthGetData<PaymentGateway[]>({
     path: "PaymentGateway/GetAll",
   });
 

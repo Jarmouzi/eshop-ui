@@ -1,41 +1,51 @@
-import {RadioGroup, Radio, cn, Card, CardBody} from "@nextui-org/react";
+import {RadioGroup, Radio, cn} from "@nextui-org/react";
 import InsertAddressModal from "./insert-modal";
 import { UserAddress } from "@/lib/types/UserAddress";
 import { SelectItem } from "@/lib/types/SelectItem";
 import { City } from "@/lib/types/City";
 import { useState } from "react";
 
-
 export default function AddressList({addressId, addresses, states, cities, onValueChange} :{addressId: number | null, addresses: UserAddress[], states: SelectItem[], cities: City[], onValueChange: (value: string) => void}) {
 
-    const [selectedValue, setSelectedValue] = useState('')
+    const [selectedValue, setSelectedValue] = useState(addressId?.toString())
+
+    if(selectedValue === undefined || selectedValue === null){ 
+      const defaultAddress = addresses.find(item => item.isDefault === true);
+
+      if(defaultAddress)
+        setSelectedValue(defaultAddress.id.toString());
+    }    
+
+    console.log(selectedValue, addresses)
 
     const handleValueChange = (value: string) => {
-        setSelectedValue(value);
-        onValueChange(value);
+      console.log('AddressList selected address Changed', value)
+      setSelectedValue(value);
+      onValueChange(value);
     }
   return (
     <div className="w-full ">
-      <RadioGroup label="انتخاب محل دریافت:" className="w-fullt mb-1" 
-        onChange={(e) => handleValueChange(e.target.value)}>
+      <RadioGroup 
+        label="انتخاب محل دریافت:" 
+        className="w-full mb-1" 
+        onValueChange={handleValueChange} 
+        value={selectedValue}>
         {addresses && addresses.map((address, i) => (
-          // <Card shadow="sm" key={i} className="overflow-hidden">
-          //   <CardBody className='text-right py-5 min-h-24 overflow-hidden'>
-              <Radio description={address.address} value={address.id.toString()} key={address.id}
-              checked={addressId? address.id == addressId: address.isDefault}
-              classNames={{
-                base: cn(
-                  "inline-flex m-1 hover:bg-stone-100",
-                  "cursor-pointer rounded-lg gap-4 p-4 py-5 border-2 border-transparent",          
-                  "w-full max-w-full relative h-auto text-foreground box-border outline-none ",
-                  "shadow-small rounded-large",
-                  "data-[selected=true]:border-primary",
-                ),
-              }}>
-                {address.title}
-              </Radio>
-          //    </CardBody>
-          // </Card> 
+          <Radio 
+            description={address.address} 
+            value={address.id.toString()} 
+            key={address.id}
+            classNames={{
+              base: cn(
+                "inline-flex m-1 hover:bg-stone-100",
+                "cursor-pointer rounded-lg gap-4 p-4 py-5 border-2 border-transparent",          
+                "w-full max-w-full relative h-auto text-foreground box-border outline-none ",
+                "shadow-small rounded-large",
+                "data-[selected=true]:border-primary",
+              ),
+            }}>
+            {address.title}
+          </Radio>
         ))}
       </RadioGroup>
       <InsertAddressModal states={states} cities={cities} />

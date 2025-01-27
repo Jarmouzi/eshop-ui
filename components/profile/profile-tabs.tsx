@@ -1,5 +1,4 @@
 'use client'
-import { Card, CardBody } from "@nextui-org/card";
 import {Tabs, Tab} from "@nextui-org/tabs";
 import { usePathname, useRouter } from "next/navigation";
 
