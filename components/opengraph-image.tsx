@@ -27,7 +27,7 @@ export default async function OpengraphImage(props?: Props): Promise<ImageRespon
       height: 630,
       fonts: [
         {
-          name: 'Inter',
+          name: 'Vazir',
           data: await fetch(new URL('../font/Vazir-Bold.ttf', import.meta.url)).then((res) =>
             res.arrayBuffer()
           ),

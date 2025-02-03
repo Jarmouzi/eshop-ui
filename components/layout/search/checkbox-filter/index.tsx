@@ -29,7 +29,7 @@ export default function CheckboxFilter({title, sk, imageUrl}: ({title: string, s
 
   return (
     <Suspense>
-      <div className="w-full p-2 pr-4 mb-2">
+      <div className="w-full p-2 pb-3 -mr-2 mb-2 border-b-1">
       <Checkbox       
         aria-label={title}
         classNames={{

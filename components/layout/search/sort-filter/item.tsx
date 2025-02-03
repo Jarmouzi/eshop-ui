@@ -29,12 +29,12 @@ export function SortFilters({ item }: { item: SortFilterItem }) {
 
   return (
     <Suspense>
-      <li className="text-sm text-black dark:text-white" key={item.title}>
+      <li className="text-xs text-black dark:text-white" key={item.title}>
         <DynamicTag
           prefetch={!active ? false : undefined}
           href={href}
-          className={clsx('w-full py-1 px-2 hover:underline hover:underline-offset-4', {
-            'bg-primary text-white font-semibold rounded-full -mt-1': active
+          className={clsx('w-full p-2 hover:text-primary', {
+            'border-primary text-primary font-semibold rounded-full -mt-2': active
           })}
         >
           {item.title}

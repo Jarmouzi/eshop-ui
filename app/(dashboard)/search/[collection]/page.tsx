@@ -1,6 +1,5 @@
 
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 
 import Grid from '@/components/grid';
 import ProductGridItems from '@/components/layout/product-grid-items';
@@ -46,7 +45,7 @@ export default async function CategoryPage({
   return (
     <section>
       {products.length === 0 ? (
-        <p className="py-3 text-lg">{`No products found in this collection`}</p>
+        <p className="py-3 text-lg">{`محصولی برای این گروه محصول یافت نشد`}</p>
       ) : (
         <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           <ProductGridItems products={products} />
