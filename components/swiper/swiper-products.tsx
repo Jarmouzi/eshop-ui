@@ -10,6 +10,7 @@ import { SimpleProduct } from '@/lib/types/Product';
 
 export default function SwiperProducts({ products }: {products: SimpleProduct[];}) {
 
+  console.log(products[0].Title.replaceAll(' ', '-'))
   return (
       <Swiper
         //slidesPerView={6}
@@ -47,8 +48,8 @@ export default function SwiperProducts({ products }: {products: SimpleProduct[];
         color='primary'
       >
         {products.map((product, i) => (
-            <SwiperSlide className='mb-3' key={product.Id}>
-              <Link href={`/product/${product.Id}`} className="relative h-full w-full">
+            <SwiperSlide className='gap-4' key={product.Id}>
+              <Link href={`/product/${product.Id}/${product.Title.replaceAll(' ', '-')}`} className="relative inline-block h-full w-full ">
                 <GridTileImage
                   alt={product.Title}
                   label={{
@@ -59,7 +60,8 @@ export default function SwiperProducts({ products }: {products: SimpleProduct[];
                   src={product.FeaturedImage}//?.url}
                   fill
                   //style={{ objectFit: 'cover' }}
-                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                  //sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                  sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
                 />
               </Link>
             </SwiperSlide>

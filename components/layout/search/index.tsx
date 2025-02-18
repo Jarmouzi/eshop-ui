@@ -1,8 +1,6 @@
 'use client'
 import { Suspense } from 'react';
-
 import FilterList from './list-filter';
-import { getCollections } from '@/lib/services/CategoryService';
 import { PriceFilter } from './price-filter';
 import CheckboxFilter from './checkbox-filter';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
@@ -18,7 +16,7 @@ import { Menu } from '@/lib/types/Menu';
 // const activeAndTitles = 'bg-neutral-800 dark:bg-neutral-300';
 // const items = 'bg-neutral-400 dark:bg-neutral-700';
 
-export default function Collections({collection}: {collection: Menu[]}) {
+export default function SearchItems({collection}: {collection: Menu[]}) {
   return (
     <Card shadow="none" className="border-1 border-primary-200 min-h-[70vh] dark:bg-neutral-900">
     <CardHeader className="font-semibold text-nowrap w-fit">

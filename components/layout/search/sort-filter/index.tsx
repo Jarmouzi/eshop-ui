@@ -22,12 +22,12 @@ export default function SortFilter({ list, title, display }: { list: SortFilterI
     <>
       <nav className={display}>
         {title ? (
-          <h3 className="`hidden inline-flex font-semibold text-neutral-600 dark:text-neutral-400 px-3 md:display`">
+          <h3 className="hidden font-semibold text-neutral-600 dark:text-neutral-400 px-3 sm:hidden md:inline-flex ">
             <BarsArrowDownIcon className='h-4 transform scale-x-[-1]' />
             {title}
           </h3>
         ) : null}
-        <ul className="inline-flex md:display">
+        <ul className="hidden md:inline-flex">
           <FilterItemList list={list} />
         </ul>
         <ul className="md:hidden">

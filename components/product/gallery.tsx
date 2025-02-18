@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
+import { ImageTile } from '../grid/image-tile';
 
 export function Gallery({ images }: { images: { src: string; altText: string }[] }) {
   const pathname = usePathname();
@@ -77,16 +78,16 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
             return (
               <li key={image.src} className="h-20 w-20">
                 <Link
-                  aria-label="Enlarge product image"
+                  aria-label="بزرگ نمایی تصویر"
                   href={createUrl(pathname, imageSearchParams)}
                   scroll={false}
                   className="h-full w-full"
                 >
-                  <GridTileImage
+                  <ImageTile
                     alt={image.altText}
                     src={image.src}
-                    width={80}
-                    height={80}
+                    width={70}
+                    height={70}
                     active={isActive}
                   />
                 </Link>

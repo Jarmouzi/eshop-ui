@@ -44,7 +44,7 @@ export async function generateMetadata({params}: {params: Params}): Promise<Meta
   };
 }
 
-export default async function ProductPage({ params }: { params: Params }) {
+export default async function ProductTitlePage({ params }: { params: Params }) {
   const { handle } = await params; 
   const product = await getProduct(handle);
 
@@ -52,23 +52,6 @@ export default async function ProductPage({ params }: { params: Params }) {
   
   const relatedProducts = await getProductRecommendations('fav'); 
 
-  // const productJsonLd = {
-  //   //'@context': 'https://schema.org',
-  //   //'@type': 'Product',
-  //   name: product.Title,
-  //   description: product.Description,
-  //   image: product.FeaturedImage.Url,
-  //   offers: {
-  //     '@type': 'AggregateOffer',
-  //     availability: product.AvailableForSale
-  //       ? 'https://schema.org/InStock'
-  //       : 'https://schema.org/OutOfStock',
-  //     //priceCurrency: 'IRI', product.priceRange.minVariantPrice.currencyCode,
-  //     // highPrice: product.priceRange.maxVariantPrice.amount,
-  //     // lowPrice: product.priceRange.minVariantPrice.amount
-  //     price: product.Price,
-  //   }
-  // };
 
   return (
     <ProductDetails product={product} relatedProducts={relatedProducts} />

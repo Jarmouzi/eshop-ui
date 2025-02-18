@@ -20,7 +20,7 @@ const Label = ({
     >
       <div className="grid items-center rounded border bg-white/70 p-1 text-sm font-semibold text-black backdrop-blur-md dark:border-neutral-800 dark:bg-black/70 dark:text-white">
         <h3 className="mr-1 line-clamp-3 flex-grow pr-2 leading-normal tracking-tight">{title}</h3>
-        <div className="mr-auto w-auto rounded-full bg-primary p-2 text-sm text-white">
+        <div className="mr-auto w-auto rounded-full  p-2 text-sm text-primary">
           <Price
             //className="inline-block text-left rounded-lg bg-primary p-2 text-white"
             amount={amount}
