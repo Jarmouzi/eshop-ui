@@ -1,7 +1,7 @@
 
 import { Suspense } from "react";
 import { Metadata } from "next";
-import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import CashHelp from "@/components/help/cash";
 
 export async function generateMetadata(): Promise<Metadata> {
 
@@ -20,14 +20,7 @@ export default async function CashPage() {
 
   return (
     <Suspense>            
-      <Card shadow="none">
-        <CardHeader>
-          شرایط فروش نقدی در سامانه انار چین
-        </CardHeader>
-        <CardBody>
-          با ورود به سامانه می توانید به آسانی خرید نمایید
-        </CardBody>
-      </Card>
+      <CashHelp />
      </Suspense>
   );
 }

@@ -1,11 +1,13 @@
 'use client'
-import { Suspense } from 'react';
+import { Suspense, useCallback } from 'react';
 import FilterList from './list-filter';
 import { PriceFilter } from './price-filter';
 import CheckboxFilter from './checkbox-filter';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
-import { Accordion, AccordionItem, Divider } from '@nextui-org/react';
+import { Accordion, AccordionItem, Divider, menu } from '@nextui-org/react';
 import { Menu } from '@/lib/types/Menu';
+import { useRouter } from 'next/navigation';
+import SingleSelectDropDown from '@/components/dropdown/singleSelectDropDown';
 
 // async function CollectionList() {
 //   const collections = await getCollections();
@@ -16,7 +18,20 @@ import { Menu } from '@/lib/types/Menu';
 // const activeAndTitles = 'bg-neutral-800 dark:bg-neutral-300';
 // const items = 'bg-neutral-400 dark:bg-neutral-700';
 
-export default function SearchItems({collection}: {collection: Menu[]}) {
+export default function SearchItems({categories, selectedItem}: {categories: Menu[]; selectedItem: string | undefined}) {
+  const router = useRouter();
+  
+  const createQueryString = (name: string, value: string) => {
+      const params = new URLSearchParams();
+      params.set(name, value);
+      return params.toString();
+    }
+
+
+  const handleCollectionChange = async (key: string) => {
+    router.push(`?${createQueryString('collection', key)}`);
+  } 
+
   return (
     <Card shadow="none" className="border-1 border-primary-200 min-h-[70vh] dark:bg-neutral-900">
     <CardHeader className="font-semibold text-nowrap w-fit">
@@ -24,30 +39,13 @@ export default function SearchItems({collection}: {collection: Menu[]}) {
     </CardHeader>      
     <Divider/>
     <CardBody>
-    <Accordion selectionMode="multiple">
-      <AccordionItem key="1" aria-label="گروه محصولات" title="گروه محصولات">
-      <Suspense> 
-        <FilterList list={collection} title="گروه محصولات" sk="c"/>
-      </Suspense>
-      </AccordionItem>
+    <Accordion>
       <AccordionItem key="2" aria-label="گروه محصولات" title="گروه محصولات">
-      <Suspense
-      //  fallback={
-      //    <div className="col-span-2 hidden h-[400px] w-full flex-none py-4 lg:block">
-      //      <div className={clsx(skeleton, activeAndTitles)} />
-      //      <div className={clsx(skeleton, activeAndTitles)} />
-      //      <div className={clsx(skeleton, items)} />
-      //      <div className={clsx(skeleton, items)} />
-      //      <div className={clsx(skeleton, items)} />
-      //      <div className={clsx(skeleton, items)} />
-      //      <div className={clsx(skeleton, items)} />
-      //      <div className={clsx(skeleton, items)} />
-      //      <div className={clsx(skeleton, items)} />
-      //      <div className={clsx(skeleton, items)} />
-      //    </div>
-      //  }
-     > 
-        <FilterList list={collection} title="گروه محصولات" sk="c"/>
+      <Suspense> 
+        <SingleSelectDropDown 
+          list={categories.map((menu: Menu) => ({id: menu.Id, title: menu.Title}))} 
+          onSelectionChange={handleCollectionChange}
+          selectedKey={selectedItem}/>
       </Suspense>
       </AccordionItem>
       <AccordionItem key="3" aria-label="قیمت" title="قیمت">

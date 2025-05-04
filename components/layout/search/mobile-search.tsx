@@ -72,7 +72,7 @@ export default function MobileSearch({collection}: {collection: Menu[]}) {
 
                 <div className="mb-4 w-full">
                   <Suspense>
-                    <SearchItems collection={collection}/>
+                    <SearchItems categories={collection} selectedItem={searchParams.get('collection') || undefined}/>
                   </Suspense>
                 </div>
               </div>

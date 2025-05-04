@@ -39,11 +39,12 @@ export default function SingleSelectDropDown({ list, hasDefault = false, selecte
       </DropdownTrigger>
       <DropdownMenu
         disallowEmptySelection
-        aria-label="Single selection example"
+        aria-label=""
         selectedKeys={selectedKeys}
         selectionMode="single"
         variant="flat"
         onSelectionChange={handleOnDropdownChange}
+        className=" max-h-56 overflow-y-auto scroller"
       >
 
         {list && list.map((item, i) => (

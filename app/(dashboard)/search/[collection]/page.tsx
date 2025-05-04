@@ -5,6 +5,7 @@ import Grid from '@/components/grid';
 import ProductGridItems from '@/components/layout/product-grid-items';
 import { defaultSort, sorting } from '@/lib/constants';
 import { getProducts } from '@/lib/services/ProductService';
+import { getCategory } from '@/lib/services/CategoryService';
 
 export const runtime = 'edge';
 
@@ -18,15 +19,22 @@ export async function generateMetadata({
   params: Params;
   searchParams?: SearchParams;
 }): Promise<Metadata> {
-  // const { sort } = searchParams as { [key: string]: string };
-  // const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
-  // const products = await getProducts(JSON.stringify({ collection: params.collection, sk: sortKey, r: reverse}));
 
-  // if (!products) return notFound();
   const { collection } = await params; 
+  const collectionItem = await getCategory(collection)
+  const indexable = true; 
+  
   return {
-    title: collection, 
-    description: 'جستجو بر اساس گروه محصول'
+    title: collectionItem.title,
+    description: 'جستجوی محصولات در گروه ' + (collectionItem.grandParentTitle + ' _ ' || '') + (collectionItem.parentTitle + ' _ ' || '') + collectionItem.title,
+    robots: {
+      index: indexable,
+      follow: indexable,
+      googleBot: {
+        index: indexable,
+        follow: indexable
+      }
+    },
   };
 }
 
@@ -47,7 +55,7 @@ export default async function CategoryPage({
       {products.length === 0 ? (
         <p className="py-3 text-lg">{`محصولی برای این گروه محصول یافت نشد`}</p>
       ) : (
-        <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           <ProductGridItems products={products} />
         </Grid>
       )}

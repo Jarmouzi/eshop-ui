@@ -50,7 +50,7 @@ export default async function ProductTitlePage({ params }: { params: Params }) {
 
   if (!product.Title) return notFound();
   
-  const relatedProducts = await getProductRecommendations('fav'); 
+  const relatedProducts = getProductRecommendations('fav'); 
 
 
   return (

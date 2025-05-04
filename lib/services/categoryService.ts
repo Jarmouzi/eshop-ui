@@ -2,6 +2,13 @@ import { GetData, PostData } from "./service";
 import { Category } from "../types/Category";
 import { Menu } from "../types/Menu";
 
+export async function getProductCategory(id: string): Promise<Category> {
+  const res = await GetData<Category>({
+    path: "Category/GetByProduct?id=" + id,
+  });
+
+  return res.body;
+}
 export async function getCategory(id: string): Promise<Category> {
   const res = await GetData<Category>({
     path: "Category/Get?id=" + id,

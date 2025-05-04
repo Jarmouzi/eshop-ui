@@ -11,7 +11,7 @@ export default async function Swiper({
   }) {
     const products = await promise;
     return (
-        <div className="px-6 my-2 collection">
+        <div className="px-6 my-4 collection">
           <div className="collection">
             <h1>{title}</h1>
           </div>
