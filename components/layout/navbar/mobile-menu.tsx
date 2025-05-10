@@ -3,11 +3,63 @@
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Fragment, Suspense, useEffect, useState } from 'react';
+import { Fragment, MouseEventHandler, Suspense, useEffect, useState } from 'react';
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Search from './search';
 import { Menu } from '@/lib/types/Menu';
+
+function MenuList({ items, level = 0, expandedIdx, setExpandedIdx, onClose }: { items: Menu[], level: number, expandedIdx: number|null, setExpandedIdx: React.Dispatch<React.SetStateAction<number | null>>, onClose: MouseEventHandler  }) {
+  return (
+    <ul style={{ paddingLeft: level * 16 }}>
+      {items.map((item, idx) => {
+        const hasChildren = !!item.Children;
+        const isExpanded = expandedIdx === idx;
+
+        return (
+          <li key={item.Title}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Link href={item.PageAddress} onClick={onClose} style={{ flex: 1 }}>
+                {item.Title}
+              </Link>
+              {hasChildren && (
+                <button
+                  aria-label={isExpanded ? "Collapse" : "Expand"}
+                  onClick={e => {
+                    e.preventDefault();
+                    setExpandedIdx(isExpanded ? null : idx);
+                  }}
+                  style={{ marginLeft: 8 }}
+                >
+                  {isExpanded ? "▲" : "▼"}
+                </button>
+              )}
+            </div>
+            {hasChildren && isExpanded && (
+              <MenuLevel
+                items={item.Children}
+                level={level + 1}
+                onClose={onClose}
+              />
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function MenuLevel({ items, level, onClose }: { items: Menu[], level: number, onClose: MouseEventHandler  }) {
+  const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
+  return (
+    <MenuList
+      items={items}
+      level={level}
+      expandedIdx={expandedIdx}
+      setExpandedIdx={setExpandedIdx}
+      onClose={onClose}
+    />
+  )}
 
 export default function MobileMenu({ menu }: { menu: Menu[] }) {
   const pathname = usePathname();
@@ -76,7 +128,9 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                     <Search />
                   </Suspense>
                 </div>
-                {menu.length ? (
+                
+                <MenuLevel items={menu} level={0} onClose={closeMobileMenu} />
+                {/* {menu.length ? (
                   <ul className="flex w-full flex-col">
                     {menu.map((item: Menu) => (
                       <li
@@ -90,7 +144,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                     ))}
                   </ul>
                 ) : null
-                }
+                } */}
               </div>
             </DialogPanel>
           </TransitionChild>

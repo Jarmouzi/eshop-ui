@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function LogoIcon(props: React.ComponentProps<'svg'>) {
   return (
-<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="560.000000pt" height="560.000000pt" viewBox="0 0 560.000000 560.000000" preserveAspectRatio="xMidYMid meet">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 560.000000 560.000000" preserveAspectRatio="xMidYMid meet">
 <metadata>
 Created by Anarchin, written by Donya Jarmouzi 2024
 </metadata>

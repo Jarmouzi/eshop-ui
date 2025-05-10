@@ -5,6 +5,8 @@ import { getCategory } from '@/lib/services/CategoryService';
 import { getProducts } from '@/lib/services/ProductService';
 import { SearchParams } from '@/lib/types/searchParam';
 import { notFound } from 'next/navigation';
+import SearchLayout from '../../../components/layout/search/layout';
+import CategoryBreadcrumb from '@/components/layout/breadcrumb/category-breadcrumb';
 
 
 export const runtime = 'edge';
@@ -63,16 +65,18 @@ export default async function SearchPage({
 }: {
   searchParams?: SearchParams
 }) {
-  const { sort, q: searchValue, collection, lp, hp, b } = await searchParams as { [key: string]: string };
-  const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
+   const { collection } = await searchParams as { [key: string]: string };
+  // const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
 
-  const products = await getProducts(JSON.stringify({ k: searchValue, sk: sortKey, r: reverse, c: collection, lp, hp, b}));
+  // const products = await getProducts(JSON.stringify({ k: searchValue, sk: sortKey, r: reverse, c: collection, lp, hp, b}));
 
-  if(products.length === 0) return notFound();
+  //if(products.length === 0) return notFound();
 
   return (    
-    <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-      <ProductGridItems products={products} />
-    </Grid>
+    <SearchLayout collection={collection} breadcrumb={<CategoryBreadcrumb />} children={
+      // <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <ProductGridItems />
+      //</Grid>
+      } />
   );
 }

@@ -1,1 +1,8 @@
-export type Option = { Id: number; Title: string | null };
+export type Option = {
+  id: number;
+  title: string;
+  values: {
+    id: number;
+    title: string;
+  }[];
+};

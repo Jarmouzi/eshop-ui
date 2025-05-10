@@ -1,28 +1,107 @@
+'use client'
 import Grid from '@/components/grid';
 import { GridTileImage } from '@/components/grid/tile';
+import { defaultSort, sorting } from '@/lib/constants';
+import { getProducts } from '@/lib/services/ProductService';
 import { SimpleProduct } from '@/lib/types/Product';
 import Link from 'next/link';
+import { ReadonlyURLSearchParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
-export default function ProductGridItems({ products }: { products: SimpleProduct[] }) {
+export default function ProductGridItems() {
+  const [products, setProducts] = useState([] as SimpleProduct[]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const observerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    fetchMoreProducts(page, pathname, searchParams);
+  }, []);
+
+  const fetchMoreProducts = async (
+    nextPage: number,
+    pathname: string,
+    searchParams: ReadonlyURLSearchParams
+  ) => {
+    if (!hasMore || loading) return;
+    setLoading(true);
+    let collection = '';
+    const match = pathname.match(/\/search\/([^\/]+)/);
+    if (match) {
+      collection = match[1];
+    }
+    const params: Record<string, string> = Object.fromEntries(searchParams.entries());
+    const { sortKey, reverse } = sorting.find((item) => item.slug === params['sort']) || defaultSort;
+    const { sort, i, ...restParams } = params; 
+    const requestObj = {
+      collection,
+      sk: sortKey,
+      r: reverse,
+      i: nextPage,
+      ...restParams,
+    };
+    const data = await getProducts(JSON.stringify(requestObj));
+
+    console.log('QUERYSTRING', JSON.stringify(requestObj))
+    if (data.length === 0) {
+      setHasMore(false);
+    } else {
+      setProducts((prev) => [...prev, ...data]);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !loading && hasMore) {
+          const nextPage = page + 1;
+          setPage(nextPage);
+          const params = new URLSearchParams(searchParams);
+          params.set('i', nextPage.toString());
+          router.push(`${pathname}?${params}`, { scroll: false });
+          fetchMoreProducts(nextPage, pathname, searchParams);
+        }
+      },
+      { threshold: 1 }
+    );
+    if (observerRef.current) observer.observe(observerRef.current);
+    return () => observer.disconnect();
+  }, [page, loading, hasMore, pathname, searchParams, router]);
+
   return (
     <>
-      {products.map((product) => (
-        <Grid.Item key={product.Id} className="animate-fadeIn">
-          <Link className="relative inline-block h-full w-full" href={`/product/${product.Id}`}>
-            <GridTileImage
-              alt={product.Title}
-              label={{
-                title: product.Title,
-                amount: product.Price,
-                currencyCode: "تومان"
-              }}
-              src={product.FeaturedImage}
-              fill
-              sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
-            />
-          </Link>
-        </Grid.Item>
-      ))}
+      {products.length === 0 ? (
+        <p className="py-3 text-lg">{`محصولی یافت نشد`}</p>
+      ) : (
+        <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          {products.map((product) => (
+            <Grid.Item key={product.Id} className="animate-fadeIn">
+              <Link className="relative inline-block h-full w-full" href={`/product/${product.Id}`}>
+                <GridTileImage
+                  alt={product.Title}
+                  label={{
+                    title: product.Title,
+                    amount: product.Price,
+                    currencyCode: "تومان"
+                  }}
+                  src={product.FeaturedImage}
+                  fill
+                  sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
+                />
+              </Link>
+            </Grid.Item>
+          ))}
+        </Grid>
+      )}
+      <div ref={observerRef}>
+        {loading && 'بارگذاری محصولات...'}
+        {!hasMore && products.length > 0 && <p className="py-3">محصولات بیشتری یافت نشد</p>}
+      </div>
     </>
   );
 }

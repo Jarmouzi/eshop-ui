@@ -12,9 +12,9 @@ function search({value} : {value: number[]})
 {
 }
 
-export function PriceFilter({minPrice, maxPrice} : {minPrice: number, maxPrice: number}) {
+export function PriceFilter({minPrice, maxPrice, minValue, maxValue} : {minPrice: number, maxPrice: number, minValue: number, maxValue: number}) {
 
-  const [value, setValue] = React.useState([minPrice, maxPrice]);
+  const [value, setValue] = React.useState([minValue, maxValue]);
 
 
   const router = useRouter();

@@ -8,7 +8,7 @@ import { TabData } from '@/lib/types/TabData';
 import FeatureList from '../list/feature-list';
 import { Gallery } from './gallery';
 import Swiper from '../swiper';
-import ProductBreadcrumb from '../breadcrumb/product-breadcrumb';
+import ProductBreadcrumb from '../layout/breadcrumb/product-breadcrumb';
 
 export default async function ProductDetails({product, relatedProducts}: {product: Product, relatedProducts:Promise<SimpleProduct[]>}) {
 

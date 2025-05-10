@@ -1,13 +1,15 @@
 'use client'
 import { Suspense, useCallback } from 'react';
-import FilterList from './list-filter';
 import { PriceFilter } from './price-filter';
 import CheckboxFilter from './checkbox-filter';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
 import { Accordion, AccordionItem, Divider, menu } from '@nextui-org/react';
 import { Menu } from '@/lib/types/Menu';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import TreeView, { mapMenuToTreeNode } from '@/components/dropdown/treeview';
 import SingleSelectDropDown from '@/components/dropdown/singleSelectDropDown';
+import { Option } from '@/lib/types/Option';
+import { SelectItem } from '@/lib/types/SelectItem';
 
 // async function CollectionList() {
 //   const collections = await getCollections();
@@ -18,19 +20,70 @@ import SingleSelectDropDown from '@/components/dropdown/singleSelectDropDown';
 // const activeAndTitles = 'bg-neutral-800 dark:bg-neutral-300';
 // const items = 'bg-neutral-400 dark:bg-neutral-700';
 
-export default function SearchItems({categories, selectedItem}: {categories: Menu[]; selectedItem: string | undefined}) {
+export default function SearchItems({categories, selectedItem, options, brands, suppliers}: {categories: Menu[]; selectedItem: string | undefined, options: Option[] | null, brands: SelectItem[], suppliers: SelectItem[]}) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const params: Record<string, string> = Object.fromEntries(searchParams.entries());
+  console.log(params['o' + 2])
   
   const createQueryString = (name: string, value: string) => {
-      const params = new URLSearchParams();
+      const params = new URLSearchParams(searchParams);
       params.set(name, value);
+      //params.append(name, value);
       return params.toString();
     }
 
-
   const handleCollectionChange = async (key: string) => {
-    router.push(`?${createQueryString('collection', key)}`);
+    //router.push(`?${createQueryString('collection', key)}`);
+    const currentQuery = searchParams.toString(); 
+    const newPath = `/search/${key}`;
+    const url = currentQuery ? `${newPath}?${currentQuery}` : newPath;
+    router.push(url);
   } 
+
+  const handleOptionhange = async (key: string) => {
+    const kv = key.split('=')
+    if(kv.length == 2)
+      router.push(`${pathname}?${createQueryString(kv[0], kv[1])}`);
+  } 
+
+  const handleSupplierChange = async (key: string) => {
+    router.push(`${pathname}?${createQueryString('su', key)}`);
+  } 
+
+  const handleBrandChange = async (key: string) => {
+    router.push(`${pathname}?${createQueryString('br', key)}`);
+  } 
+  const items = [
+    <AccordionItem key="1" aria-label="گروه محصولات" title="گروه محصولات">
+      <Suspense> 
+        <TreeView list={mapMenuToTreeNode(categories)} onSelectionChange={handleCollectionChange} selectedKey={selectedItem}/>
+      </Suspense>
+    </AccordionItem>,
+    <AccordionItem key="2" aria-label="قیمت" title="قیمت">
+      <Suspense>
+        <PriceFilter minPrice={10000} maxPrice={100000000} minValue={Number(params['lp']) | 10000} maxValue={Number(params['hp']) | 100000000}  />
+      </Suspense>
+    </AccordionItem>,
+    ...(options?.map((o, i) => (
+      <AccordionItem key={i + 10} aria-label={o.title} title={o.title}>
+        <Suspense>
+          <SingleSelectDropDown list={o.values.map((v) => ({ id: `o${o.id}=${v.id}`, title: v.title}))} onSelectionChange={handleOptionhange} selectedKey={params['o' + o.id] || ""} />
+        </Suspense>
+      </AccordionItem>
+    ))) ?? [],
+    (brands && brands.length > 0 ? <AccordionItem key={3} aria-label='برند' title='برند'>
+      <Suspense>
+        <SingleSelectDropDown list={brands} onSelectionChange={handleBrandChange} selectedKey={params['br'] ||''} />
+      </Suspense>
+    </AccordionItem> : null),
+    (suppliers && suppliers.length > 0 ? <AccordionItem key={4} aria-label='فروشگاه' title='فروشگاه'>
+      <Suspense>
+        <SingleSelectDropDown list={suppliers} onSelectionChange={handleSupplierChange} selectedKey={params['su'] ||''} />
+      </Suspense>
+    </AccordionItem> : null),
+  ];
 
   return (
     <Card shadow="none" className="border-1 border-primary-200 min-h-[70vh] dark:bg-neutral-900">
@@ -39,64 +92,18 @@ export default function SearchItems({categories, selectedItem}: {categories: Men
     </CardHeader>      
     <Divider/>
     <CardBody>
-    <Accordion>
-      <AccordionItem key="2" aria-label="گروه محصولات" title="گروه محصولات">
-      <Suspense> 
-        <SingleSelectDropDown 
-          list={categories.map((menu: Menu) => ({id: menu.Id, title: menu.Title}))} 
-          onSelectionChange={handleCollectionChange}
-          selectedKey={selectedItem}/>
-      </Suspense>
-      </AccordionItem>
-      <AccordionItem key="3" aria-label="قیمت" title="قیمت">
-
+      <Accordion>
+        {items}
+      </Accordion>
       <Suspense>
-        <PriceFilter minPrice={10000} maxPrice={100000000} />
+        <CheckboxFilter title='فقط کالاهای قابل سفارش' sk='e'/>
       </Suspense>
-      </AccordionItem>
-    </Accordion>
-        {/* <SwitchFilter title='فقط کالاهای موجود' sk='e' /> */}
-      <Suspense>
-        <CheckboxFilter title='فقط کالاهای تخفیف دار' sk='b'/>
-      </Suspense>
-      <Suspense>
+      {/* <Suspense>
         <CheckboxFilter title='ارسال امروز' sk='d' imageUrl='https://dkstatics-public.digikala.com/digikala-static/262c38c0e4990522af759e0016a287508bbc84f6_1684761217.png'/>
-      </Suspense>
+      </Suspense> */}
 
     </CardBody>
   </Card>
-    // <div className='group h-full w-full top-1 rounded-lg border bg-white hover:border-primary dark:bg-black'>
-    //   <h1 className="text-lg font-semibold text-neutral-600 dark:text-neutral-300 p-2 pb-3">
-    //     فیلترهای جستجو
-    //   </h1>
-    //  <Suspense
-    //   //  fallback={
-    //   //    <div className="col-span-2 hidden h-[400px] w-full flex-none py-4 lg:block">
-    //   //      <div className={clsx(skeleton, activeAndTitles)} />
-    //   //      <div className={clsx(skeleton, activeAndTitles)} />
-    //   //      <div className={clsx(skeleton, items)} />
-    //   //      <div className={clsx(skeleton, items)} />
-    //   //      <div className={clsx(skeleton, items)} />
-    //   //      <div className={clsx(skeleton, items)} />
-    //   //      <div className={clsx(skeleton, items)} />
-    //   //      <div className={clsx(skeleton, items)} />
-    //   //      <div className={clsx(skeleton, items)} />
-    //   //      <div className={clsx(skeleton, items)} />
-    //   //    </div>
-    //   //  }
-    //  > 
-    //     <CollectionList/>
-    //   </Suspense>
-    //   <Suspense>
-    //     <PriceFilter minPrice={10000} maxPrice={100000000} />
-    //   </Suspense>
-    //     {/* <SwitchFilter title='فقط کالاهای موجود' sk='e' /> */}
-    //   <Suspense>
-    //     <CheckboxFilter title='فقط کالاهای تخفیف دار' sk='b'/>
-    //   </Suspense>
-    //   <Suspense>
-    //     <CheckboxFilter title='ارسال امروز' sk='d' imageUrl='https://dkstatics-public.digikala.com/digikala-static/262c38c0e4990522af759e0016a287508bbc84f6_1684761217.png'/>
-    //   </Suspense>
-    // </div>
+
   );
 }

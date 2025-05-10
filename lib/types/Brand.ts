@@ -1,5 +1,6 @@
-type Brand =  { 
-	'Title': string | null, 
-	'ThemeAndOtherOptions': string | null, 
-	'Confirmed': boolean | null, 
-} 
+type Brand = {
+  id: number;
+  title: string;
+  logo: string | null;
+  Banner: string | null;
+};
