@@ -64,9 +64,8 @@ export async function AuthGetData<T>({
   cache?: RequestCache;
   tags?: string[];
 }): Promise<{ status: number; body: T } | never> {
+  const token = (await cookies()).get("currentUser")?.value;
   try {
-    const token = (await cookies()).get("currentUser")?.value;
-    console.log("api: ", domain + path);
     const result = await fetch(domain + path, {
       method: "GET",
       headers: {
@@ -122,8 +121,8 @@ export async function PostData<T>({
   tags?: string[];
   variables?: string;
 }): Promise<{ status: number; body: T } | never> {
+  const token = (await cookies()).get("currentUser")?.value;
   try {
-    const token = (await cookies()).get("currentUser")?.value;
     const result = await fetch(domain + path, {
       method: "POST",
       headers: {
@@ -173,8 +172,8 @@ export async function PostDataModel<T>({
   tags?: string[];
   model?: T;
 }): Promise<{ status: number; body: T } | never> {
+  const token = (await cookies()).get("currentUser")?.value;
   try {
-    const token = (await cookies()).get("currentUser")?.value;
     const result = await fetch(domain + path, {
       method: "POST",
       headers: {
@@ -222,8 +221,8 @@ export async function PutData<T>({
   tags?: string[];
   model?: T;
 }): Promise<{ status: number; body: T } | never> {
+  const token = (await cookies()).get("currentUser")?.value;
   try {
-    const token = (await cookies()).get("currentUser")?.value;
     const result = await fetch(domain + path, {
       method: "PUT",
       headers: {

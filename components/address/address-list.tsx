@@ -16,10 +16,7 @@ export default function AddressList({addressId, addresses, states, cities, onVal
         setSelectedValue(defaultAddress.id.toString());
     }    
 
-    console.log(selectedValue, addresses)
-
     const handleValueChange = (value: string) => {
-      console.log('AddressList selected address Changed', value)
       setSelectedValue(value);
       onValueChange(value);
     }

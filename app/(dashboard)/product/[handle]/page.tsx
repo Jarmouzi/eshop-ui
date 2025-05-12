@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getProduct, getProductRecommendations } from '@/lib/services/ProductService';
+import { getProduct, getProductHandles, getProductRecommendations } from '@/lib/services/ProductService';
 import ProductDetails from '@/components/product';
 
 //export const runtime = 'edge';
@@ -75,6 +75,6 @@ export default async function ProductPage({ params }: { params: Params }) {
   );
 }
 
-// export async function generateStaticParams() {
-//   return await getProductHandles();
-// }
+export async function generateStaticParams() {
+  return await getProductHandles();
+}

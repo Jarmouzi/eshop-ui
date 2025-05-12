@@ -13,8 +13,6 @@ export default function SignoutPage() {
           headers: { 'Content-Type': 'application/json' },
         });
 
-        console.log('Logout response:', response);
-
         if (response.ok) {
           router.push('/');
         } else {

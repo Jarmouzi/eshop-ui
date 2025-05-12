@@ -10,7 +10,6 @@ import { SimpleProduct } from '@/lib/types/Product';
 
 export default function SwiperProducts({ products }: {products: SimpleProduct[];}) {
 
-  console.log(products[0].Title.replaceAll(' ', '-'))
   return (
       <Swiper
         //slidesPerView={6}

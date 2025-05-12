@@ -12,7 +12,7 @@ interface Props {
 export function mapMenuToTreeNode(menus: Menu[]): DataNode[] {
     return menus.map(menu => ({
       title: menu.Title,
-      value: menu.Id,
+      key: menu.Id,
       children: menu.Children && menu.Children.length > 0
         ? mapMenuToTreeNode(menu.Children)
         : undefined,

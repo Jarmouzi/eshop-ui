@@ -34,7 +34,7 @@ export function VariantSelector({
     availableForSale: variant.AvailableForSale,
     // Adds key / value pairs for each variant (ie. "color": "Black" and "size": 'M").
     ...variant.SelectedOptions.reduce(
-      (accumulator, option) => ({ ...accumulator, [option.OptionId.toString()]: option.OptionValueId }),
+      (accumulator, option) => ({ ...accumulator, [option.OptionId]: option.OptionValueId }),
       {}
     )
   }));

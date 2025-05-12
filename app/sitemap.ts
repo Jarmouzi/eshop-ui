@@ -7,9 +7,7 @@ type Route = {
   lastModified: string;
 };
 
-const baseUrl = process.env.NEXT_PUBLIC_URL
-  ? `https://${process.env.NEXT_PUBLIC_URL}`
-  : "http://localhost:3000";
+const baseUrl = process.env.STORE_DOMAIN;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const routesMap = [""].map((route) => ({

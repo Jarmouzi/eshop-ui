@@ -21,15 +21,12 @@ export async function addItem(
   let cart;
 
   cart = await getCart(cartId);
-  console.log("cart in actions: ", cart);
 
   if (!cart) {
     cart = await createCart();
   }
   cartId = cart?.Id;
   (await cookies()).set("cartId", cartId);
-
-  console.log("cart:", cart);
 
   if (!selectedVariantId) {
     return "مدل محصول را انتخاب نمایید"; //'Missing product variant ID';

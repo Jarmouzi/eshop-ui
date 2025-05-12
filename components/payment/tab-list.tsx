@@ -17,16 +17,11 @@ export default function PaymentTablist({userOrder, cart, addresses, states, citi
   const [activeTab, setActiveTab] = useState("basket");
   const [formData, setFormData] = useState(userOrder);
 
-  console.log('PaymentTablist formData', formData)
-
   const handleSelectedGatewayChange = (value: string) => {
     setFormData({ ...formData, PaymentGatewayId: Number(value) }); 
-    console.log(formData)
   } 
   const handleSelectedAddressChange = (value: string) => {
-    console.log('handleSelectedAddressChange called')
     setFormData({ ...formData, UserAddressId: Number(value) }); 
-    console.log(formData)
   } 
 
   const handleTabChange = (key: any) => {

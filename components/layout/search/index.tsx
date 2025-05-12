@@ -20,12 +20,17 @@ import { SelectItem } from '@/lib/types/SelectItem';
 // const activeAndTitles = 'bg-neutral-800 dark:bg-neutral-300';
 // const items = 'bg-neutral-400 dark:bg-neutral-700';
 
-export default function SearchItems({categories, selectedItem, options, brands, suppliers}: {categories: Menu[]; selectedItem: string | undefined, options: Option[] | null, brands: SelectItem[], suppliers: SelectItem[]}) {
+export default function SearchItems({categories, options, brands, suppliers}: {categories: Menu[]; options: Option[] | null; brands: SelectItem[]; suppliers: SelectItem[];}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const params: Record<string, string> = Object.fromEntries(searchParams.entries());
-  console.log(params['o' + 2])
+   
+  let collection = '';
+    const match = pathname.match(/\/search\/([^\/]+)/);
+    if (match) {
+      collection = match[1];
+    }
   
   const createQueryString = (name: string, value: string) => {
       const params = new URLSearchParams(searchParams);
@@ -58,7 +63,7 @@ export default function SearchItems({categories, selectedItem, options, brands, 
   const items = [
     <AccordionItem key="1" aria-label="گروه محصولات" title="گروه محصولات">
       <Suspense> 
-        <TreeView list={mapMenuToTreeNode(categories)} onSelectionChange={handleCollectionChange} selectedKey={selectedItem}/>
+        <TreeView list={mapMenuToTreeNode(categories)} onSelectionChange={handleCollectionChange} selectedKey={collection}/>
       </Suspense>
     </AccordionItem>,
     <AccordionItem key="2" aria-label="قیمت" title="قیمت">

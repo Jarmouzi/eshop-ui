@@ -3,8 +3,6 @@ import { updateUserProfile } from "@/lib/services/UserProfileService";
 import { UserProfile } from "@/lib/types/UserProfile";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Divider } from "@nextui-org/react";
-import {Tabs, Tab} from "@nextui-org/tabs";
-import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function Profile({userProfile} :{userProfile: UserProfile}){

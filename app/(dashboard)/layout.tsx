@@ -1,14 +1,11 @@
 import Navbar from '@/components/layout/navbar';
-//import { ensureStartsWith } from '@/lib/utils';
 import { ReactNode, Suspense } from 'react';
 import Footer from '@/components/layout/footer';
 import { getMenu } from '@/lib/services/CategoryService';
 
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
-const baseUrl = process.env.NEXT_PUBLIC_URL
-  ? `https://${process.env.NEXT_PUBLIC_URL}`
-  : 'http://localhost:3000';
+const baseUrl = process.env.STORE_DOMAIN || 'http://localhost:3000';
 
 export const metadata = {
   metadataBase: new URL(baseUrl),

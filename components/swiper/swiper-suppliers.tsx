@@ -1,17 +1,14 @@
 'use client';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-//import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import Link from 'next/link';
-import { GridTileImage } from '../grid/tile';
 import { Supplier } from '@/lib/types/Supplier';
 import { GridBoxImage } from '../grid/box';
 
 export default function SwiperSuppliers({ suppliers }: {suppliers: Supplier[];}) {
 
-  console.log(suppliers)
   return (
       <Swiper
         //slidesPerView={6}

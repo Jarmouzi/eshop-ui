@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getProduct, getProductRecommendations } from '@/lib/services/ProductService';
+import { getProduct, getProductHandles, getProductRecommendations } from '@/lib/services/ProductService';
 import ProductDetails from '@/components/product';
 
 //export const runtime = 'edge';

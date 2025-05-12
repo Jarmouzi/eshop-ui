@@ -7,8 +7,10 @@ import { Fragment, Suspense, useEffect, useState } from 'react';
 import { ArrowsPointingInIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Menu } from '@/lib/types/Menu';
 import SearchItems from '.';
+import { Option } from '@/lib/types/Option';
+import { SelectItem } from '@/lib/types/SelectItem';
 
-export default function MobileSearch({collection}: {collection: Menu[]}) {
+export default function MobileSearch({categories, options, brands, suppliers}: {categories: Menu[]; options: Option[] | null; brands: SelectItem[]; suppliers: SelectItem[];}) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
@@ -72,7 +74,7 @@ export default function MobileSearch({collection}: {collection: Menu[]}) {
 
                 <div className="mb-4 w-full">
                   <Suspense>
-                    <SearchItems categories={collection} selectedItem={searchParams.get('collection') || undefined}/>
+                    <SearchItems categories={categories} options={options} brands={brands} suppliers={suppliers} />
                   </Suspense>
                 </div>
               </div>

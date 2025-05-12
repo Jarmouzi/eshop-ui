@@ -4,9 +4,9 @@ import { Providers } from './providers';
 
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
-const baseUrl = process.env.NEXT_PUBLIC_URL
-  ? `https://${process.env.NEXT_PUBLIC_URL}`
-  : 'http://localhost:3000';
+const baseUrl = process.env.STORE_DOMAIN || 'http://localhost:3000';
+  // ? `https://${process.env.STORE_DOMAIN}`
+  // : 'http://localhost:3000';
 
 export const metadata = {
   metadataBase: new URL(baseUrl),

@@ -24,13 +24,13 @@ export default async function SearchLayout({ breadcrumb, children, collection }:
       <div className="mx-auto max-w-screen-2xl flex gap-4 p-3 text-black dark:text-white md:flex-row md:col-span-5">
  
         <div className="hidden order-first w-full md:flex-none md:max-w-[255px] self-start sticky top-0 col-span-1">
-          <SearchItems categories={collections} selectedItem='3788269D3B2E' options={options} brands={brands} suppliers={suppliers} />
+          <SearchItems categories={collections} options={options} brands={brands} suppliers={suppliers} />
         </div>
         <div className="order-last min-h-[70vh] w-full md:order-none col-span-4">
           <div className="order-none flex gap-1 text-xs pt-1">
             <SortFilter list={sorting} title="مرتب سازی:" display="inline-flex" />
             <div className="block flex-none md:hidden">
-              <MobileSearch collection={collections} />
+              <MobileSearch categories={collections} options={options} brands={brands} suppliers={suppliers} />
             </div>
           </div>
           {children}

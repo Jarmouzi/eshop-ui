@@ -9,7 +9,6 @@ export default function VerticalTab({list}: {list: SimpleMenu[]}) {
     const router = useRouter();
 
     const handleTabChange = (key: any) => {
-        console.log(key)
         router.push(key ); 
     };
 

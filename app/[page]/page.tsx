@@ -4,9 +4,9 @@ import Prose from '@/components/prose';
 import { notFound } from 'next/navigation';
 import { getPage } from '@/lib/services/PageService';
 
-export const runtime = 'edge';
+//export const runtime = 'edge';
 
-export const revalidate = 43200; // 12 hours in seconds
+//export const revalidate = 43200; // 12 hours in seconds
 
 type Params = Promise<{ page: string }>
 export async function generateMetadata({params}: { params: Params;}): Promise<Metadata> {
