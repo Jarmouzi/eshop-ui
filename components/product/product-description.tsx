@@ -10,17 +10,17 @@ export function ProductDescription({ product }: { product: Product }) {
   return (
     <>
       <div className="mb-6 flex flex-col border-b pb-6 dark:border-neutral-700">
-        <h1 className="mb-2 text-xl font-medium">{product.Title}</h1>
+        <h1 className="mb-2 text-xl font-medium">{product.title}</h1>
         
-        <h6 className="flex mb-2 text-xs font-light text-neutral-600 justify-start">{product.Title_En}</h6>
+        <h6 className="flex mb-2 text-xs font-light text-neutral-600 justify-start">{product.title_En}</h6>
         <div className="flex mr-auto w-auto rounded-full bg-primary p-2 text-sm text-white justify-end">
           <Price
-            amount={product.Price} //priceRange.maxVariantPrice.amount}
+            amount={product.price} //priceRange.maxVariantPrice.amount}
           />
         </div>
       </div>
       <Suspense>
-        <VariantSelector options={product.Options} variants={product.Variants} />
+        <VariantSelector options={product.options} variants={product.variants} />
       </Suspense>
       {/* {product.Description ? (
         <Prose
@@ -34,7 +34,7 @@ export function ProductDescription({ product }: { product: Product }) {
         color="success"
       ></Chip> */}
       <Suspense>
-        <AddToCart variants={product.Variants} availableForSale={product.AvailableForSale} />
+        <AddToCart variants={product.variants} availableForSale={product.availableForSale} />
       </Suspense>
     </>
   );

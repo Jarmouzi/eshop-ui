@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 const domain = process.env.API_Domain;
 export async function GetData<T>({
   path = "",
-  cache = "force-cache", //'no-store',
+  cache = "no-store",
   tags,
 }: {
   path?: string;

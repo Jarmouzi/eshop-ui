@@ -16,19 +16,19 @@ function ThreeItemGridItem({
     <div
       className={size === 'full' ? 'md:col-span-4 md:row-span-2' : 'md:col-span-2 md:row-span-1'}
     >
-      <Link className="relative block aspect-square h-full w-full" href={`/product/${item.Id}`}>
+      <Link className="relative block aspect-square h-full w-full" href={`/product/${item.id}`}>
         <GridTileImage
-          src={item.FeaturedImage}
+          src={item.featuredImage}
           fill
           sizes={
             size === 'full' ? '(min-width: 768px) 66vw, 100vw' : '(min-width: 768px) 33vw, 100vw'
           }
           priority={priority}
-          alt={item.Title}
+          alt={item.title}
           label={{
             position: size === 'full' ? 'center' : 'bottom',
-            title: item.Title as string,
-            amount: item.Price, // item.priceRange.maxVariantPrice.amount,
+            title: item.title as string,
+            amount: item.price, // item.priceRange.maxVariantPrice.amount,
             currencyCode: 'IRI', //item.priceRange.maxVariantPrice.currencyCode
           }}
         />

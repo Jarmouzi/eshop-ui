@@ -23,34 +23,34 @@ export function VariantSelector({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const hasNoOptionsOrJustOneOption =
-    !options.length || (options.length === 1 && options[0]?.Values.length === 1);
+    !options.length || (options.length === 1 && options[0]?.values.length === 1);
 
   if (hasNoOptionsOrJustOneOption) {
     return null;
   }
 
   const combinations: Combination[] = variants.map((variant) => ({
-    id: variant.Id,
-    availableForSale: variant.AvailableForSale,
+    id: variant.id,
+    availableForSale: variant.availableForSale,
     // Adds key / value pairs for each variant (ie. "color": "Black" and "size": 'M").
-    ...variant.SelectedOptions.reduce(
-      (accumulator, option) => ({ ...accumulator, [option.OptionId]: option.OptionValueId }),
+    ...variant.selectedOptions.reduce(
+      (accumulator, option) => ({ ...accumulator, [option.optionId]: option.optionValueId }),
       {}
     )
   }));
 
   return options.map((option) => (
-    <Suspense key={option.Id}>
-      <dl className="mb-8" key={option.Id}>
-        <dt className="mb-4 text-sm uppercase tracking-wide">{option.Title}</dt>
+    <Suspense key={option.id}>
+      <dl className="mb-8" key={option.id}>
+        <dt className="mb-4 text-sm uppercase tracking-wide">{option.title}</dt>
         <dd className="flex flex-wrap gap-3">
-          {option.Values.map((value) => {
-            const optionNameLowerCase = option.Title.toLowerCase();
+          {option.values.map((value) => {
+            const optionNameLowerCase = option.title.toLowerCase();
             // Base option params on current params so we can preserve any other param state in the url.
             const optionSearchParams = new URLSearchParams(searchParams.toString());
             // Update the option params using the current option to reflect how the url *would* change,
             // if the option was clicked.
-            optionSearchParams.set(optionNameLowerCase, value.Title);
+            optionSearchParams.set(optionNameLowerCase, value.title);
             const optionUrl = createUrl(pathname, optionSearchParams);
 
             // In order to determine if an option is available for sale, we need to:
@@ -64,7 +64,7 @@ export function VariantSelector({
             // then all other sizes should be disabled.
             const filtered = Array.from(optionSearchParams.entries()).filter(([key, value]) =>
               options.find(
-                (option) => option.Title.toLowerCase() === key && option.Values.find(m => m.Title == value) != undefined //option.Values.includes(value.Title)
+                (option) => option.title.toLowerCase() === key && option.values.find(m => m.title == value) != undefined //option.Values.includes(value.Title)
               )
             );
             const isAvailableForSale = combinations.find((combination) =>
@@ -74,17 +74,17 @@ export function VariantSelector({
             );
 
             // The option is active if it's in the url params.
-            const isActive = searchParams.get(optionNameLowerCase) === value.Title;
+            const isActive = searchParams.get(optionNameLowerCase) === value.title;
 
             return (
               <button
-                key={value.Id}
+                key={value.id}
                 aria-disabled={!isAvailableForSale}
                 disabled={!isAvailableForSale}
                 onClick={() => {
                   router.replace(optionUrl, { scroll: false });
                 }}
-                title={`${option.Title} ${value}${!isAvailableForSale ? ' غیر قابل سفارش' : ''}`}
+                title={`${option.title} ${value}${!isAvailableForSale ? ' غیر قابل سفارش' : ''}`}
                 className={clsx(
                   'flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900',
                   {
@@ -96,7 +96,7 @@ export function VariantSelector({
                   }
                 )}
               >
-                {value.Title}
+                {value.title}
               </button>
             );
           })}

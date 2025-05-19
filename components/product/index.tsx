@@ -15,13 +15,13 @@ export default async function ProductDetails({product, relatedProducts}: {produc
     const tabData: Array<TabData> = [{
       Id: "1",
       Title: "معرفی محصول",
-      Content: <p className='p-5 text-justify'>{product.Description}</p>
+      Content: <p className='p-5 text-justify'>{product.description}</p>
     }];
-    if(product.Features)
+    if(product.features)
       tabData.push({
         Id: "2",
         Title: "ویژگی های محصول",
-        Content: <FeatureList list={product.Features} title='ویژگی های محصول' ></FeatureList> 
+        Content: <FeatureList list={product.features} title='ویژگی های محصول' ></FeatureList> 
       });
 
  return (
@@ -32,9 +32,9 @@ export default async function ProductDetails({product, relatedProducts}: {produc
           <div className="h-full w-full basis-full lg:basis-2/6 md:basis-1/2">
             <Suspense>
               <Gallery 
-                images={product.Images.map((image: Image) => ({
-                  src: image.Url,
-                  altText: image.AltText
+                images={product.images.map((image: Image) => ({
+                  src: image.url,
+                  altText: image.altText
                 }))}
               />
             </Suspense>
@@ -70,18 +70,18 @@ async function RelatedProducts({ relatedProducts }: { relatedProducts: Promise<S
       //   <ul className="flex w-full gap-4 overflow-x-auto overflow-y-hidden pt-1">
       //     {relatedProducts.map((product) => (
       //       <li
-      //         key={product.Id}
+      //         key={product.id}
       //         className="aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6"
       //       >
-      //         <Link className="relative h-full w-full" href={`/product/${product.Id}`}>
+      //         <Link className="relative h-full w-full" href={`/product/${product.id}`}>
       //           <GridTileImage
-      //             alt={product.Title}
+      //             alt={product.title}
       //             label={{
-      //               title: product.Title,
-      //               amount: product.Price, //.priceRange.maxVariantPrice.amount,
+      //               title: product.title,
+      //               amount: product.price, //.priceRange.maxVariantPrice.amount,
       //               currencyCode: 'IRI', //product.priceRange.maxVariantPrice.currencyCode
       //             }}
-      //             src={product.FeaturedImage}
+      //             src={product.featuredImage}
       //             fill
       //             sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
       //           />

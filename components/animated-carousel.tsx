@@ -22,18 +22,18 @@ export async function AnimatedCarousel({
       <ul className="flex animate-carousel gap-1">
         {products.map((product, i) => (
           <li
-            key={`${product.Id}${i}`}
+            key={`${product.id}${i}`}
             className="relative aspect-square h-1/3 min-h-96 w-1/2 flex-none md:w-1/5" //max-h-[275px] max-w-[475px]
           >
-            <Link href={`/product/${product.Id}`} className="relative h-full w-full">
+            <Link href={`/product/${product.id}`} className="relative h-full w-full">
               <GridTileImage
-                alt={product.Title}
+                alt={product.title}
                 label={{
-                  title: product.Title,
-                  amount: product.Price, //product.priceRange.maxVariantPrice.amount,
+                  title: product.title,
+                  amount: product.price, //product.priceRange.maxVariantPrice.amount,
                   currencyCode: 'IRI' //product.priceRange.maxVariantPrice.currencyCode
                 }}
-                src={product.FeaturedImage}//?.url}
+                src={product.featuredImage}//?.url}
                 fill
                 sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
               />

@@ -10,17 +10,17 @@ export async function generateMetadata({params}: {params: Params}): Promise<Meta
   const { handle } = await params; 
   const product = await getProduct(handle);
 
-  if (!product.Title) {
+  if (!product.title) {
     return {
       title: 'محصول مورد نظر یافت نشد',
     }
   }
-  const { Url: url, Width: width, Height: height, AltText: alt } = product.FeaturedImage || {};
+  const { url: url, width: width, height: height, altText: alt } = product.featuredImage || {};
   const indexable = true; //!product.Tags.includes(HIDDEN_PRODUCT_TAG);
 
   return {
-    title: product.Seo.Title || product.Title,
-    description: product.Seo.Description || product.Description,
+    title: product.seo.title || product.title,
+    description: product.seo.description || product.description,
     robots: {
       index: indexable,
       follow: indexable,
@@ -48,7 +48,7 @@ export default async function ProductTitlePage({ params }: { params: Params }) {
   const { handle } = await params; 
   const product = await getProduct(handle);
 
-  if (!product.Title) return notFound();
+  if (!product.title) return notFound();
   
   const relatedProducts = getProductRecommendations('fav'); 
 

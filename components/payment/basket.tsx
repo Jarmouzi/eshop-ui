@@ -44,7 +44,7 @@ export default function PaymentBasket({ cart }: { cart: Cart | undefined }) {
                 });
 
                 const ProductVariantUrl = createUrl(
-                `/product/${item.ProductVariant.Product.Id}`,
+                `/product/${item.ProductVariant.Product.id}`,
                 new URLSearchParams(ProductVariantSearchParams)
                 );
 
@@ -67,15 +67,15 @@ export default function PaymentBasket({ cart }: { cart: Cart | undefined }) {
                           width={64}
                           height={64}
                           alt={
-                            item.ProductVariant.Product.FeaturedImage.AltText ||
-                            item.ProductVariant.Product.Title
+                            item.ProductVariant.Product.featuredImage.altText ||
+                            item.ProductVariant.Product.title
                           }
-                          src={item.ProductVariant.Product.FeaturedImage.Url}
+                          src={item.ProductVariant.Product.featuredImage.url}
                         />
                       </div>
                       <div className="flex flex-1 flex-col text-base">
                         <span className="leading-tight text-sm pr-1">
-                          {item.ProductVariant.Product.Title}
+                          {item.ProductVariant.Product.title}
                         </span>
                         {/* {item.ProductVariant.Title !== DEFAULT_OPTION ? (
                           <p className="text-sm text-neutral-500 dark:text-neutral-400">

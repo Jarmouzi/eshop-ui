@@ -23,7 +23,7 @@ export default async function SearchLayout({ breadcrumb, children, collection }:
       {breadcrumb}
       <div className="mx-auto max-w-screen-2xl flex gap-4 p-3 text-black dark:text-white md:flex-row md:col-span-5">
  
-        <div className="hidden order-first w-full md:flex-none md:max-w-[255px] self-start sticky top-0 col-span-1">
+        <div className="hidden order-first w-full md:block md:max-w-[255px] self-start sticky top-0 col-span-1">
           <SearchItems categories={collections} options={options} brands={brands} suppliers={suppliers} />
         </div>
         <div className="order-last min-h-[70vh] w-full md:order-none col-span-4">

@@ -75,13 +75,13 @@ export function AddToCart({
 }) {
   const [message, formAction] = useActionState(addItem, null);
   const searchParams = useSearchParams();
-  const defaultVariantId = variants.length === 1 ? variants[0]?.Id : undefined;
+  const defaultVariantId = variants.length === 1 ? variants[0]?.id : undefined;
   const variant = variants.find((variant: ProductVariant) =>
-    variant.SelectedOptions.every(
-      (option) => option.OptionValueId === searchParams.get(option.OptionId)
+    variant.selectedOptions.every(
+      (option: { optionId: string; optionValueId: string;}) => option.optionValueId === searchParams.get(option.optionId)
     )
   );
-  const selectedVariantId = variant?.Id || defaultVariantId;
+  const selectedVariantId = variant?.id || defaultVariantId;
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();

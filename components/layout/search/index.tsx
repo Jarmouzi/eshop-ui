@@ -5,7 +5,7 @@ import CheckboxFilter from './checkbox-filter';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
 import { Accordion, AccordionItem, Divider, menu } from '@nextui-org/react';
 import { Menu } from '@/lib/types/Menu';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import TreeView, { mapMenuToTreeNode } from '@/components/dropdown/treeview';
 import SingleSelectDropDown from '@/components/dropdown/singleSelectDropDown';
 import { Option } from '@/lib/types/Option';
@@ -21,16 +21,13 @@ import { SelectItem } from '@/lib/types/SelectItem';
 // const items = 'bg-neutral-400 dark:bg-neutral-700';
 
 export default function SearchItems({categories, options, brands, suppliers}: {categories: Menu[]; options: Option[] | null; brands: SelectItem[]; suppliers: SelectItem[];}) {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const params: Record<string, string> = Object.fromEntries(searchParams.entries());
    
-  let collection = '';
-    const match = pathname.match(/\/search\/([^\/]+)/);
-    if (match) {
-      collection = match[1];
-    }
+  const router = useRouter();
+  const dparams = useParams();
+  const collection = dparams.collection;
   
   const createQueryString = (name: string, value: string) => {
       const params = new URLSearchParams(searchParams);
@@ -63,7 +60,7 @@ export default function SearchItems({categories, options, brands, suppliers}: {c
   const items = [
     <AccordionItem key="1" aria-label="گروه محصولات" title="گروه محصولات">
       <Suspense> 
-        <TreeView list={mapMenuToTreeNode(categories)} onSelectionChange={handleCollectionChange} selectedKey={collection}/>
+        <TreeView list={mapMenuToTreeNode(categories)} onSelectionChange={handleCollectionChange} selectedKey={collection?.toString()}/>
       </Suspense>
     </AccordionItem>,
     <AccordionItem key="2" aria-label="قیمت" title="قیمت">

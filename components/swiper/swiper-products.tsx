@@ -47,16 +47,16 @@ export default function SwiperProducts({ products }: {products: SimpleProduct[];
         color='primary'
       >
         {products.map((product, i) => (
-            <SwiperSlide className='gap-4' key={product.Id}>
-              <Link href={`/product/${product.Id}/${product.Title.replaceAll(' ', '-')}`} className="relative inline-block h-full w-full ">
+            <SwiperSlide className='gap-4' key={product.id}>
+              <Link href={`/product/${product.id}/${product.title.replaceAll(' ', '-')}`} className="relative inline-block h-full w-full ">
                 <GridTileImage
-                  alt={product.Title}
+                  alt={product.title}
                   label={{
-                    title: product.Title,
-                    amount: product.Price, //product.priceRange.maxVariantPrice.amount,
+                    title: product.title,
+                    amount: product.price, //product.priceRange.maxVariantPrice.amount,
                     currencyCode: 'IRI' //product.priceRange.maxVariantPrice.currencyCode
                   }}
-                  src={product.FeaturedImage}//?.url}
+                  src={product.featuredImage}//?.url}
                   fill
                   //style={{ objectFit: 'cover' }}
                   //sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
