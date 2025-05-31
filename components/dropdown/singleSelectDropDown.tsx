@@ -13,16 +13,17 @@ export default function SingleSelectDropDown({ list, hasDefault = false, selecte
   
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set([selectedKey]))
 
-  if(hasDefault) list.unshift({id: "", title: 'انتخاب نمایید'})
+  if(hasDefault && list.find(item => item.id == "") == undefined) list.unshift({id: "", title: "همه"})
 
   // const selectedValue = React.useMemo(
   //   () => Array.from(selectedKeys).join(", ").replace(/_/g, ""),
   //   [selectedKeys],
   // );
   const selectedValue = React.useMemo(() => {
-    const key = Array.from(selectedKeys)[0]; 
-    const selectedItem = list.find(item => item.id === key); 
-    return selectedItem ? selectedItem.title : 'انتخاب نمایید'; 
+    const key = Array.from(selectedKeys)[0] || ""; 
+
+    const selectedItem = list.find(item => item.id == key); 
+    return selectedItem ? selectedItem.title : 'همه'; 
   }, [selectedKeys, list]);
 
   const handleOnDropdownChange = (keys: SharedSelection) => {
@@ -52,7 +53,6 @@ export default function SingleSelectDropDown({ list, hasDefault = false, selecte
                 {item.title}
             </DropdownItem>
         ))}
-
       </DropdownMenu>
     </Dropdown>
   );

@@ -1,7 +1,7 @@
 import { AddToCart } from '@/components/cart/add-to-cart';
 import Price from '@/components/price';
 import Prose from '@/components/prose';
-import { VariantSelector } from './variant-selector';
+import { VariantSelector } from '../../app/(dashboard)/product/[handle]/variant-selector';
 import { Product } from '@/lib/types/Product';
 import { Chip } from '@nextui-org/react';
 import { Suspense } from 'react';

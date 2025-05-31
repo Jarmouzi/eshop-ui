@@ -1,23 +1,16 @@
 'use client';
 import {Slider} from "@nextui-org/slider";
 import React, { Suspense } from "react";
-import Search from "../../navbar/search";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { createUrl } from "@/lib/utils";
 import Link from "next/link";
-import { CogIcon } from "@heroicons/react/24/solid";
 import { MagnifyingGlassCircleIcon } from "@heroicons/react/16/solid";
 
-function search({value} : {value: number[]})
-{
-}
 
 export function PriceFilter({minPrice, maxPrice, minValue, maxValue} : {minPrice: number, maxPrice: number, minValue: number, maxValue: number}) {
 
   const [value, setValue] = React.useState([minValue, maxValue]);
 
-
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const current = new URLSearchParams(Array.from(searchParams.entries())); 
@@ -38,8 +31,7 @@ export function PriceFilter({minPrice, maxPrice, minValue, maxValue} : {minPrice
     <Suspense>
       <div className="block gap-2 w-full max-w-md items-start justify-center pb-4">
         <Slider 
-            label="حدود قیمت"
-            //formatOptions={{maximumFractionDigits: 15}}          
+            label="حدود قیمت"       
             size="sm"
             color="primary"
             step={10000}

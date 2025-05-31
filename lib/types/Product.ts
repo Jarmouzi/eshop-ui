@@ -54,13 +54,18 @@ export type OptionValue = {
 
 export type ProductVariant = {
   id: string;
-  //Title: string;
+  selected: boolean;
   availableForSale: boolean;
   selectedOptions: {
-    optionId: string; //Title: string;
-    optionValueId: string; //Value: string;
+    optionId: string;
+    optionValueId: string;
   }[];
   price: number;
+};
+
+export type collection = {
+  title: string;
+  products: SimpleProduct[];
 };
 
 export type SEO = {

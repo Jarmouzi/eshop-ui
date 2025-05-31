@@ -24,6 +24,8 @@ export default function SearchItems({categories, options, brands, suppliers}: {c
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const params: Record<string, string> = Object.fromEntries(searchParams.entries());
+
+  const prices = [10000, 100000000]
    
   const router = useRouter();
   const dparams = useParams();
@@ -31,10 +33,18 @@ export default function SearchItems({categories, options, brands, suppliers}: {c
   
   const createQueryString = (name: string, value: string) => {
       const params = new URLSearchParams(searchParams);
-      params.set(name, value);
-      //params.append(name, value);
+      if(value == "") 
+        params.delete(name);
+      else
+        params.set(name, value);
+
       return params.toString();
     }
+  const mapOptions = (option: Option) => {
+    const list = option.values.map((v) => ({ id: `o${option.id}=${v.id}`, title: v.title}))    
+    list.unshift({id: `o${option.id}=`, title: "همه"})
+    return list;
+  }
 
   const handleCollectionChange = async (key: string) => {
     //router.push(`?${createQueryString('collection', key)}`);
@@ -46,8 +56,7 @@ export default function SearchItems({categories, options, brands, suppliers}: {c
 
   const handleOptionhange = async (key: string) => {
     const kv = key.split('=')
-    if(kv.length == 2)
-      router.push(`${pathname}?${createQueryString(kv[0], kv[1])}`);
+    router.push(`${pathname}?${createQueryString(kv[0], kv.length == 2 ? kv[1] : "")}`);
   } 
 
   const handleSupplierChange = async (key: string) => {
@@ -65,24 +74,24 @@ export default function SearchItems({categories, options, brands, suppliers}: {c
     </AccordionItem>,
     <AccordionItem key="2" aria-label="قیمت" title="قیمت">
       <Suspense>
-        <PriceFilter minPrice={10000} maxPrice={100000000} minValue={Number(params['lp']) | 10000} maxValue={Number(params['hp']) | 100000000}  />
+        <PriceFilter minPrice={prices[0]} maxPrice={prices[1]} minValue={Number(params['lp']) || prices[0]} maxValue={Number(params['hp']) || prices[1]}  />
       </Suspense>
     </AccordionItem>,
     ...(options?.map((o, i) => (
       <AccordionItem key={i + 10} aria-label={o.title} title={o.title}>
         <Suspense>
-          <SingleSelectDropDown list={o.values.map((v) => ({ id: `o${o.id}=${v.id}`, title: v.title}))} onSelectionChange={handleOptionhange} selectedKey={params['o' + o.id] || ""} />
+          <SingleSelectDropDown list={mapOptions(o)} onSelectionChange={handleOptionhange} selectedKey={ `o${o.id}=${params['o' + o.id]}` || ""} />
         </Suspense>
       </AccordionItem>
     ))) ?? [],
     (brands && brands.length > 0 ? <AccordionItem key={3} aria-label='برند' title='برند'>
       <Suspense>
-        <SingleSelectDropDown list={brands} onSelectionChange={handleBrandChange} selectedKey={params['br'] ||''} />
+        <SingleSelectDropDown hasDefault list={brands} onSelectionChange={handleBrandChange} selectedKey={params['br'] ||''} />
       </Suspense>
     </AccordionItem> : null),
     (suppliers && suppliers.length > 0 ? <AccordionItem key={4} aria-label='فروشگاه' title='فروشگاه'>
       <Suspense>
-        <SingleSelectDropDown list={suppliers} onSelectionChange={handleSupplierChange} selectedKey={params['su'] ||''} />
+        <SingleSelectDropDown hasDefault list={suppliers} onSelectionChange={handleSupplierChange} selectedKey={params['su'] ||''} />
       </Suspense>
     </AccordionItem> : null),
   ];

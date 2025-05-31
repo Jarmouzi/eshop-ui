@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getProduct, getProductHandles, getProductRecommendations } from '@/lib/services/ProductService';
+import { getProduct, getProductHandles, getCollectionsForProduct } from '@/lib/services/ProductService';
 import ProductDetails from '@/components/product';
 
 //export const runtime = 'edge';
@@ -50,11 +50,11 @@ export default async function ProductTitlePage({ params }: { params: Params }) {
 
   if (!product.title) return notFound();
   
-  const relatedProducts = getProductRecommendations('fav'); 
+  const relatedProducts = getCollectionsForProduct(handle); 
 
 
   return (
-    <ProductDetails product={product} relatedProducts={relatedProducts} />
+    <ProductDetails product={product} productCollections={relatedProducts} />
   );
 }
 

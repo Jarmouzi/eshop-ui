@@ -13,6 +13,7 @@ export function mapMenuToTreeNode(menus: Menu[]): DataNode[] {
     return menus.map(menu => ({
       title: menu.Title,
       key: menu.Id,
+      value: menu.Id,
       children: menu.Children && menu.Children.length > 0
         ? mapMenuToTreeNode(menu.Children)
         : undefined,
